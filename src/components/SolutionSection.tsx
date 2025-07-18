@@ -48,7 +48,7 @@ const SolutionSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">
-            Why <span className="gradient-primary bg-clip-text text-transparent">MutualBook</span> Works
+            Why <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">MutualBook</span> Works
           </h2>
           <p className="text-xl text-muted-foreground mb-8">The 6 A's Framework</p>
           <p className="text-lg font-medium text-accent">
