@@ -102,7 +102,7 @@ const WhosHereSection = () => {
         <div className="mt-16 text-center">
           <Card className="glass-effect border-primary/20 max-w-2xl mx-auto glow-primary">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
+              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 Status Affirmation
               </CardTitle>
             </CardHeader>
