@@ -43,7 +43,7 @@ const HeroSection = () => {
         {/* Main Headline */}
         <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
           Elites' Fast-Track to{" "}
-          <span className="gradient-primary bg-clip-text text-transparent inline-block transition-all duration-500">
+          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent inline-block transition-all duration-500">
             {rotatingWords[wordIndex]}
           </span>
         </h1>
