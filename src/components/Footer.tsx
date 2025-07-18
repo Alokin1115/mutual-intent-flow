@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="container mx-auto text-center">
         {/* Logo */}
         <div className="mb-8">
-          <h2 className="text-4xl font-bold gradient-primary bg-clip-text text-transparent glow-primary">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent glow-primary">
             My MutualBook
           </h2>
           <p className="text-xl text-muted-foreground mt-4 font-medium">
