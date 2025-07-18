@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -11,11 +11,18 @@ const companies = [
   "Georgia Tech", "IITs", "NITs", "BITS"
 ];
 
-const rotatingWords = ["Collaboration", "Networking", "Growth"];
+const rotatingWords = ["Collaborations", "Deals", "Partnerships"];
 
 const HeroSection = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="min-h-screen gradient-hero relative overflow-hidden pt-24 pb-16">
