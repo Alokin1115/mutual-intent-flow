@@ -19,11 +19,11 @@ const WaitlistSection = () => {
   };
 
   return (
-    <section className="py-20 px-6" id="waitlist">
+    <section className="py-12 sm:py-20 px-4 sm:px-6" id="waitlist">
       <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">Waitlist Wild Card</h2>
-          <p className="text-xl text-muted-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 px-2">Waitlist Wild Card</h2>
+          <p className="text-lg sm:text-xl text-muted-foreground px-2">
             For Non-Org Members Who Belong With The Elite
           </p>
         </div>
@@ -33,10 +33,10 @@ const WaitlistSection = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 to-orange-600/20"></div>
           
           <CardHeader className="relative text-center">
-            <CardTitle className="text-3xl font-bold text-accent mb-4">
+            <CardTitle className="text-2xl sm:text-3xl font-bold text-accent mb-4 px-2">
               Think You Belong Here?
             </CardTitle>
-            <CardDescription className="text-lg text-foreground/80">
+            <CardDescription className="text-base sm:text-lg text-foreground/80 px-2">
               If you are not from the listed org and think you belong here with elites & high achievers, 
               then pre-register to get your invitation link this week.
             </CardDescription>
@@ -44,14 +44,14 @@ const WaitlistSection = () => {
 
           <CardContent className="relative">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium mb-2 text-foreground">Name</label>
                   <Input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="glass-effect border-accent/30 focus:border-accent"
+                    className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                     placeholder="Your full name"
                     required
                   />
@@ -63,7 +63,7 @@ const WaitlistSection = () => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="glass-effect border-accent/30 focus:border-accent"
+                    className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                     placeholder="your@email.com"
                     required
                   />
@@ -76,7 +76,7 @@ const WaitlistSection = () => {
                   type="url"
                   value={formData.linkedinX}
                   onChange={(e) => setFormData(prev => ({ ...prev, linkedinX: e.target.value }))}
-                  className="glass-effect border-accent/30 focus:border-accent"
+                  className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                   placeholder="https://linkedin.com/in/yourprofile"
                   required
                 />
@@ -87,7 +87,7 @@ const WaitlistSection = () => {
                 <Textarea
                   value={formData.reason}
                   onChange={(e) => setFormData(prev => ({ ...prev, reason: e.target.value }))}
-                  className="glass-effect border-accent/30 focus:border-accent min-h-[120px]"
+                  className="glass-effect border-accent/30 focus:border-accent min-h-[120px] text-base"
                   placeholder="Tell us about your achievements, ambitions, and why you belong with the elite..."
                   required
                 />
@@ -95,7 +95,7 @@ const WaitlistSection = () => {
 
               <Button 
                 type="submit"
-                className="w-full gradient-gold text-black font-bold py-4 text-lg glow-gold hover:scale-105 transition-all duration-300"
+                className="w-full gradient-gold text-black font-bold py-4 text-base sm:text-lg glow-gold hover:scale-105 transition-all duration-300 min-h-[56px]"
               >
                 Join the Weekly Waitlist
               </Button>
@@ -113,18 +113,18 @@ const WaitlistSection = () => {
         </Card>
 
         {/* Curation Stats */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-accent mb-2">2,847</div>
-            <div className="text-sm text-muted-foreground">Applications This Week</div>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">2,847</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Applications This Week</div>
           </div>
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-primary mb-2">28</div>
-            <div className="text-sm text-muted-foreground">Approved Last Friday</div>
+          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">28</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Approved Last Friday</div>
           </div>
-          <div className="text-center glass-effect rounded-xl p-6">
-            <div className="text-3xl font-bold text-accent mb-2">1.2%</div>
-            <div className="text-sm text-muted-foreground">Acceptance Rate</div>
+          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
+            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">1.2%</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Acceptance Rate</div>
           </div>
         </div>
       </div>

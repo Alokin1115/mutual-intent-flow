@@ -41,7 +41,7 @@ const HeroSection = () => {
         </Badge>
 
         {/* Main Headline */}
-        <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-2">
           Elites' Fast-Track to{" "}
           <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent inline-block transition-all duration-500">
             {rotatingWords[wordIndex]}
@@ -49,38 +49,38 @@ const HeroSection = () => {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+        <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto px-2">
           Where the world's most ambitious meet—and get things done.
         </p>
 
         {/* CTA Area */}
-        <div className="max-w-md mx-auto mb-12">
-          <div className="flex gap-3 mb-4">
+        <div className="max-w-md mx-auto mb-8 sm:mb-12 px-4">
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Input 
               type="email" 
               placeholder="Organization Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="glass-effect text-white placeholder:text-gray-400"
+              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
             />
             <Button 
-              className="gradient-gold text-black font-semibold px-8 glow-gold" 
+              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
               disabled={!email}
             >
               Get Your Invitation
             </Button>
           </div>
-          <p className="text-sm text-muted-foreground mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 px-2">
             ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
             <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
           </p>
         </div>
 
         {/* Company Logos Scroll */}
-        <div className="overflow-hidden mb-16">
-          <div className="flex animate-marquee space-x-8 whitespace-nowrap">
+        <div className="overflow-hidden mb-12 sm:mb-16">
+          <div className="flex animate-marquee space-x-4 sm:space-x-8 whitespace-nowrap" style={{animationDuration: "30s"}}>
             {companies.concat(companies).map((company, index) => (
-              <Badge key={index} variant="outline" className="px-4 py-2 text-sm font-medium glass-effect">
+              <Badge key={index} variant="outline" className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium glass-effect shrink-0">
                 {company}
               </Badge>
             ))}
@@ -95,22 +95,22 @@ const HeroSection = () => {
         </div>
 
         {/* Impact Strip */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">5,000+</div>
-            <div className="text-sm text-muted-foreground">Verified Professionals Joined This Week</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto px-4">
+          <div className="glass-effect rounded-xl p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">5,000+</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Verified Professionals Joined This Week</div>
           </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-accent mb-2">4,847</div>
-            <div className="text-sm text-muted-foreground">Confirmed Collaborations Last Week</div>
+          <div className="glass-effect rounded-xl p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">4,847</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Confirmed Collaborations Last Week</div>
           </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">9.5 hrs</div>
-            <div className="text-sm text-muted-foreground">Average From First Call to Collab</div>
+          <div className="glass-effect rounded-xl p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">9.5 hrs</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Average From First Call to Collab</div>
           </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-accent mb-2">0</div>
-            <div className="text-sm text-muted-foreground">Randomness | 20+ Use Cases</div>
+          <div className="glass-effect rounded-xl p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">0</div>
+            <div className="text-xs sm:text-sm text-muted-foreground">Randomness | 20+ Use Cases</div>
           </div>
         </div>
       </div>

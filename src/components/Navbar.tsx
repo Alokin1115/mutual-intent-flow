@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,13 +18,14 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled ? 'glass-effect py-2' : 'bg-transparent py-4'
     }`}>
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <div className={`text-xl font-bold transition-all duration-300 ${
+      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
+        <div className={`text-lg sm:text-xl font-bold transition-all duration-300 ${
           scrolled ? 'glow-primary' : ''
         }`}>
           My MutualBook
         </div>
         
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <a href="#about" className="text-sm hover:text-primary transition-colors">About</a>
           <a href="#how-it-works" className="text-sm hover:text-primary transition-colors">How It Works</a>
@@ -31,10 +34,72 @@ const Navbar = () => {
           <a href="#waitlist" className="text-sm hover:text-primary transition-colors">Waitlist</a>
         </div>
         
-        <Button className="gradient-gold text-black font-semibold px-6 py-2 rounded-full glow-gold" disabled>
+        {/* Desktop CTA Button */}
+        <Button className="hidden md:block gradient-gold text-black font-semibold px-6 py-2 rounded-full glow-gold" disabled>
           Get Invite
         </Button>
+        
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 rounded-lg glass-effect border border-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label="Toggle mobile menu"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+      
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden glass-effect border-t border-white/10">
+          <div className="container mx-auto px-4 py-4 space-y-4">
+            <a 
+              href="#about" 
+              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </a>
+            <a 
+              href="#how-it-works" 
+              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              How It Works
+            </a>
+            <a 
+              href="#whos-here" 
+              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Who's Here
+            </a>
+            <a 
+              href="#pricing" 
+              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Pricing
+            </a>
+            <a 
+              href="#waitlist" 
+              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Waitlist
+            </a>
+            <div className="pt-4">
+              <Button 
+                className="w-full gradient-gold text-black font-semibold py-3 rounded-full glow-gold min-h-[48px]" 
+                disabled
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Get Invite
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

@@ -49,17 +49,17 @@ const BenefitsSection = () => {
   }, [currentSection]);
 
   return (
-    <section className="py-20 px-6">
+    <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 px-2">
             Benefits Achieved with <span className="text-accent">Few Dollars</span>
           </h2>
-          <p className="text-xl text-muted-foreground">Real success stories from our members</p>
+          <p className="text-lg sm:text-xl text-muted-foreground px-2">Real success stories from our members</p>
         </div>
 
         {/* Section Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-2">
           {benefitsSections.map((section, index) => (
             <button
               key={index}
@@ -67,7 +67,7 @@ const BenefitsSection = () => {
                 setCurrentSection(index);
                 setCurrentTestimonial(0);
               }}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-3 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] flex items-center justify-center ${
                 currentSection === index 
                   ? 'gradient-primary text-black glow-primary' 
                   : 'glass-effect text-white hover:border-primary/50'
@@ -82,17 +82,17 @@ const BenefitsSection = () => {
         <div className="max-w-4xl mx-auto">
           <Card className="glass-effect border-primary/20 glow-primary">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-primary mb-4">
+              <CardTitle className="text-2xl sm:text-3xl font-bold text-primary mb-4 px-2">
                 {benefitsSections[currentSection].title}
               </CardTitle>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-base sm:text-lg text-muted-foreground px-2">
                 {benefitsSections[currentSection].subtitle}
               </p>
             </CardHeader>
             <CardContent>
               {/* Testimonial Carousel */}
-              <div className="bg-secondary/20 rounded-xl p-8 text-center min-h-[120px] flex items-center justify-center">
-                <p className="text-lg font-medium animate-pulse-slow">
+              <div className="bg-secondary/20 rounded-xl p-4 sm:p-8 text-center min-h-[120px] flex items-center justify-center">
+                <p className="text-base sm:text-lg font-medium animate-pulse-slow">
                   {benefitsSections[currentSection].testimonials[currentTestimonial]}
                 </p>
               </div>
@@ -103,7 +103,7 @@ const BenefitsSection = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 flex items-center justify-center ${
                       currentTestimonial === index ? 'bg-primary' : 'bg-muted'
                     }`}
                   />
@@ -113,11 +113,11 @@ const BenefitsSection = () => {
           </Card>
 
           {/* Weekly Stats */}
-          <div className="mt-16 text-center glass-effect rounded-xl p-8">
-            <p className="text-lg font-semibold text-accent mb-2">
+          <div className="mt-12 sm:mt-16 text-center glass-effect rounded-xl p-6 sm:p-8">
+            <p className="text-base sm:text-lg font-semibold text-accent mb-2">
               Every week, MutualBook facilitates thousands of intent-driven real-life partnerships
             </p>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Collaborations, deals, hirings—from startups and scholarships to weddings and manufacturing deals.
             </p>
           </div>
