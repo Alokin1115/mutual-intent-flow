@@ -90,23 +90,17 @@ const BenefitsSection = () => {
               </p>
             </CardHeader>
             <CardContent>
-              {/* Testimonial Carousel */}
-              <div className="bg-secondary/20 rounded-xl p-4 sm:p-8 text-center min-h-[120px] flex items-center justify-center">
-                <p className="text-base sm:text-lg font-medium animate-pulse-slow">
-                  {benefitsSections[currentSection].testimonials[currentTestimonial]}
-                </p>
-              </div>
-              
-              {/* Dots Indicator */}
-              <div className="flex justify-center mt-6 space-x-2">
-                {benefitsSections[currentSection].testimonials.map((_, index) => (
-                  <button
+              {/* Vertically Stacked Testimonials */}
+              <div className="flex flex-col space-y-4">
+                {benefitsSections[currentSection].testimonials.map((testimonial, index) => (
+                  <div
                     key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-4 h-4 sm:w-3 sm:h-3 rounded-full transition-all duration-300 min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 flex items-center justify-center ${
-                      currentTestimonial === index ? 'bg-primary' : 'bg-muted'
-                    }`}
-                  />
+                    className="bg-secondary/20 rounded-xl p-4 sm:p-6 text-center transition-transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg hover:bg-secondary/30 cursor-pointer"
+                  >
+                    <p className="text-base sm:text-lg font-medium">
+                      {testimonial}
+                    </p>
+                  </div>
                 ))}
               </div>
             </CardContent>
