@@ -27,8 +27,8 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="py-20 px-6" id="how-it-works">
-      <div className="container mx-auto">
+    <section className="py-20 px-3 md:px-12 lg:px-24" id="how-it-works">
+      <div className="container mx-auto !px-0 !mx-0">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">How It Works</h2>
           <p className="text-xl text-muted-foreground">Simple. Fast. Effective.</p>

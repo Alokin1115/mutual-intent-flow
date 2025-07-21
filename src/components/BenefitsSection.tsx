@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSwipeable } from "react-swipeable";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const benefitsSections = [
@@ -34,23 +35,57 @@ const benefitsSections = [
   }
 ];
 
+const AUTO_SCROLL_INTERVAL = 5000;
+
 const BenefitsSection = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const autoScrollRef = useRef<NodeJS.Timeout | null>(null);
+  const isUserInteracting = useRef(false);
 
+  // Auto-scroll between sections
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => 
+    if (isUserInteracting.current) return;
+    autoScrollRef.current = setInterval(() => {
+      setCurrentSection((prev) => (prev === benefitsSections.length - 1 ? 0 : prev + 1));
+      setCurrentTestimonial(0);
+    }, AUTO_SCROLL_INTERVAL);
+    return () => {
+      if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    };
+  }, [currentSection]);
+
+  // Pause auto-scroll on user interaction
+  const handleTabClick = (index: number) => {
+    isUserInteracting.current = true;
+    setCurrentSection(index);
+    setCurrentTestimonial(0);
+    if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    setTimeout(() => {
+      isUserInteracting.current = false;
+    }, AUTO_SCROLL_INTERVAL * 2);
+  };
+
+  // Swipe handlers for mobile
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleTabClick((currentSection + 1) % benefitsSections.length),
+    onSwipedRight: () => handleTabClick((currentSection - 1 + benefitsSections.length) % benefitsSections.length),
+    trackMouse: true,
+  });
+
+  // Testimonial carousel auto-scroll
+  useEffect(() => {
+    const testimonialInterval = setInterval(() => {
+      setCurrentTestimonial((prev) =>
         prev === benefitsSections[currentSection].testimonials.length - 1 ? 0 : prev + 1
       );
     }, 3000);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(testimonialInterval);
   }, [currentSection]);
 
   return (
-    <section className="py-20 px-6">
-      <div className="container mx-auto">
+    <section className="py-20 px-3 md:px-12 lg:px-24">
+      <div className="container mx-auto !px-0 !mx-0">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">
             Benefits Achieved with <span className="text-accent">Few Dollars</span>
@@ -58,19 +93,24 @@ const BenefitsSection = () => {
           <p className="text-xl text-muted-foreground">Real success stories from our members</p>
         </div>
 
-        {/* Section Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        {/* Section Tabs - Responsive */}
+        <div
+          className="flex flex-wrap justify-center gap-4 mb-12"
+          role="tablist"
+          aria-label="Benefit Sections"
+        >
           {benefitsSections.map((section, index) => (
             <button
               key={index}
-              onClick={() => {
-                setCurrentSection(index);
-                setCurrentTestimonial(0);
-              }}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                currentSection === index 
-                  ? 'gradient-primary text-black glow-primary' 
-                  : 'glass-effect text-white hover:border-primary/50'
+              role="tab"
+              aria-selected={currentSection === index}
+              aria-controls={`section-panel-${index}`}
+              tabIndex={currentSection === index ? 0 : -1}
+              onClick={() => handleTabClick(index)}
+              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/60 ${
+                currentSection === index
+                  ? "gradient-primary text-black glow-primary"
+                  : "glass-effect text-white hover:border-primary/50"
               }`}
             >
               {section.title}
@@ -78,8 +118,14 @@ const BenefitsSection = () => {
           ))}
         </div>
 
-        {/* Content Area */}
-        <div className="max-w-4xl mx-auto">
+        {/* Content Area - Swipeable on mobile */}
+        <div
+          {...swipeHandlers}
+          className="w-full md:max-w-4xl md:mx-auto transition-all duration-500"
+          id={`section-panel-${currentSection}`}
+          role="tabpanel"
+          aria-labelledby={`section-tab-${currentSection}`}
+        >
           <Card className="glass-effect border-primary/20 glow-primary">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl font-bold text-primary mb-4">
@@ -91,21 +137,21 @@ const BenefitsSection = () => {
             </CardHeader>
             <CardContent>
               {/* Testimonial Carousel */}
-              <div className="bg-secondary/20 rounded-xl p-8 text-center min-h-[120px] flex items-center justify-center">
+              <div className="bg-secondary/20 rounded-xl p-8 text-center min-h-[120px] flex items-center justify-center transition-all duration-500">
                 <p className="text-lg font-medium animate-pulse-slow">
                   {benefitsSections[currentSection].testimonials[currentTestimonial]}
                 </p>
               </div>
-              
               {/* Dots Indicator */}
               <div className="flex justify-center mt-6 space-x-2">
                 {benefitsSections[currentSection].testimonials.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      currentTestimonial === index ? 'bg-primary' : 'bg-muted'
+                    className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/60 ${
+                      currentTestimonial === index ? "bg-primary" : "bg-muted"
                     }`}
+                    aria-label={`Show testimonial ${index + 1}`}
                   />
                 ))}
               </div>

@@ -1,14 +1,77 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ImpactStrip } from "./ImpactStrip";
+import { NoticeBanner } from "./NoticeBanner";
+import HorizontalScroller from "./ui/horizontal-scroller";
+import HeroHighlights from "./HeroHighlights";
 
-const companies = [
-  "Google", "Meta", "MIT", "Stanford", "Microsoft", "Nvidia", "Y Combinator", 
-  "Fortune 500", "University of Chicago", "Duke", "Northwestern", "UC Berkeley", 
-  "Cornell", "Columbia", "Princeton", "Harvard", "Yale", "Caltech", "UPenn", 
-  "Johns Hopkins", "Brown", "Dartmouth", "UCLA", "Michigan", "Carnegie Mellon", 
-  "Georgia Tech", "IITs", "NITs", "BITS"
+const topUniversities = [
+  { name: "Harvard", logo: "/logos/universities/Harvard.png" },
+  { name: "Stanford", logo: "/logos/universities/Stanford.png" },
+  { name: "MIT", logo: "/logos/universities/MIT.png" },
+  { name: "UC Berkeley", logo: "/logos/universities/UC_Berkeley.png" },
+  { name: "Oxford", logo: "/logos/universities/Oxford.png" },
+  { name: "Cambridge", logo: "/logos/universities/Cambridge.png" },
+  { name: "Caltech", logo: "/logos/universities/Caltech.png" },
+  { name: "Princeton", logo: "/logos/universities/Princeton.png" },
+  { name: "Yale", logo: "/logos/universities/Yale.png" },
+  { name: "Columbia", logo: "/logos/universities/Columbia.png" },
+  { name: "UChicago", logo: "/logos/universities/UChicago.png" },
+  { name: "UPenn", logo: "/logos/universities/UPenn.png" },
+  { name: "Cornell", logo: "/logos/universities/Cornell.png" },
+  { name: "UCLA", logo: "/logos/universities/UCLA.png" },
+  { name: "Johns Hopkins", logo: "/logos/universities/Johns_Hopkins.png" },
+  { name: "Duke", logo: "/logos/universities/Duke.png" },
+  { name: "Northwestern", logo: "/logos/universities/Northwestern.png" },
+  { name: "NYU", logo: "/logos/universities/NYU.png" },
+  { name: "Michigan", logo: "/logos/universities/Michigan.png" },
+  { name: "Toronto", logo: "/logos/universities/Toronto.png" },
+  { name: "Imperial College London", logo: "/logos/universities/Imperial_College_London.png" },
+  { name: "ETH Zurich", logo: "/logos/universities/ETH_Zurich.png" },
+  { name: "Tsinghua", logo: "/logos/universities/Tsinghua.png" },
+  { name: "Peking University", logo: "/logos/universities/Peking_University.png" },
+  { name: "National University of Singapore", logo: "/logos/universities/National_University_of_Singapore.png" },
+  { name: "LSE", logo: "/logos/universities/LSE.png" },
+  { name: "Carnegie Mellon", logo: "/logos/universities/Carnegie_Mellon.png" },
+  { name: "Brown", logo: "/logos/universities/Brown.png" },
+  { name: "Dartmouth", logo: "/logos/universities/Dartmouth.png" },
+  { name: "IIT Bombay", logo: "/logos/universities/IIT_Bombay.png" },
+  { name: "IIT Delhi", logo: "/logos/universities/IIT_Delhi.png" }
+];
+const topCompanies = [
+  { name: "Google", logo: "https://logo.clearbit.com/google.com" },
+  { name: "Meta", logo: "https://logo.clearbit.com/meta.com" },
+  { name: "Microsoft", logo: "https://logo.clearbit.com/microsoft.com" },
+  { name: "Apple", logo: "https://logo.clearbit.com/apple.com" },
+  { name: "Amazon", logo: "https://logo.clearbit.com/amazon.com" },
+  { name: "Nvidia", logo: "https://logo.clearbit.com/nvidia.com" },
+  { name: "Tesla", logo: "https://logo.clearbit.com/tesla.com" },
+  { name: "OpenAI", logo: "https://logo.clearbit.com/openai.com" },
+  { name: "Y Combinator", logo: "https://logo.clearbit.com/ycombinator.com" },
+  { name: "Goldman Sachs", logo: "https://logo.clearbit.com/goldmansachs.com" },
+  { name: "McKinsey", logo: "https://logo.clearbit.com/mckinsey.com" },
+  { name: "Bain", logo: "https://logo.clearbit.com/bain.com" },
+  { name: "BCG", logo: "https://logo.clearbit.com/bcg.com" },
+  { name: "JP Morgan", logo: "https://logo.clearbit.com/jpmorganchase.com" },
+  { name: "Morgan Stanley", logo: "https://logo.clearbit.com/morganstanley.com" },
+  { name: "Stripe", logo: "https://logo.clearbit.com/stripe.com" },
+  { name: "Airbnb", logo: "https://logo.clearbit.com/airbnb.com" },
+  { name: "Netflix", logo: "https://logo.clearbit.com/netflix.com" },
+  { name: "Uber", logo: "https://logo.clearbit.com/uber.com" },
+  { name: "Salesforce", logo: "https://logo.clearbit.com/salesforce.com" },
+  { name: "Adobe", logo: "https://logo.clearbit.com/adobe.com" },
+  { name: "Intel", logo: "https://logo.clearbit.com/intel.com" },
+  { name: "SpaceX", logo: "https://logo.clearbit.com/spacex.com" },
+  { name: "Palantir", logo: "https://logo.clearbit.com/palantir.com" },
+  { name: "LinkedIn", logo: "https://logo.clearbit.com/linkedin.com" },
+  { name: "Dropbox", logo: "https://logo.clearbit.com/dropbox.com" },
+  { name: "Atlassian", logo: "https://logo.clearbit.com/atlassian.com" },
+  { name: "Shopify", logo: "https://logo.clearbit.com/shopify.com" },
+  { name: "ByteDance", logo: "https://logo.clearbit.com/bytedance.com" },
+  { name: "Tencent", logo: "https://logo.clearbit.com/tencent.com" }
 ];
 
 const rotatingWords = ["Collaborations", "Deals", "Partnerships"];
@@ -16,6 +79,11 @@ const rotatingWords = ["Collaborations", "Deals", "Partnerships"];
 const HeroSection = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const [email, setEmail] = useState("");
+  const isMobile = useIsMobile();
+  const [unstacked, setUnstacked] = useState(false);
+  const lastScrollY = useRef(0);
+  const stackRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,6 +91,23 @@ const HeroSection = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const handleScroll = () => {
+      if (!stackRef.current) return;
+      const rect = stackRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      // When the top of the stack is at the top of the viewport, progress is 0
+      // When the bottom of the stack is at the top of the viewport, progress is 1
+      const total = rect.height;
+      const scrolled = Math.min(Math.max(-rect.top, 0), total);
+      setScrollProgress(scrolled / total);
+    };
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile]);
 
   return (
     <section className="min-h-screen gradient-hero relative overflow-hidden pt-24 pb-16">
@@ -34,28 +119,28 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <div className="container mx-auto px-3 md:px-6 text-center relative z-10">
         {/* Top Banner */}
-        <Badge className="mb-8 px-6 py-3 text-lg font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
-          🟦 From the World's Top 500 Universities & Companies ✨ Verified
+        <Badge className="mb-8 px-3 py-2 text-xs md:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+          From World's Top 100 Universities & Companies✨
         </Badge>
 
         {/* Main Headline */}
-        <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-          Elites' Fast-Track to{" "}
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent inline-block transition-all duration-500">
+        <h1 className="text-4xl md:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
             {rotatingWords[wordIndex]}
           </span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+        <p className="text-lg md:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
           Where the world's most ambitious meet—and get things done.
         </p>
 
         {/* CTA Area */}
         <div className="max-w-md mx-auto mb-12">
-          <div className="flex gap-3 mb-4">
+          <div className="flex flex-col md:flex-row gap-3 mb-4">
             <Input 
               type="email" 
               placeholder="Organization Email"
@@ -76,43 +161,19 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* Company Logos Scroll */}
-        <div className="overflow-hidden mb-16">
-          <div className="flex animate-marquee space-x-8 whitespace-nowrap">
-            {companies.concat(companies).map((company, index) => (
-              <Badge key={index} variant="outline" className="px-4 py-2 text-sm font-medium glass-effect">
-                {company}
-              </Badge>
-            ))}
+        {/* University and Company Logos Scroll */}
+        <div className="overflow-hidden w-full">
+          <div className="text-xs text-muted-foreground mb-1 font-medium px-3 md:px-6">
+            Used by Professionals, Alumni & Students from
+          </div>
+          <div className="w-full">
+            <HorizontalScroller items={topUniversities} />
+            <HorizontalScroller items={topCompanies} />
           </div>
         </div>
 
-        {/* Notice Banner */}
-        <div className="bg-primary/10 border border-primary/20 rounded-xl p-6 max-w-4xl mx-auto mb-16">
-          <p className="text-lg font-medium">
-            Real-time calls with your future co-founder, investor, mentor, employer or life partner—matching your intent, urgency, and expectation like thousands already have.
-          </p>
-        </div>
-
-        {/* Impact Strip */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">5,000+</div>
-            <div className="text-sm text-muted-foreground">Verified Professionals Joined This Week</div>
-          </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-accent mb-2">4,847</div>
-            <div className="text-sm text-muted-foreground">Confirmed Collaborations Last Week</div>
-          </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-primary mb-2">9.5 hrs</div>
-            <div className="text-sm text-muted-foreground">Average From First Call to Collab</div>
-          </div>
-          <div className="glass-effect rounded-xl p-6 text-center">
-            <div className="text-3xl font-bold text-accent mb-2">0</div>
-            <div className="text-sm text-muted-foreground">Randomness | 20+ Use Cases</div>
-          </div>
-        </div>
+        {/* Hero Highlights (ImpactStrip + Notice Banner) */}
+        <HeroHighlights />
       </div>
     </section>
   );

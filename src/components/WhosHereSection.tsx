@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRef, useEffect } from "react";
 
 const professions = [
   { title: "Neurosurgeons", icon: "🧠", color: "bg-blue-500/20 text-blue-300" },
@@ -18,16 +19,21 @@ const industries = [
   "Venture Capital", "Private Equity", "Legal", "Medicine", "Academia"
 ];
 
-const educationTags = [
-  "Harvard MBA", "Stanford CS", "MIT PhD", "Wharton Finance", "Yale Law",
-  "IIT Bombay", "Oxford PPE", "Cambridge Engineering", "Berkeley EECS",
-  "Columbia Journalism", "NYU Stern", "INSEAD", "LBS", "Caltech Physics"
+
+const startupSectors = [
+  "SaaS", "FoodTech", "AgriTech", "PropTech", "InsurTech", "MarTech", "TravelTech", "SportsTech", "GovTech", "RetailTech",
+  "SpaceTech", "Robotics", "3D Printing", "Wearables", "IoT", "eCommerce", "D2C Brands", "Marketplace", "Crowdfunding", "Gaming"
+];
+
+const modernEconomySectors = [
+  "Influencer", "Creator Economy", "eSports", "Podcasting", "YouTube", "Streaming", "Remote Work", "Gig Economy", "Digital Nomads", "NFTs",
+  "Web3", "Crypto Trading", "Online Courses", "Social Commerce", "Subscription Boxes", "Micro SaaS", "No-Code", "Dropshipping", "Virtual Events", "Online Fitness", "Personal Branding"
 ];
 
 const WhosHereSection = () => {
   return (
-    <section className="py-20 px-6" id="whos-here">
-      <div className="container mx-auto">
+    <section className="py-20 px-0" id="whos-here">
+      <div className="w-full !px-0 !mx-0">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">Who's Here</h2>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
@@ -53,36 +59,17 @@ const WhosHereSection = () => {
           </div>
         </div>
 
-        {/* Industries */}
+        {/* Modern Economy and Startup Sectors */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-primary">Industries</h3>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {industries.map((industry, index) => (
-              <Badge 
-                key={index} 
-                variant="outline" 
-                className="px-4 py-2 glass-effect hover:border-accent/50 hover:text-accent transition-all duration-300"
-              >
-                {industry}
-              </Badge>
-            ))}
+          <h3 className="text-2xl font-bold text-center mb-8 text-primary">Modern Economy and Startup Sectors</h3>
+          <div className="flex flex-col gap-[2px]">
+            <IndustriesScroller industries={startupSectors} />
+            <IndustriesScroller industries={industries} reverse />
+            <IndustriesScroller industries={modernEconomySectors} />
           </div>
         </div>
 
-        {/* Education Tags */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-primary">Education</h3>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {educationTags.map((tag, index) => (
-              <Badge 
-                key={index} 
-                className="px-4 py-2 bg-primary/20 text-primary border-primary/30 hover:bg-primary/30 transition-all duration-300"
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </div>
+        
 
         {/* Avatars/Portraits Section */}
         <div className="max-w-6xl mx-auto">
@@ -116,6 +103,136 @@ const WhosHereSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+// --- IndustriesScroller component for auto-scroll and drag ---
+const IndustriesScroller = ({ industries, compact, reverse }: { industries: string[], compact?: boolean, reverse?: boolean }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragScrollLeft = useRef(0);
+  const autoScrollInterval = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-scroll effect with seamless infinite loop
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    let paused = false;
+    function startAutoScroll() {
+      if (autoScrollInterval.current) clearInterval(autoScrollInterval.current);
+      autoScrollInterval.current = setInterval(() => {
+        if (paused) return;
+        if (!container) return;
+        const scrollWidth = container.scrollWidth / 2;
+        if (reverse) {
+          if (container.scrollLeft <= 0) {
+            container.scrollLeft = scrollWidth;
+          } else {
+            container.scrollLeft -= 1.5;
+          }
+          if (container.scrollLeft < 0) container.scrollLeft = scrollWidth;
+        } else {
+          if (container.scrollLeft >= scrollWidth) {
+            container.scrollLeft = 0;
+          } else {
+            container.scrollLeft += 1.5;
+          }
+        }
+      }, 16);
+    }
+    startAutoScroll();
+    // Pause on mouse enter/touch
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; };
+    container.addEventListener('mouseenter', pause);
+    container.addEventListener('mouseleave', resume);
+    container.addEventListener('touchstart', pause);
+    container.addEventListener('touchend', resume);
+    return () => {
+      if (autoScrollInterval.current) clearInterval(autoScrollInterval.current);
+      container.removeEventListener('mouseenter', pause);
+      container.removeEventListener('mouseleave', resume);
+      container.removeEventListener('touchstart', pause);
+      container.removeEventListener('touchend', resume);
+    };
+  }, [reverse, industries]);
+
+  // Drag-to-scroll handlers
+  const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+    isDragging.current = true;
+    dragStartX.current = e.pageX - container.offsetLeft;
+    dragScrollLeft.current = container.scrollLeft;
+    container.style.cursor = 'grabbing';
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
+  };
+  const onMouseMove = (e: MouseEvent) => {
+    if (!isDragging.current) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - dragStartX.current) * 1.2;
+    container.scrollLeft = dragScrollLeft.current - walk;
+  };
+  const onMouseUp = () => {
+    isDragging.current = false;
+    const container = containerRef.current;
+    if (container) container.style.cursor = '';
+    window.removeEventListener('mousemove', onMouseMove);
+    window.removeEventListener('mouseup', onMouseUp);
+  };
+  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+    isDragging.current = true;
+    dragStartX.current = e.touches[0].pageX - container.offsetLeft;
+    dragScrollLeft.current = container.scrollLeft;
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onTouchEnd);
+  };
+  const onTouchMove = (e: TouchEvent) => {
+    if (!isDragging.current) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - dragStartX.current) * 1.2;
+    container.scrollLeft = dragScrollLeft.current - walk;
+  };
+  const onTouchEnd = () => {
+    isDragging.current = false;
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', onTouchEnd);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`flex flex-nowrap overflow-x-auto px-0 py-2 max-w-full cursor-grab active:cursor-grabbing gap-3`}
+      style={{
+        WebkitOverflowScrolling: 'touch',
+        scrollbarWidth: 'none', // Firefox
+        msOverflowStyle: 'none', // IE 10+
+      }}
+      tabIndex={0}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+    >
+      <style>{`
+        .industries-scroller::-webkit-scrollbar { display: none; }
+      `}</style>
+      {[...industries, ...industries].map((industry, index) => (
+        <Badge
+          key={index}
+          variant="outline"
+          className={`glass-effect hover:border-accent/50 hover:text-accent transition-all duration-300 whitespace-nowrap px-4 py-2`}
+        >
+          {industry}
+        </Badge>
+      ))}
+    </div>
   );
 };
 

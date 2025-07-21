@@ -24,11 +24,7 @@ const Index = () => {
       <Footer />
       
       {/* Mobile Floating CTA */}
-      <div className="md:hidden fixed bottom-6 left-6 right-6 z-50">
-        <button className="w-full gradient-gold text-black font-semibold py-3 rounded-full glow-gold">
-          Get Invite
-        </button>
-      </div>
+      {/* Removed floating Get Invite button */}
     </div>
   );
 };

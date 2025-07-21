@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useScrollActiveCard } from "@/hooks/use-scroll-active-card";
 
 const solutionCards = [
   {
@@ -41,41 +43,59 @@ const solutionCards = [
 ];
 
 const SolutionSection = () => {
+  const isMobile = useIsMobile();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Use scroll-based activation on mobile
+  const scrollActiveIdx = useScrollActiveCard(cardRefs.current);
+
+  useEffect(() => {
+    if (isMobile) {
+      setHoveredCard(scrollActiveIdx ?? null);
+    }
+  }, [isMobile, scrollActiveIdx]);
+
+  // Reset hoveredCard on desktop
+  useEffect(() => {
+    if (!isMobile) setHoveredCard(null);
+  }, [isMobile]);
 
   return (
-    <section className="py-20 px-6">
+    <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 px-2">
             Why <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">MutualBook</span> Works
           </h2>
-          <p className="text-xl text-muted-foreground mb-8">The 6 A's Framework</p>
-          <p className="text-lg font-medium text-accent">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8 px-2">The 6 A's Framework</p>
+          <p className="text-base sm:text-lg font-medium text-accent px-2">
             "It's like YC Demo Day + Bumble + Zoom, all driven by bold ambition & intents."
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           {solutionCards.map((card, index) => (
             <Card 
               key={index}
-              className={`glass-effect border-primary/20 cursor-pointer transition-all duration-300 hover:scale-105 hover:border-primary/50 ${
+              ref={el => cardRefs.current[index] = el}
+              data-idx={index}
+              className={`glass-effect border-primary/20 cursor-pointer transition-all duration-300 sm:hover:scale-105 hover:border-primary/50 ${
                 hoveredCard === index ? 'glow-primary' : ''
               }`}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={() => !isMobile && setHoveredCard(index)}
+              onMouseLeave={() => !isMobile && setHoveredCard(null)}
+              onClick={() => !isMobile && setHoveredCard(hoveredCard === index ? null : index)}
             >
               <CardHeader>
-                <div className="text-4xl mb-4">{card.icon}</div>
-                <CardTitle className="text-2xl font-bold text-primary">
+                <div className="text-3xl sm:text-4xl mb-4">{card.icon}</div>
+                <CardTitle className="text-xl sm:text-2xl font-bold text-primary">
                   {card.title}
                 </CardTitle>
-                <CardDescription className="text-base">
+                <CardDescription className="text-sm sm:text-base">
                   {card.description}
                 </CardDescription>
               </CardHeader>
-              {hoveredCard === index && (
+              {(hoveredCard === index) && (
                 <CardContent className="pt-0">
                   <p className="text-sm text-muted-foreground">
                     {card.detail}

@@ -15,12 +15,12 @@ const WaitlistSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log("Waitlist submission:", formData);
+    // console.log("Waitlist submission:", formData); // Removed for production
   };
 
   return (
-    <section className="py-20 px-6" id="waitlist">
-      <div className="container mx-auto max-w-4xl">
+    <section className="py-20 px-3 md:px-12 lg:px-24" id="waitlist">
+      <div className="container mx-auto !px-0 !mx-0">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">Waitlist Wild Card</h2>
           <p className="text-xl text-muted-foreground">
@@ -28,7 +28,7 @@ const WaitlistSection = () => {
           </p>
         </div>
 
-        <Card className="relative overflow-hidden">
+        <Card className="relative overflow-hidden md:max-w-2xl md:mx-auto">
           {/* Dark Gold Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-600/20 to-orange-600/20"></div>
           
@@ -113,7 +113,7 @@ const WaitlistSection = () => {
         </Card>
 
         {/* Curation Stats */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:max-w-2xl md:mx-auto">
           <div className="text-center glass-effect rounded-xl p-6">
             <div className="text-3xl font-bold text-accent mb-2">2,847</div>
             <div className="text-sm text-muted-foreground">Applications This Week</div>

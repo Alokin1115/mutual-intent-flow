@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useRef, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useScrollActiveCard } from "@/hooks/use-scroll-active-card";
 
 const pricingTiers = [
   {
@@ -38,18 +41,35 @@ const pricingTiers = [
   {
     name: "Golden Class",
     price: "$1,000–$10,000",
-    tagline: "Invite Only",
+    tagline: "Gated Access",
     buttonText: "Apply",
-    features: ["Top 0.01% professionals", "Billionaire network access", "Closed-door invitations", "White-glove service", "Custom matching"],
+    features: ["Top 0.01% professionals", "Millionaire network access", "Closed-door invitations", "White-glove service", "Beta access & benefits"],
     highlight: false,
     premium: true
   }
 ];
 
 const PricingSection = () => {
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const isMobile = useIsMobile();
+  const scrollActiveIdx = useScrollActiveCard(cardRefs.current);
+
+  // Focus the active button on mobile
+  useEffect(() => {
+    if (
+      isMobile &&
+      scrollActiveIdx !== null &&
+      buttonRefs.current[scrollActiveIdx] &&
+      !pricingTiers[scrollActiveIdx].premium // Only focus if not premium
+    ) {
+      buttonRefs.current[scrollActiveIdx]?.focus();
+    }
+  }, [isMobile, scrollActiveIdx]);
+
   return (
-    <section className="py-20 px-6" id="pricing">
-      <div className="container mx-auto">
+    <section className="py-20 px-3 md:px-12 lg:px-24" id="pricing">
+      <div className="container mx-auto !px-0 !mx-0">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold mb-8">
             You'll Make It Back In <span className="text-accent">One Call</span>
@@ -60,16 +80,20 @@ const PricingSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 w-full md:max-w-7xl md:mx-auto">
           {pricingTiers.map((tier, index) => (
             <Card 
               key={index}
+              ref={el => cardRefs.current[index] = el}
               className={`relative transition-all duration-300 hover:scale-105 ${
-                tier.highlight 
-                  ? 'border-primary/50 glow-primary scale-105' 
-                  : tier.premium 
-                    ? 'border-accent/50 gradient-gold' 
-                    : 'glass-effect border-border/20'
+                // Auto-highlight (expand) on mobile scroll for non-premium
+                isMobile && scrollActiveIdx === index && !tier.premium
+                  ? 'glow-primary scale-105 z-10 border-primary/70'
+                  : tier.highlight 
+                    ? 'border-primary/50 glow-primary scale-105' 
+                    : tier.premium 
+                      ? 'border-accent/50 gradient-gold' 
+                      : 'glass-effect border-border/20'
               }`}
             >
               {tier.highlight && (
@@ -110,12 +134,18 @@ const PricingSection = () => {
                 </ul>
 
                 <Button 
+                  ref={el => buttonRefs.current[index] = el}
+                  aria-current={isMobile && scrollActiveIdx === index ? "true" : undefined}
+                  tabIndex={isMobile && scrollActiveIdx === index ? 0 : -1}
+                  variant={isMobile && scrollActiveIdx === index && !tier.premium ? "active" : undefined}
                   className={`w-full font-semibold ${
-                    tier.highlight 
-                      ? 'gradient-primary text-black glow-primary' 
-                      : tier.premium
-                        ? 'bg-black text-accent hover:bg-black/80'
-                        : 'glass-effect border-primary/20 hover:border-primary/50'
+                    isMobile && scrollActiveIdx === index && !tier.premium
+                      ? "gradient-primary text-black glow-primary shadow-lg border-2 border-primary"
+                      : tier.highlight
+                        ? 'gradient-primary text-black glow-primary'
+                        : tier.premium
+                          ? 'bg-black text-accent hover:bg-black/80'
+                          : 'glass-effect border-primary/20 hover:border-primary/50'
                   }`}
                 >
                   {tier.buttonText}
@@ -125,34 +155,7 @@ const PricingSection = () => {
           ))}
         </div>
 
-        {/* Golden Class Details */}
-        <div className="mt-16 max-w-3xl mx-auto">
-          <Card className="gradient-gold border-accent/30">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl font-bold text-black mb-4">
-                Golden Class (Premium Experience, Invite Only)
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-black">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-semibold mb-2">$1,000/year & $10,000/year</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Priority call to top 0.01% professionals & executives</li>
-                    <li>• Closed-door invitations with founders, executives & billionaires</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-2">Exclusive Benefits</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li>• First-access to beta features & benefits</li>
-                    <li>• Increased visibility & fully customizable filtering</li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        
       </div>
     </section>
   );
