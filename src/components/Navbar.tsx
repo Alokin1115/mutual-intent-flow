@@ -15,10 +15,14 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect py-3">
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <div className={`text-xl font-bold transition-all duration-300 ${
+        <div className={`transition-all duration-300 ${
           scrolled ? 'glow-primary' : ''
         }`}>
-          My MutualBook
+          <img 
+            src="/Mutualbook complete logo.png" 
+            alt="MutualBook" 
+            className="h-8 md:h-10 w-auto object-contain"
+          />
         </div>
         
         <div className="hidden md:flex items-center space-x-8">

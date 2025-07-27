@@ -73,31 +73,31 @@ const SolutionSection = () => {
             "It's like YC Demo Day + Bumble + Zoom, all driven by bold ambition & intents."
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {solutionCards.map((card, index) => (
             <Card 
               key={index}
               ref={el => cardRefs.current[index] = el}
               data-idx={index}
-              className={`glass-effect border-primary/20 cursor-pointer transition-all duration-300 sm:hover:scale-105 hover:border-primary/50 ${
+              className={`glass-effect border-primary/20 cursor-pointer transition-all duration-300 sm:hover:scale-105 hover:border-primary/50 min-h-[280px] sm:min-h-[320px] ${
                 hoveredCard === index ? 'glow-primary' : ''
               }`}
               onMouseEnter={() => !isMobile && setHoveredCard(index)}
               onMouseLeave={() => !isMobile && setHoveredCard(null)}
               onClick={() => !isMobile && setHoveredCard(hoveredCard === index ? null : index)}
             >
-              <CardHeader>
-                <div className="text-3xl sm:text-4xl mb-4">{card.icon}</div>
-                <CardTitle className="text-xl sm:text-2xl font-bold text-primary">
+              <CardHeader className="pb-4">
+                <div className="text-4xl sm:text-5xl mb-4">{card.icon}</div>
+                <CardTitle className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary">
                   {card.title}
                 </CardTitle>
-                <CardDescription className="text-sm sm:text-base">
+                <CardDescription className="text-sm sm:text-base lg:text-lg">
                   {card.description}
                 </CardDescription>
               </CardHeader>
               {(hoveredCard === index) && (
                 <CardContent className="pt-0">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     {card.detail}
                   </p>
                 </CardContent>
