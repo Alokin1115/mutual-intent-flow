@@ -10,17 +10,99 @@ const HeroHighlights = () => {
       {isMobile ? (
         <NoticeBanner />
       ) : (
-        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-8 max-w-3xl mx-auto my-12 shadow-lg">
-          <div className="flex items-center justify-center mb-3">
-            <span className="text-2xl mr-2">⚡</span>
-            <span className="font-semibold text-lg text-primary">Real-time, high-intent connections</span>
+        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-3xl p-8 md:p-12 max-w-4xl mx-auto my-12 shadow-2xl">
+          {/* Floating background elements */}
+          <div className="absolute top-4 right-6 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute bottom-4 left-6 w-16 h-16 bg-accent/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+          
+          {/* Header with enhanced styling */}
+          <div className="flex items-center justify-center mb-8 relative z-10">
+            <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-primary/30">
+              <span className="text-3xl mr-3 animate-bounce">⚡</span>
+              <span className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Real-time, high-intent connections
+              </span>
+            </div>
           </div>
-          <p className="text-lg text-center mb-2">
-            Meet your future <span className="font-bold text-accent">co-founder</span>, <span className="font-bold text-accent">investor</span>, <span className="font-bold text-accent">mentor</span>, <span className="font-bold text-accent">employer</span>, or <span className="font-bold text-accent">life partner</span>—faster than ever.
-          </p>
-          <p className="text-base text-muted-foreground text-center">
-            Matching your <span className="font-semibold text-primary">intent</span>, <span className="font-semibold text-primary">urgency</span>, and <span className="font-semibold text-primary">expectation</span>—just like thousands already have.
-          </p>
+          
+          {/* Main content with enhanced typography */}
+          <div className="space-y-6 relative z-10">
+            <div className="text-center">
+              <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground">
+                Meet your future{" "}
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    co-founder
+                  </span>
+                  <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse"></div>
+                </span>
+                ,{" "}
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    investor
+                  </span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "0.5s" }}></div>
+                </span>
+                ,{" "}
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    mentor
+                  </span>
+                  <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "1s" }}></div>
+                </span>
+                ,
+              </p>
+              <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground mt-2">
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    employer
+                  </span>
+                  <div className="absolute inset-0 bg-primary/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "1.5s" }}></div>
+                </span>
+                , or{" "}
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    life partner
+                  </span>
+                  <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "2s" }}></div>
+                </span>
+                —faster than ever.
+              </p>
+            </div>
+            
+            {/* Separator line with glow */}
+            <div className="flex justify-center my-8">
+              <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent shadow-lg"></div>
+            </div>
+            
+            {/* Supporting text with enhanced highlights */}
+            <div className="text-center">
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                Matching your{" "}
+                <span className="relative inline-block group">
+                  <span className="font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                    intent
+                  </span>
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                </span>
+                ,{" "}
+                <span className="relative inline-block group">
+                  <span className="font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                    urgency
+                  </span>
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                </span>
+                , and{" "}
+                <span className="relative inline-block group">
+                  <span className="font-bold text-primary transition-all duration-300 group-hover:scale-110">
+                    expectation
+                  </span>
+                  <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                </span>
+                —just like thousands already have.
+              </p>
+            </div>
+          </div>
         </div>
       )}
     </>
