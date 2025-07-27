@@ -3,6 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import TimelineBenefitsSection from "@/components/TimelineBenefitsSection";
+import GlassmorphismBenefitsSection from "@/components/GlassmorphismBenefitsSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
 import WhosHereSection from "@/components/WhosHereSection";
@@ -18,6 +20,8 @@ const Index = () => {
       <ProblemSection />
       <SolutionSection />
       <BenefitsSection />
+      <TimelineBenefitsSection />
+      <GlassmorphismBenefitsSection />
       <HowItWorksSection />
       <PricingSection />
       <WhosHereSection />
@@ -26,7 +30,11 @@ const Index = () => {
       <Footer />
       
       {/* Mobile Floating CTA */}
-      {/* Removed floating Get Invite button */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
+        <button className="w-full gradient-gold text-black font-semibold py-4 rounded-full glow-gold min-h-[56px] text-base shadow-lg">
+          Get Invite
+        </button>
+      </div>
     </div>
   );
 };

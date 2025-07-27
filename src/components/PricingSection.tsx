@@ -74,26 +74,22 @@ const PricingSection = () => {
           <h2 className="text-5xl font-bold mb-8">
             You'll Make It Back In <span className="text-accent">One Call</span>
           </h2>
-          <p className="text-xl text-muted-foreground mb-4">Choose your level of commitment</p>
-          <p className="text-lg font-medium text-primary">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-4 px-2">Choose your level of commitment</p>
+          <p className="text-base sm:text-lg font-medium text-primary px-2">
             "If one call leads to your future partner, it pays for itself 100x."
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 w-full md:max-w-7xl md:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {pricingTiers.map((tier, index) => (
             <Card 
               key={index}
-              ref={el => cardRefs.current[index] = el}
-              className={`relative transition-all duration-300 hover:scale-105 ${
-                // Auto-highlight (expand) on mobile scroll for non-premium
-                isMobile && scrollActiveIdx === index && !tier.premium
-                  ? 'glow-primary scale-105 z-10 border-primary/70'
-                  : tier.highlight 
-                    ? 'border-primary/50 glow-primary scale-105' 
-                    : tier.premium 
-                      ? 'border-accent/50 gradient-gold' 
-                      : 'glass-effect border-border/20'
+              className={`relative transition-all duration-300 sm:hover:scale-105 ${
+                tier.highlight 
+                  ? 'border-primary/50 glow-primary sm:scale-105' 
+                  : tier.premium 
+                    ? 'border-accent/50 gradient-gold' 
+                    : 'glass-effect border-border/20'
               }`}
             >
               {tier.highlight && (
@@ -109,43 +105,37 @@ const PricingSection = () => {
               )}
 
               <CardHeader className="text-center">
-                <CardTitle className={`text-2xl font-bold ${tier.premium ? 'text-black' : ''}`}>
+                <CardTitle className={`text-lg sm:text-xl lg:text-2xl font-bold ${tier.premium ? 'text-black' : ''}`}>
                   {tier.name}
                 </CardTitle>
-                <div className={`text-3xl font-bold mb-2 ${tier.premium ? 'text-black' : 'text-primary'}`}>
+                <div className={`text-2xl sm:text-3xl font-bold mb-2 ${tier.premium ? 'text-black' : 'text-primary'}`}>
                   {tier.price}
                 </div>
-                <CardDescription className={tier.premium ? 'text-black/70' : ''}>
+                <CardDescription className={`text-sm sm:text-base ${tier.premium ? 'text-black/70' : ''}`}>
                   {tier.tagline}
                 </CardDescription>
               </CardHeader>
 
               <CardContent>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-2 sm:space-y-3 mb-6">
                   {tier.features.map((feature, featureIndex) => (
                     <li 
                       key={featureIndex} 
-                      className={`flex items-center text-sm ${tier.premium ? 'text-black' : 'text-muted-foreground'}`}
+                      className={`flex items-start text-xs sm:text-sm ${tier.premium ? 'text-black' : 'text-muted-foreground'}`}
                     >
-                      <span className="text-green-400 mr-2">✓</span>
+                      <span className="text-green-400 mr-2 mt-0.5">✓</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
                 <Button 
-                  ref={el => buttonRefs.current[index] = el}
-                  aria-current={isMobile && scrollActiveIdx === index ? "true" : undefined}
-                  tabIndex={isMobile && scrollActiveIdx === index ? 0 : -1}
-                  variant={isMobile && scrollActiveIdx === index && !tier.premium ? "active" : undefined}
-                  className={`w-full font-semibold ${
-                    isMobile && scrollActiveIdx === index && !tier.premium
-                      ? "gradient-primary text-black glow-primary shadow-lg border-2 border-primary"
-                      : tier.highlight
-                        ? 'gradient-primary text-black glow-primary'
-                        : tier.premium
-                          ? 'bg-black text-accent hover:bg-black/80'
-                          : 'glass-effect border-primary/20 hover:border-primary/50'
+                  className={`w-full font-semibold text-sm sm:text-base min-h-[44px] ${
+                    tier.highlight 
+                      ? 'gradient-primary text-black glow-primary' 
+                      : tier.premium
+                        ? 'bg-black text-accent hover:bg-black/80'
+                        : 'glass-effect border-primary/20 hover:border-primary/50'
                   }`}
                 >
                   {tier.buttonText}
@@ -155,7 +145,34 @@ const PricingSection = () => {
           ))}
         </div>
 
-        
+        {/* Golden Class Details */}
+        <div className="mt-12 sm:mt-16 max-w-3xl mx-auto">
+          <Card className="gradient-gold border-accent/30">
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl sm:text-2xl font-bold text-black mb-4 px-2">
+                Golden Class (Premium Experience, Invite Only)
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-black">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                <div>
+                  <h4 className="font-semibold mb-2 text-sm sm:text-base">$1,000/year & $10,000/year</h4>
+                  <ul className="space-y-2 text-xs sm:text-sm">
+                    <li>• Priority call to top 0.01% professionals & executives</li>
+                    <li>• Closed-door invitations with founders, executives & billionaires</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2 text-sm sm:text-base">Exclusive Benefits</h4>
+                  <ul className="space-y-2 text-xs sm:text-sm">
+                    <li>• First-access to beta features & benefits</li>
+                    <li>• Increased visibility & fully customizable filtering</li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </section>
   );

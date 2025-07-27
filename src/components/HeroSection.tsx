@@ -146,16 +146,16 @@ const HeroSection = () => {
               placeholder="Organization Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="glass-effect text-white placeholder:text-gray-400"
+              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
             />
             <Button 
-              className="gradient-gold text-black font-semibold px-8 glow-gold" 
+              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
               disabled={!email}
             >
               Get Your Invitation
             </Button>
           </div>
-          <p className="text-sm text-muted-foreground mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground mb-6 px-2">
             ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
             <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
           </p>
