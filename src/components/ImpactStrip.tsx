@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const ImpactStrip = () => {
   const cards = [
@@ -25,17 +25,70 @@ const ImpactStrip = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const lastScrollY = useRef(0);
+  const scrollThreshold = useRef(0);
 
-  // Auto-advance cards every 3 seconds
+  // Check if mobile device
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Scroll-triggered card advancement for mobile
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = Math.abs(currentScrollY - lastScrollY.current);
+      
+      // Only trigger if section is in view
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isInView && scrollDelta > 50) {
+          scrollThreshold.current += scrollDelta;
+          
+          // Trigger slide change after accumulated scroll threshold
+          if (scrollThreshold.current > 150) {
+            if (currentScrollY > lastScrollY.current) {
+              // Scrolling down - next card
+              setCurrentIndex(prev => (prev + 1) % cards.length);
+            } else {
+              // Scrolling up - previous card
+              setCurrentIndex(prev => (prev - 1 + cards.length) % cards.length);
+            }
+            scrollThreshold.current = 0;
+          }
+        }
+      }
+      
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMobile, cards.length]);
+
+  // Auto-advance cards every 4 seconds (only when not mobile)
+  useEffect(() => {
+    if (isMobile) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex(prev => (prev + 1) % cards.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [cards.length]);
+  }, [cards.length, isMobile]);
 
   return (
-    <section className="w-full py-12 px-4">
+    <section ref={sectionRef} className="w-full py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Desktop Layout - Grid */}
         <div className="hidden lg:grid lg:grid-cols-4 gap-6">
