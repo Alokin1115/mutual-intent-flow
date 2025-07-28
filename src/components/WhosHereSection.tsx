@@ -156,19 +156,19 @@ const testimonials = [
 
 const WhosHereSection = () => {
   return (
-    <section className="py-20 px-0" id="whos-here">
-      <div className="w-full !px-0 !mx-0">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">Who's Here</h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+    <section className="py-16 md:py-20 px-4 md:px-6" id="whos-here">
+      <div className="container mx-auto max-w-7xl">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">Who's Here</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto">
             "Neurosurgeons to quantum physicists, Travelers to Fashion Designers, 
             Hollywood screenwriters to startup unicorn founders, crypto whales to Nobel Peace Prize nominees…"
           </p>
         </div>
 
         {/* Additional Professionals Auto-Scroller */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-primary">More Elite Professionals</h3>
+        <div className="mb-12 md:mb-16">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">More Elite Professionals</h3>
           <div className="flex flex-col gap-[2px]">
             <ProfessionsScroller professions={professions.slice(8, 24)} />
             <ProfessionsScroller professions={professions.slice(24, 40)} reverse />
@@ -177,8 +177,8 @@ const WhosHereSection = () => {
         </div>
 
         {/* Modern Economy and Startup Sectors */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8 text-primary">Modern Economy and Startup Sectors</h3>
+        <div className="mb-12 md:mb-16">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">Modern Economy and Startup Sectors</h3>
           <div className="flex flex-col gap-[2px]">
             <SectorsScroller sectors={startupSectors} />
             <SectorsScroller sectors={industries} reverse />
@@ -189,8 +189,8 @@ const WhosHereSection = () => {
         
 
         {/* Avatars/Portraits Section */}
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-8 text-primary">Real Members</h3>
+        <div className="max-w-6xl mx-auto mb-16">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">Real Members</h3>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {[...Array(12)].map((_, index) => (
               <div key={index} className="aspect-square rounded-full bg-gradient-to-br from-primary/20 to-accent/20 p-1">
@@ -203,18 +203,18 @@ const WhosHereSection = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="mt-20">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+        <div className="mt-16 md:mt-20">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
               TRUSTED BY
             </h2>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
               THE SELECTED
             </h2>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
               BACKED BY RESULTS
             </h2>
-            <p className="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
               6 months of ghost mode operation with only golden-tier elites. 
               The top 0.001% have validated our vision. Now expanding to the public.
             </p>

@@ -68,18 +68,18 @@ const PricingSection = () => {
   }, [isMobile, scrollActiveIdx]);
 
   return (
-    <section className="py-20 px-3 md:px-12 lg:px-24" id="pricing">
-      <div className="container mx-auto !px-0 !mx-0">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">
+    <section className="py-16 md:py-20 px-4 md:px-6" id="pricing">
+      <div className="container mx-auto max-w-7xl">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">
             You'll Make It Back In <span className="text-accent">One Call</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-4 px-2">Choose your level of commitment</p>
-          <p className="text-base sm:text-lg font-medium text-primary px-2">
+          <p className="text-lg md:text-xl text-muted-foreground mb-4 px-2">Choose your level of commitment</p>
+          <p className="text-base md:text-lg font-medium text-primary px-2">
             "If one call leads to your future partner, it pays for itself 100x."
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 w-full md:max-w-7xl md:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 w-full">
           {pricingTiers.map((tier, index) => (
             <Card 
               key={index}
@@ -108,23 +108,23 @@ const PricingSection = () => {
               )}
 
               <CardHeader className="text-center">
-                <CardTitle className={`text-lg sm:text-xl lg:text-2xl font-bold ${tier.premium ? 'text-black' : ''}`}>
+                <CardTitle className={`text-lg md:text-xl lg:text-2xl font-bold ${tier.premium ? 'text-black' : ''}`}>
                   {tier.name}
                 </CardTitle>
-                <div className={`text-2xl sm:text-3xl font-bold mb-2 ${tier.premium ? 'text-black' : 'text-primary'}`}>
+                <div className={`text-2xl md:text-3xl font-bold mb-2 ${tier.premium ? 'text-black' : 'text-primary'}`}>
                   {tier.price}
                 </div>
-                <CardDescription className={`text-sm sm:text-base ${tier.premium ? 'text-black/70' : ''}`}>
+                <CardDescription className={`text-sm md:text-base ${tier.premium ? 'text-black/70' : ''}`}>
                   {tier.tagline}
                 </CardDescription>
               </CardHeader>
 
               <CardContent>
-                <ul className="space-y-2 sm:space-y-3 mb-6">
+                <ul className="space-y-2 md:space-y-3 mb-6">
                   {tier.features.map((feature, featureIndex) => (
                     <li 
                       key={featureIndex} 
-                      className={`flex items-start text-xs sm:text-sm ${tier.premium ? 'text-black' : 'text-muted-foreground'}`}
+                      className={`flex items-start text-xs md:text-sm ${tier.premium ? 'text-black' : 'text-muted-foreground'}`}
                     >
                       <span className="text-green-400 mr-2 mt-0.5">✓</span>
                       {feature}

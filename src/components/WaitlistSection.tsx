@@ -19,11 +19,11 @@ const WaitlistSection = () => {
   };
 
   return (
-    <section className="py-20 px-3 md:px-12 lg:px-24" id="waitlist">
+    <section className="py-16 md:py-20 px-4 md:px-6" id="waitlist">
       <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-8">Waitlist Wild Card</h2>
-          <p className="text-xl text-muted-foreground">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">Waitlist Wild Card</h2>
+          <p className="text-lg md:text-xl text-muted-foreground">
             For Non-Org Members Who Belong With The Elite
           </p>
         </div>
@@ -113,18 +113,18 @@ const WaitlistSection = () => {
         </Card>
 
         {/* Curation Stats */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
-            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">2,847</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Applications This Week</div>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+          <div className="text-center glass-effect rounded-xl p-4 md:p-6">
+            <div className="text-2xl md:text-3xl font-bold text-accent mb-2">2,847</div>
+            <div className="text-xs md:text-sm text-muted-foreground">Applications This Week</div>
           </div>
-          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
-            <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">28</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Approved Last Friday</div>
+          <div className="text-center glass-effect rounded-xl p-4 md:p-6">
+            <div className="text-2xl md:text-3xl font-bold text-primary mb-2">28</div>
+            <div className="text-xs md:text-sm text-muted-foreground">Approved Last Friday</div>
           </div>
-          <div className="text-center glass-effect rounded-xl p-4 sm:p-6">
-            <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">1.2%</div>
-            <div className="text-xs sm:text-sm text-muted-foreground">Acceptance Rate</div>
+          <div className="text-center glass-effect rounded-xl p-4 md:p-6">
+            <div className="text-2xl md:text-3xl font-bold text-accent mb-2">1.2%</div>
+            <div className="text-xs md:text-sm text-muted-foreground">Acceptance Rate</div>
           </div>
         </div>
       </div>

@@ -238,11 +238,11 @@ const BenefitsSection = () => {
   };
 
   return (
-    <section className="py-8 px-4 md:py-20 md:px-12 lg:px-24 bg-gray-900 min-h-screen">
-      <div className="container mx-auto !px-0 !mx-0">
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-gray-900 min-h-screen">
+      <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
             Benefits Achieved with <span className="text-yellow-400">Few Dollars</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
@@ -251,7 +251,7 @@ const BenefitsSection = () => {
         </div>
 
         {/* Main Content - Three Visually Separated Cards */}
-        <div className="w-full max-w-7xl mx-auto">
+        <div className="w-full max-w-6xl mx-auto">
           {/* Three Cards with Visual Separators */}
           <div className="space-y-8 md:space-y-12">
             {benefitsSections.map((benefit, sectionIndex) => {

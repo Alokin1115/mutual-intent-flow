@@ -119,14 +119,14 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      <div className="container mx-auto px-3 md:px-6 text-center relative z-10">
+      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         {/* Top Banner */}
-        <Badge className="mb-8 px-3 py-2 text-xs md:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+        <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
           From World's Top 100 Universities & Companies✨
         </Badge>
 
         {/* Main Headline */}
-        <h1 className="text-4xl md:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
           <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
           <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
             {rotatingWords[wordIndex]}
@@ -134,7 +134,7 @@ const HeroSection = () => {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg md:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
           Where the world's most ambitious meet—and get things done.
         </p>
 
@@ -155,7 +155,7 @@ const HeroSection = () => {
               Get Your Invitation
             </Button>
           </div>
-          <p className="text-sm sm:text-base text-muted-foreground mb-6 px-2">
+          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
             ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
             <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
           </p>
@@ -163,7 +163,7 @@ const HeroSection = () => {
 
         {/* University and Company Logos Scroll */}
         <div className="overflow-hidden w-full">
-          <div className="text-xs text-muted-foreground mb-1 font-medium px-3 md:px-6">
+          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium px-3 md:px-6">
             Used by Professionals, Alumni & Students from
           </div>
           <div className="w-full">
