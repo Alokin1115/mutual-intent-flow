@@ -8,7 +8,28 @@ const HeroHighlights = () => {
     <>
       <ImpactStrip />
       {isMobile ? (
-        <NoticeBanner />
+        <div className="px-4 py-6 mx-4 my-6 bg-gradient-to-br from-primary/10 via-background to-accent/10 border border-primary/20 rounded-xl">
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center mb-4">
+              <div className="flex items-center bg-primary/10 rounded-full px-3 py-2">
+                <span className="text-xl mr-2">⚡</span>
+                <span className="font-bold text-sm text-primary">Real-time, high-intent mutual calls</span>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <p className="text-base font-medium text-foreground leading-relaxed">
+                Matching your <span className="font-bold text-primary">intent</span>, <span className="font-bold text-primary">urgency</span> & <span className="font-bold text-primary">expectation</span>
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Real-time calls with your future co-founder, investor, mentor, employer or life partner
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Like thousands already have.
+              </p>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-12 max-w-4xl mx-auto my-6 md:my-12 shadow-xl md:shadow-2xl">
           {/* Floating background elements */}
