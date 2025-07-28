@@ -6,64 +6,64 @@ import { motion, AnimatePresence, easeOut, easeIn } from "framer-motion";
 
 const testimonials = [
   {
-    name: "Naval Ravikant",
-    title: "AngelList Founder • Tech Philosopher",
-    quote: "You have one life. The most important thing is to surround yourself with people who are playing the long game. MutualBook gets this—it's not about networking, it's about finding your tribe of builders, thinkers, and doers who understand that real wealth comes from deep relationships, not shallow connections."
-  },
-  {
-    name: "Sam Altman",
-    title: "OpenAI CEO • Golden Member",
-    quote: "The future belongs to those who can build and execute at the intersection of technology and human connection. MutualBook is creating something special—a platform where the world's most ambitious minds can find their perfect collaborators. This is exactly what the next generation of founders and builders need."
-  },
-  {
-    name: "Marc Andreessen",
-    title: "Andreessen Horowitz • Co-founder",
-    quote: "The best companies are built by teams that share a deep understanding and mutual respect. MutualBook's approach to connecting like-minded professionals is exactly what the startup ecosystem needs."
-  },
-  {
     name: "Satya Nadella",
     title: "CEO, Microsoft",
-    quote: "What impressed me about MutualBook wasn't the technology—it was the philosophy. Intent-first networking is where the future of collaboration lies.",
+    quote:
+      "What impressed me about MutualBook wasn't the technology—it was the philosophy. Intent-first networking is where the future of collaboration lies.",
   },
   {
     name: "Aileen Lee",
     title: "Founder, Cowboy Ventures",
-    quote: "MutualBook is quietly doing what other platforms only promise—curating real founders, doers, and operators around aligned missions.",
+    quote:
+      "MutualBook is quietly doing what other platforms only promise—curating real founders, doers, and operators around aligned missions.",
   },
   {
     name: "Balaji Srinivasan",
     title: "Author, The Network State",
-    quote: "This feels like a social layer designed for sovereignty of purpose. A decentralized 'phonebook' that sorts by mission, not popularity.",
+    quote:
+      "This feels like a social layer designed for sovereignty of purpose. A decentralized 'phonebook' that sorts by mission, not popularity.",
   },
   {
     name: "Whitney Wolfe Herd",
     title: "Founder & CEO, Bumble",
-    quote: "We built Bumble to humanize dating. MutualBook is doing the same for work, collaboration, and creative ambition—with less noise and more respect.",
+    quote:
+      "We built Bumble to humanize dating. MutualBook is doing the same for work, collaboration, and creative ambition—with less noise and more respect.",
+  },
+  {
+    name: "Naval Ravikant",
+    title: "Founder, AngelList",
+    quote:
+      "The best way to build wealth and relationships is through alignment. MutualBook makes finding aligned minds effortless and scalable.",
   },
   {
     name: "Rohini Nilekani",
     title: "Founder, Arghyam",
-    quote: "Impact needs more than money—it needs matching minds. MutualBook connects purpose-led builders who would otherwise never find each other.",
+    quote:
+      "Impact needs more than money—it needs matching minds. MutualBook connects purpose-led builders who would otherwise never find each other.",
   },
   {
     name: "Parag Agrawal",
     title: "ex-CEO, Twitter",
-    quote: "I wish we'd built something like MutualBook inside Twitter—something that filters not by followers but by intent.",
+    quote:
+      "I wish we'd built something like MutualBook inside Twitter—something that filters not by followers but by intent.",
   },
   {
     name: "Dylan Field",
     title: "Co-founder, Figma",
-    quote: "The best product teams form around clear intent. MutualBook is productizing that intent-matching—across industries, not just tech.",
+    quote:
+      "The best product teams form around clear intent. MutualBook is productizing that intent-matching—across industries, not just tech.",
   },
   {
     name: "Reshma Saujani",
     title: "Founder, Girls Who Code",
-    quote: "I've seen communities, accelerators, mentorship programs—none match people like MutualBook does. This is what women and students need to grow together.",
+    quote:
+      "I've seen communities, accelerators, mentorship programs—none match people like MutualBook does. This is what women and students need to grow together.",
   },
   {
     name: "Ben Horowitz",
     title: "Co-founder, Andreessen Horowitz",
-    quote: "This isn't just another network. It's a blueprint for how the next generation of partnerships, teams, and companies will form.",
+    quote:
+      "This isn't just another network. It's a blueprint for how the next generation of partnerships, teams, and companies will form.",
   },
 ];
 
@@ -155,16 +155,11 @@ const IndustryLeaderCarousel = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
-            TRUSTED BY
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            Trusted by Industry Leaders
           </h2>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">TOP 0.001%</h2>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
-            BACKED BY RESULTS
-          </h2>
-          <p className="text-base md:text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            6 months of ghost mode operation with only golden-tier elites. 
-            The top 0.001% have validated our vision. Now expanding to the public.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Hear from the visionaries who believe in the future of intent-based networking
           </p>
         </motion.div>
 
