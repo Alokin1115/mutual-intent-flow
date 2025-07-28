@@ -65,7 +65,7 @@ const SolutionSection = () => {
     <section className="py-12 sm:py-20 px-4 sm:px-6">
       <div className="container mx-auto">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 px-2">
+          <h2 className="sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 px-2 text-[44px]">
             Why <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">MutualBook</span> Works
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground mb-6 sm:mb-8 px-2">The 6 A's Framework</p>
