@@ -169,7 +169,7 @@ const WhosHereSection = () => {
         {/* Additional Professionals Auto-Scroller */}
         <div className="mb-12 md:mb-16">
           <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">More Elite Professionals</h3>
-          <div className="flex flex-col gap-[2px]">
+          <div className="flex flex-col gap-[2px] -mx-4 md:-mx-6">
             <ProfessionsScroller professions={professions.slice(8, 24)} />
             <ProfessionsScroller professions={professions.slice(24, 40)} reverse />
             <ProfessionsScroller professions={professions.slice(40, 56)} />
@@ -179,7 +179,7 @@ const WhosHereSection = () => {
         {/* Modern Economy and Startup Sectors */}
         <div className="mb-12 md:mb-16">
           <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">Modern Economy and Startup Sectors</h3>
-          <div className="flex flex-col gap-[2px]">
+          <div className="flex flex-col gap-[2px] -mx-4 md:-mx-6">
             <SectorsScroller sectors={startupSectors} />
             <SectorsScroller sectors={industries} reverse />
             <SectorsScroller sectors={modernEconomySectors} />

@@ -144,7 +144,7 @@ const PricingSection = () => {
                         ? 'gradient-primary text-black glow-primary'
                         : tier.premium
                           ? 'bg-black text-accent hover:bg-black/80 group-hover:glow-accent group-hover:shadow-lg'
-                          : 'glass-effect border-primary/20 hover:border-primary/50 group-hover:gradient-primary group-hover:text-black group-hover:glow-primary group-hover:shadow-lg'
+                          : 'glass-effect border-primary/20 hover:border-primary/50 hover:gradient-primary hover:text-black hover:glow-primary hover:shadow-lg'
                   }`}
                 >
                   {tier.buttonText}

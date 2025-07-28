@@ -88,7 +88,7 @@ const ImpactStrip = () => {
   }, [cards.length, isMobile]);
 
   return (
-    <section ref={sectionRef} className="w-full py-12 px-4">
+    <section ref={sectionRef} className="w-full py-12 px-0">
       <div className="max-w-6xl mx-auto">
         {/* Desktop Layout - Grid */}
         <div className="hidden lg:grid lg:grid-cols-4 gap-6">

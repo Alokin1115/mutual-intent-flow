@@ -25,12 +25,7 @@ const Index = () => {
       <WaitlistSection />
       <Footer />
       
-      {/* Mobile Floating CTA */}
-      <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
-        <button className="w-full gradient-gold text-black font-semibold py-4 rounded-full glow-gold min-h-[56px] text-base shadow-lg">
-          Get Invite
-        </button>
-      </div>
+
     </div>
   );
 };

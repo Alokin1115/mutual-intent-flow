@@ -96,3 +96,16 @@ The application is configured for multiple deployment scenarios:
 - **Banner**: Development banner when accessed outside Replit
 
 The architecture prioritizes developer experience with hot reload, type safety, and clear separation of concerns while maintaining simplicity for deployment and scaling.
+
+## Recent Changes
+
+### UI/UX Improvements (July 28, 2025)
+- **Mobile Experience**: Increased hero section headline font size for better mobile readability
+- **Navigation**: Removed floating invite button for mobile screens, keeping invite button only in navbar
+- **Layout**: Made moving strips (ImpactStrip, ProfessionsScroller, SectorsScroller) full width without side padding across all screens
+- **Components**: 
+  - Increased HeroHighlights card width and capitalized headline text properly
+  - Enhanced BenefitsSection cards with better width and removed "Achievement:" prefix
+  - Fixed pricing section hover effects for desktop CTA buttons
+- **Content Updates**: Updated testimonials in BenefitsSection to highlight scholarships, team building, and vision alignment success stories
+- **Technical**: Fixed DOM nesting warnings by replacing inappropriate p > div structures with proper div containers

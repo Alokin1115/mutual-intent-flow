@@ -126,7 +126,7 @@ const HeroSection = () => {
         </Badge>
 
         {/* Main Headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
           <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
           <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
             {rotatingWords[wordIndex]}

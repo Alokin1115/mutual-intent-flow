@@ -301,7 +301,7 @@ const BenefitsSection = () => {
                       {/* Right Side - Combined Dynamic Card */}
                       <div className="relative">
                         {/* Single Dynamic Card with User Details and Testimonial */}
-                        <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-pink-400/50 w-full max-w-md mx-auto lg:max-w-none">
+                        <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-pink-400/50 w-full max-w-lg mx-auto lg:max-w-none">
                           {/* User Details Section */}
                           <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
                             <span className="text-2xl">{currentTestimonial.userImage}</span>
