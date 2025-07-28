@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const professions = [
   { title: "Neurosurgeons", icon: "🧠", color: "bg-blue-500/20 text-blue-300" },
@@ -203,104 +203,192 @@ const WhosHereSection = () => {
         </div>
 
         {/* Testimonials Section */}
-        <div className="mt-16 md:mt-20">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
-              TRUSTED BY
-            </h2>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">TOP 0.001%</h2>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
-              BACKED BY RESULTS
-            </h2>
-            <p className="text-base md:text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              6 months of ghost mode operation with only golden-tier elites. 
-              The top 0.001% have validated our vision. Now expanding to the public.
-            </p>
-          </div>
-          
-          {/* Modern Testimonial Cards */}
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="relative">
-                  {/* Card with Tab */}
-                  <div className="bg-white rounded-2xl shadow-xl relative overflow-hidden">
-                    {/* Tab Handle */}
-                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 z-10">
-                      <div className="w-16 h-6 bg-gray-200 rounded-t-lg flex items-center justify-center">
-                        <div className="w-8 h-1 bg-gray-400 rounded-full"></div>
-                      </div>
-                    </div>
-                    
-                    {/* Navigation Dots */}
-                    <div className="absolute top-4 right-4 flex space-x-1">
-                      {testimonials.map((_, dotIndex) => (
-                        <div 
-                          key={dotIndex} 
-                          className={`w-2 h-2 rounded-full ${
-                            dotIndex === index ? 'bg-gray-800' : 'bg-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Card Content */}
-                    <div className="p-6 pt-8">
-                      {/* Company/Platform Name */}
-                      <div className="text-sm font-bold text-gray-800 mb-4">
-                        MUTUALBOOK
-                      </div>
-                      
-                      {/* Quote Icon */}
-                      <div className="text-4xl text-gray-800 mb-4">
-                        "
-                      </div>
-                      
-                      {/* Testimonial Text */}
-                      <div className="text-gray-700 leading-relaxed mb-6 text-sm">
-                        {testimonial.quote}
-                      </div>
-                      
-                      {/* Author Section */}
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-full overflow-hidden">
-                            <img 
-                              src={testimonial.image} 
-                              alt={testimonial.name} 
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <div>
-                            <div className="font-bold text-gray-800 text-sm">
-                              {testimonial.name}
-                            </div>
-                            <div className="text-gray-600 text-xs">
-                              {testimonial.role}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* LinkedIn Icon */}
-                        <div className="text-blue-600">
-                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Background Cards for Layering Effect */}
-                  <div className="absolute -top-2 -left-2 w-full h-full bg-white rounded-2xl opacity-20 -z-10"></div>
-                  <div className="absolute -top-1 -left-1 w-full h-full bg-white rounded-2xl opacity-40 -z-20"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <TestimonialsCarousel testimonials={testimonials} />
       </div>
     </section>
+  );
+};
+
+// --- TestimonialsCarousel component with auto-sliding and fade effects ---
+const TestimonialsCarousel = ({ testimonials }: { testimonials: Array<{ name: string; role: string; image: string; quote: string }> }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoSlideInterval = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-slide effect
+  useEffect(() => {
+    const startAutoSlide = () => {
+      if (autoSlideInterval.current) clearInterval(autoSlideInterval.current);
+      autoSlideInterval.current = setInterval(() => {
+        if (!isPaused) {
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+        }
+      }, 4000); // Change slide every 4 seconds
+    };
+
+    startAutoSlide();
+
+    return () => {
+      if (autoSlideInterval.current) clearInterval(autoSlideInterval.current);
+    };
+  }, [testimonials.length, isPaused]);
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+  };
+
+  return (
+    <div className="mt-16 md:mt-20">
+      <div className="text-center mb-12 md:mb-16">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+          TRUSTED BY
+        </h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">TOP 0.001%</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
+          BACKED BY RESULTS
+        </h2>
+        <p className="text-base md:text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          6 months of ghost mode operation with only golden-tier elites. 
+          The top 0.001% have validated our vision. Now expanding to the public.
+        </p>
+      </div>
+      
+      {/* Carousel Container */}
+      <div 
+        className="relative max-w-6xl mx-auto px-4"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Cards Container */}
+        <div className="relative h-[500px] md:h-[450px] overflow-hidden">
+          <div 
+            className="flex transition-transform duration-1000 ease-in-out h-full"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="w-full flex-shrink-0 px-2 md:px-4">
+                <div className="h-full flex items-center justify-center">
+                  <div className="relative w-full max-w-md mx-auto">
+                    {/* Card with Tab */}
+                    <div className="bg-white rounded-2xl shadow-xl relative overflow-hidden h-[420px] flex flex-col">
+                      {/* Tab Handle */}
+                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 z-10">
+                        <div className="w-16 h-6 bg-gray-200 rounded-t-lg flex items-center justify-center">
+                          <div className="w-8 h-1 bg-gray-400 rounded-full"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Navigation Dots */}
+                      <div className="absolute top-4 right-4 flex space-x-1">
+                        {testimonials.map((_, dotIndex) => (
+                          <div 
+                            key={dotIndex} 
+                            className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${
+                              dotIndex === currentIndex ? 'bg-gray-800' : 'bg-gray-300'
+                            }`}
+                            onClick={() => goToSlide(dotIndex)}
+                          />
+                        ))}
+                      </div>
+                      
+                      {/* Card Content */}
+                      <div className="p-6 pt-8 flex flex-col h-full">
+                        {/* Company/Platform Name */}
+                        <div className="text-sm font-bold text-gray-800 mb-4">
+                          MUTUALBOOK
+                        </div>
+                        
+                        {/* Quote Icon */}
+                        <div className="text-4xl text-gray-800 mb-4">
+                          "
+                        </div>
+                        
+                        {/* Testimonial Text */}
+                        <div className="text-gray-700 leading-relaxed mb-6 text-sm flex-grow overflow-y-auto">
+                          {testimonial.quote}
+                        </div>
+                        
+                        {/* Author Section */}
+                        <div className="flex items-center justify-between mt-auto">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                              <img 
+                                src={testimonial.image} 
+                                alt={testimonial.name} 
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-bold text-gray-800 text-sm">
+                                {testimonial.name}
+                              </div>
+                              <div className="text-gray-600 text-xs">
+                                {testimonial.role}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* LinkedIn Icon */}
+                          <div className="text-blue-600 flex-shrink-0">
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Background Cards for Layering Effect */}
+                    <div className="absolute -top-2 -left-2 w-full h-full bg-white rounded-2xl opacity-20 -z-10"></div>
+                    <div className="absolute -top-1 -left-1 w-full h-full bg-white rounded-2xl opacity-40 -z-20"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Navigation Arrows */}
+        <button 
+          onClick={prevSlide}
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <button 
+          onClick={nextSlide}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all duration-300 backdrop-blur-sm z-10"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Bottom Indicator Dots */}
+        <div className="flex justify-center space-x-2 mt-8">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex ? 'bg-white' : 'bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
