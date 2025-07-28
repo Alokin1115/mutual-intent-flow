@@ -208,9 +208,7 @@ const WhosHereSection = () => {
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
               TRUSTED BY
             </h2>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
-              THE SELECTED
-            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">TOP 0.001%</h2>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white">
               BACKED BY RESULTS
             </h2>
