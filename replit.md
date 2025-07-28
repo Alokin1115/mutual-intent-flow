@@ -109,3 +109,4 @@ The architecture prioritizes developer experience with hot reload, type safety, 
   - Fixed pricing section hover effects for desktop CTA buttons
 - **Content Updates**: Updated testimonials in BenefitsSection to highlight scholarships, team building, and vision alignment success stories
 - **Technical**: Fixed DOM nesting warnings by replacing inappropriate p > div structures with proper div containers
+- **Testimonials Migration**: Moved testimonials section from WhosHereSection to IndustryLeaderCarousel component, combining existing and new testimonials (Naval Ravikant, Sam Altman, Marc Andreessen, Satya Nadella, Aileen Lee, Balaji Srinivasan, Whitney Wolfe Herd, Rohini Nilekani, Parag Agrawal, Dylan Field, Reshma Saujani, Ben Horowitz)
