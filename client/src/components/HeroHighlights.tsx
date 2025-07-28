@@ -49,7 +49,7 @@ const HeroHighlights = () => {
           {/* Main content with enhanced typography */}
           <div className="space-y-6 relative z-10">
             <div className="text-center">
-              <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground">
+              <div className="text-xl md:text-2xl font-medium leading-relaxed text-foreground">
                 Meet your future{" "}
                 <span className="relative inline-block">
                   <span className="font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
@@ -72,8 +72,8 @@ const HeroHighlights = () => {
                   <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "1s" }}></div>
                 </span>
                 ,
-              </p>
-              <p className="text-xl md:text-2xl font-medium leading-relaxed text-foreground mt-2">
+              </div>
+              <div className="text-xl md:text-2xl font-medium leading-relaxed text-foreground mt-2">
                 <span className="relative inline-block">
                   <span className="font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
                     employer
@@ -88,7 +88,7 @@ const HeroHighlights = () => {
                   <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "2s" }}></div>
                 </span>
                 —faster than ever.
-              </p>
+              </div>
             </div>
             
             {/* Separator line with glow */}
@@ -98,7 +98,7 @@ const HeroHighlights = () => {
             
             {/* Supporting text with enhanced highlights */}
             <div className="text-center">
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              <div className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Matching your{" "}
                 <span className="relative inline-block group">
                   <span className="font-bold text-primary transition-all duration-300 group-hover:scale-110">
@@ -121,7 +121,7 @@ const HeroHighlights = () => {
                   <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary/50 to-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                 </span>
                 —just like thousands already have.
-              </p>
+              </div>
             </div>
           </div>
         </div>
