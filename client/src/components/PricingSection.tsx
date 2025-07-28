@@ -84,7 +84,7 @@ const PricingSection = () => {
             <Card 
               key={index}
               ref={el => cardRefs.current[index] = el}
-              className={`relative transition-all duration-300 hover:scale-105 ${
+              className={`relative transition-all duration-300 hover:scale-105 group ${
                 // Auto-highlight (expand) on mobile scroll for non-premium
                 isMobile && scrollActiveIdx === index && !tier.premium
                   ? 'glow-primary scale-105 z-10 border-primary/70'
@@ -137,14 +137,14 @@ const PricingSection = () => {
                   aria-current={isMobile && scrollActiveIdx === index ? "true" : undefined}
                   tabIndex={isMobile && scrollActiveIdx === index ? 0 : -1}
                   variant={isMobile && scrollActiveIdx === index && !tier.premium ? "active" : undefined}
-                  className={`w-full font-semibold ${
+                  className={`w-full font-semibold transition-all duration-300 ${
                     isMobile && scrollActiveIdx === index && !tier.premium
                       ? "gradient-primary text-black glow-primary shadow-lg border-2 border-primary"
                       : tier.highlight
                         ? 'gradient-primary text-black glow-primary'
                         : tier.premium
-                          ? 'bg-black text-accent hover:bg-black/80'
-                          : 'glass-effect border-primary/20 hover:border-primary/50'
+                          ? 'bg-black text-accent hover:bg-black/80 group-hover:glow-accent group-hover:shadow-lg'
+                          : 'glass-effect border-primary/20 hover:border-primary/50 group-hover:gradient-primary group-hover:text-black group-hover:glow-primary group-hover:shadow-lg'
                   }`}
                 >
                   {tier.buttonText}

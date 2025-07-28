@@ -126,7 +126,7 @@ const HeroSection = () => {
         </Badge>
 
         {/* Main Headline */}
-        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
           <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
           <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
             {rotatingWords[wordIndex]}
@@ -163,7 +163,7 @@ const HeroSection = () => {
 
         {/* University and Company Logos Scroll */}
         <div className="overflow-hidden w-full">
-          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium px-3 md:px-6">
+          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium">
             Used by Professionals, Alumni & Students from
           </div>
           <div className="w-full">

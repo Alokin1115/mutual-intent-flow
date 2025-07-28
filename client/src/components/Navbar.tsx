@@ -41,67 +41,13 @@ const Navbar = () => {
           Get Invite
         </Button>
         
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 rounded-lg glass-effect border border-white/20 min-h-[44px] min-w-[44px] flex items-center justify-center"
-          aria-label="Toggle mobile menu"
-        >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {/* Mobile Get Invite Button */}
+        <Button className="md:hidden gradient-gold text-black font-semibold px-4 py-2 rounded-full glow-gold text-sm" disabled>
+          Get Invite
+        </Button>
       </div>
       
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden glass-effect border-t border-white/10">
-          <div className="container mx-auto px-4 py-4 space-y-4">
-            <a 
-              href="#about" 
-              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About
-            </a>
-            <a 
-              href="#how-it-works" 
-              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              How It Works
-            </a>
-            <a 
-              href="#whos-here" 
-              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Who's Here
-            </a>
-            <a 
-              href="#pricing" 
-              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Pricing
-            </a>
-            <a 
-              href="#waitlist" 
-              className="block py-3 text-base hover:text-primary transition-colors border-b border-white/10"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Waitlist
-            </a>
-            <div className="pt-4">
-              <Button 
-                className="w-full gradient-gold text-black font-semibold py-3 rounded-full glow-gold min-h-[48px]" 
-                disabled
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Invite
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </nav>
   );
 };

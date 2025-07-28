@@ -13,7 +13,7 @@ const HeroHighlights = () => {
             <div className="flex items-center justify-center mb-4">
               <div className="flex items-center bg-primary/10 rounded-full px-3 py-2">
                 <span className="text-xl mr-2">⚡</span>
-                <span className="font-bold text-sm text-primary">Real-time, high-intent mutual calls</span>
+                <span className="font-bold text-sm text-primary">Real-Time High Intent Mutual Calls</span>
               </div>
             </div>
             
@@ -31,7 +31,7 @@ const HeroHighlights = () => {
           </div>
         </div>
       ) : (
-        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-12 max-w-4xl mx-auto my-6 md:my-12 shadow-xl md:shadow-2xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-12 max-w-5xl mx-auto my-6 md:my-12 shadow-xl md:shadow-2xl">
           {/* Floating background elements */}
           <div className="absolute top-4 right-6 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute bottom-4 left-6 w-16 h-16 bg-accent/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: "1s" }}></div>
@@ -41,7 +41,7 @@ const HeroHighlights = () => {
             <div className="flex items-center bg-primary/10 backdrop-blur-sm rounded-full px-4 md:px-6 py-2 md:py-3 shadow-lg border border-primary/20">
               <span className="text-2xl md:text-3xl mr-2 md:mr-3 animate-bounce">⚡</span>
               <span className="font-bold text-lg md:text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Real-time, high-intent mutual calls
+                Real-Time High Intent Mutual Calls
               </span>
             </div>
           </div>
