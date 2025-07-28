@@ -19,15 +19,6 @@ const benefitsSections = [
         percentage: "100%"
       },
       {
-        text: "🏠 Found my first SF roommate through MutualBook—same startup ambitions, same 5AM gym routine, same weird diet. We've now joined the same accelerator.",
-        highlight: "Roommates",
-        userImage: "👨‍💼",
-        userType: "Startup Founder",
-        location: "San Francisco",
-        achievement: "Accelerator Joined",
-        percentage: "Perfect Match"
-      },
-      {
         text: "🎓 Landed a fully-funded PhD at Oxford via a MutualBook intro with a former reviewer. The platform helped me skip months of cold outreach and confusion.",
         highlight: "Scholarships",
         userImage: "👨‍🎓",
@@ -35,6 +26,15 @@ const benefitsSections = [
         location: "Oxford",
         achievement: "Fully-Funded PhD",
         percentage: "100%"
+      },
+      {
+        text: "🏠 Found my first SF roommate through MutualBook—same startup ambitions, same 5AM gym routine, same weird diet. We've now joined the same accelerator.",
+        highlight: "Roommates",
+        userImage: "👨‍💼",
+        userType: "Startup Founder",
+        location: "San Francisco",
+        achievement: "Accelerator Joined",
+        percentage: "Perfect Match"
       },
       {
         text: "💼 Got hired as Product Lead at a climate startup backed by Sequoia — all from a single filtered intro through MutualBook. Felt like it understood exactly where I was headed.",
@@ -142,13 +142,13 @@ const benefitsSections = [
     visitorType: "Career Climbers",
     testimonials: [
       {
-        text: "📈 10X'd my salary in 3 months. Moved from an early-stage fintech to a global payments unicorn through an aligned mentorship chain on MutualBook.",
-        highlight: "10X job switch",
-        userImage: "📈",
-        userType: "Fintech Professional",
-        location: "Payments Unicorn",
-        achievement: "10X Salary",
-        percentage: "10X"
+        text: "I tried to build my dream team on Twitter and got nowhere. On MutualBook? I got 3 people who already believed in the vision. No pitching, just building.",
+        highlight: "Team alignment",
+        userImage: "👥",
+        userType: "Team Leader",
+        location: "Startup",
+        achievement: "Vision-Aligned Team",
+        percentage: "Dream Team"
       },
       {
         text: "Just had my third MutualBook connection convert into a long-term contractor. This isn't LinkedIn. It's something sharper, faster, and aligned.",
@@ -238,7 +238,7 @@ const BenefitsSection = () => {
   };
 
   return (
-    <section className="py-16 md:py-20 px-4 md:px-6 bg-gray-900 min-h-screen">
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-gray-900 min-h-screen mt-[20px] mb-[20px]">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
