@@ -119,51 +119,76 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
-        {/* Top Banner */}
-        <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
-          From World's Top 100 Universities & Companies✨
-        </Badge>
+      {/* Split Layout Container */}
+      <div className="container mx-auto px-4 md:px-6 relative z-10 min-h-[calc(100vh-8rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
+          
+          {/* Left Side - Content */}
+          <div className="text-center lg:text-left order-2 lg:order-1">
+            {/* Top Banner */}
+            <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+              From World's Top 100 Universities & Companies✨
+            </Badge>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
-          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
-            {rotatingWords[wordIndex]}
-          </span>
-        </h1>
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+              <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
+                {rotatingWords[wordIndex]}
+              </span>
+            </h1>
 
-        {/* Subheadline */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
-          Where the world's most ambitious meet—and get things done.
-        </p>
+            {/* Subheadline */}
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl lg:max-w-none">
+              Where the world's most ambitious meet—and get things done.
+            </p>
 
-        {/* CTA Area */}
-        <div className="max-w-md mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <Input 
-              type="email" 
-              placeholder="Organization Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
-            />
-            <Button 
-              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
-              disabled={!email}
-            >
-              Get Your Invitation
-            </Button>
+            {/* CTA Area */}
+            <div className="max-w-md lg:max-w-lg mx-auto lg:mx-0 mb-12">
+              <div className="flex flex-col md:flex-row gap-3 mb-4">
+                <Input 
+                  type="email" 
+                  placeholder="Organization Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
+                />
+                <Button 
+                  className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
+                  disabled={!email}
+                >
+                  Get Your Invitation
+                </Button>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
+                ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
+                <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+              </p>
+            </div>
           </div>
-          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
-            ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-            <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
-          </p>
+
+          {/* Right Side - iOS Image */}
+          <div className="flex items-center justify-center order-1 lg:order-2">
+            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
+              <img 
+                src="/1 ios.png" 
+                alt="MutualBook iOS App" 
+                className="w-full h-auto object-contain drop-shadow-2xl"
+                onError={(e) => {
+                  // Fallback if image doesn't exist yet
+                  const img = e.target as HTMLImageElement;
+                  img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600' viewBox='0 0 300 600'%3E%3Crect width='300' height='600' fill='%23334155' rx='30'/%3E%3Ctext x='150' y='300' text-anchor='middle' fill='%23E2E8F0' fontSize='18'%3EiOS App Image%3C/text%3E%3Ctext x='150' y='330' text-anchor='middle' fill='%2394A3B8' fontSize='14'%3EPlace your image at:%3C/text%3E%3Ctext x='150' y='350' text-anchor='middle' fill='%2394A3B8' fontSize='14'%3Eclient/public/1 ios.png%3C/text%3E%3C/svg%3E";
+                }}
+              />
+              {/* Optional glow effect for the image */}
+              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 to-accent/20 blur-2xl rounded-3xl scale-110"></div>
+            </div>
+          </div>
         </div>
 
-        {/* University and Company Logos Scroll */}
-        <div className="overflow-hidden w-full">
-          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium">
+        {/* University and Company Logos Scroll - Full Width Below Split */}
+        <div className="overflow-hidden w-full mt-12 lg:mt-16">
+          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium text-center">
             Used by Professionals, Alumni & Students from
           </div>
           <div className="w-full">
@@ -172,8 +197,10 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Hero Highlights (ImpactStrip + Notice Banner) */}
-        <HeroHighlights />
+        {/* Hero Highlights (ImpactStrip + Notice Banner) - Full Width Below */}
+        <div className="mt-12 lg:mt-16">
+          <HeroHighlights />
+        </div>
       </div>
     </section>
   );
