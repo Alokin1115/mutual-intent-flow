@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const benefitsSections = [
   {
     title: "Personal Goals",
-    subtitle: "Found love, romance partners, internships, scholarships, roommates",
+    subtitle:
+      "Found love, romance partners, internships, scholarships, roommates",
     badgeText: "Found love",
-    description: "Whether it's finding your soulmate or landing your dream internship, MutualBook helps you achieve your most personal aspirations.",
+    description:
+      "Whether it's finding your soulmate or landing your dream internship, MutualBook helps you achieve your most personal aspirations.",
     visitorType: "Personal Seekers",
     testimonials: [
       {
@@ -16,7 +18,7 @@ const benefitsSections = [
         userType: "MIT Graduate",
         location: "MIT",
         achievement: "Engaged",
-        percentage: "100%"
+        percentage: "100%",
       },
       {
         text: "🎓 Landed a fully-funded PhD at Oxford via a MutualBook intro with a former reviewer. The platform helped me skip months of cold outreach and confusion.",
@@ -25,7 +27,7 @@ const benefitsSections = [
         userType: "PhD Student",
         location: "Oxford",
         achievement: "Fully-Funded PhD",
-        percentage: "100%"
+        percentage: "100%",
       },
       {
         text: "🏠 Found my first SF roommate through MutualBook—same startup ambitions, same 5AM gym routine, same weird diet. We've now joined the same accelerator.",
@@ -34,7 +36,7 @@ const benefitsSections = [
         userType: "Startup Founder",
         location: "San Francisco",
         achievement: "Accelerator Joined",
-        percentage: "Perfect Match"
+        percentage: "Perfect Match",
       },
       {
         text: "💼 Got hired as Product Lead at a climate startup backed by Sequoia — all from a single filtered intro through MutualBook. Felt like it understood exactly where I was headed.",
@@ -43,7 +45,7 @@ const benefitsSections = [
         userType: "Product Lead",
         location: "Climate Startup",
         achievement: "Sequoia-Backed Role",
-        percentage: "Dream Job"
+        percentage: "Dream Job",
       },
       {
         text: "🎯 Within 2 days of posting, I had 4 high-context intros. This is not networking—it's alignment over signal. Finally.",
@@ -52,7 +54,7 @@ const benefitsSections = [
         userType: "Networker",
         location: "Global",
         achievement: "4 Quality Intros",
-        percentage: "48hrs"
+        percentage: "48hrs",
       },
       {
         text: "📬 I get zero spam and 100% useful intros. My post asked for a co-founder with design sense and urgency. The person I matched with had read my thesis.",
@@ -61,18 +63,20 @@ const benefitsSections = [
         userType: "Founder",
         location: "Startup",
         achievement: "Perfect Match",
-        percentage: "100%"
-      }
+        percentage: "100%",
+      },
     ],
     imageBg: "bg-gradient-to-br from-pink-500 to-pink-700",
     overlayIcon: "💕",
-    floatingIcons: ["💕", "💕", "🎯"]
+    floatingIcons: ["💕", "💕", "🎯"],
   },
   {
-    title: "Professional Collaborations", 
-    subtitle: "Made startup cofounders, investor deals, jobs, sponsorships, go-to-market partners",
+    title: "Professional Collaborations",
+    subtitle:
+      "Made startup cofounders, investor deals, jobs, sponsorships, go-to-market partners",
     badgeText: "Made startup cofounders",
-    description: "From startup cofounders to investor deals, MutualBook connects you with the right people to scale your business.",
+    description:
+      "From startup cofounders to investor deals, MutualBook connects you with the right people to scale your business.",
     visitorType: "Business Builders",
     testimonials: [
       {
@@ -82,7 +86,7 @@ const benefitsSections = [
         userType: "AI Founder",
         location: "YC Startup",
         achievement: "YC-Backed",
-        percentage: "48hrs"
+        percentage: "48hrs",
       },
       {
         text: "🚀 Got my first term sheet from a female solo capitalist I met via MutualBook's co-founder filter. We were both focused on impact + speed.",
@@ -91,7 +95,7 @@ const benefitsSections = [
         userType: "Startup CEO",
         location: "Silicon Valley",
         achievement: "Term Sheet",
-        percentage: "First"
+        percentage: "First",
       },
       {
         text: "🤝 Closed a $1.4M manufacturing partnership in Taiwan. Never thought I'd find such aligned industrial partners on what looked like a social network.",
@@ -100,7 +104,7 @@ const benefitsSections = [
         userType: "Manufacturing CEO",
         location: "Taiwan",
         achievement: "$1.4M Partnership",
-        percentage: "$1.4M"
+        percentage: "$1.4M",
       },
       {
         text: "I've used everything from Slack groups to On Deck, but nothing comes close to the quality of mutual intent I found here. My startup literally wouldn't exist without MutualBook.",
@@ -109,7 +113,7 @@ const benefitsSections = [
         userType: "Startup Founder",
         location: "Global",
         achievement: "Startup Founded",
-        percentage: "Game Changer"
+        percentage: "Game Changer",
       },
       {
         text: "MutualBook intro'd me to someone in Zurich who knew the exact investor I was trying to reach. We closed our pre-seed in 8 days. That shouldn't be possible.",
@@ -118,7 +122,7 @@ const benefitsSections = [
         userType: "Founder",
         location: "Zurich",
         achievement: "Pre-seed Closed",
-        percentage: "8 days"
+        percentage: "8 days",
       },
       {
         text: "I found a cofounder, then a partner, then a first hire. All through one post. It's weirdly addictive how well this works when you're clear on your 'why.'",
@@ -127,18 +131,20 @@ const benefitsSections = [
         userType: "Team Builder",
         location: "Startup",
         achievement: "Complete Team",
-        percentage: "3-in-1"
-      }
+        percentage: "3-in-1",
+      },
     ],
     imageBg: "bg-gradient-to-br from-blue-500 to-blue-700",
     overlayIcon: "🚀",
-    floatingIcons: ["💕", "💼", "🚀"]
+    floatingIcons: ["💕", "💼", "🚀"],
   },
   {
     title: "Professional Growth",
-    subtitle: "Mentorships, exec roles, freelance, international relocations, 10X job switch", 
+    subtitle:
+      "Mentorships, exec roles, freelance, international relocations, 10X job switch",
     badgeText: "Mentorships",
-    description: "With real-time insights and personalized recommendations, MutualBook empowers you to advance your career strategically.",
+    description:
+      "With real-time insights and personalized recommendations, MutualBook empowers you to advance your career strategically.",
     visitorType: "Career Climbers",
     testimonials: [
       {
@@ -148,7 +154,7 @@ const benefitsSections = [
         userType: "Team Leader",
         location: "Startup",
         achievement: "Vision-Aligned Team",
-        percentage: "Dream Team"
+        percentage: "Dream Team",
       },
       {
         text: "Just had my third MutualBook connection convert into a long-term contractor. This isn't LinkedIn. It's something sharper, faster, and aligned.",
@@ -157,7 +163,7 @@ const benefitsSections = [
         userType: "Contractor",
         location: "Global",
         achievement: "Long-term Contract",
-        percentage: "3rd Success"
+        percentage: "3rd Success",
       },
       {
         text: "Got connected to a Yale alum who connected me to his partner at a VC firm. That intro did more in one call than a year of pitch emails.",
@@ -166,7 +172,7 @@ const benefitsSections = [
         userType: "Yale Alum",
         location: "VC Firm",
         achievement: "VC Connection",
-        percentage: "1 Call"
+        percentage: "1 Call",
       },
       {
         text: "I'm not exaggerating—within hours I was on a Zoom with a founder from SF and a developer from Ghana. We're now building the MVP together.",
@@ -175,7 +181,7 @@ const benefitsSections = [
         userType: "Global Team",
         location: "SF + Ghana",
         achievement: "MVP Building",
-        percentage: "Hours"
+        percentage: "Hours",
       },
       {
         text: "Everyone talks about community. MutualBook gives you clarity. It's like productizing intent. You can't game it. That's what makes it work.",
@@ -184,7 +190,7 @@ const benefitsSections = [
         userType: "Community Builder",
         location: "Global",
         achievement: "Clear Intent",
-        percentage: "100%"
+        percentage: "100%",
       },
       {
         text: "I tried to build my dream team on Twitter and got nowhere. On MutualBook? I got 3 people who already believed in the vision. No pitching, just building.",
@@ -193,44 +199,55 @@ const benefitsSections = [
         userType: "Team Leader",
         location: "Startup",
         achievement: "Vision-Aligned Team",
-        percentage: "3 People"
-      }
+        percentage: "3 People",
+      },
     ],
     imageBg: "bg-gradient-to-br from-purple-500 to-purple-700",
     overlayIcon: "📈",
-    floatingIcons: ["📈", "💼", "🌍"]
-  }
+    floatingIcons: ["📈", "💼", "🌍"],
+  },
 ];
 
 const BenefitsSection = () => {
   const [currentTestimonials, setCurrentTestimonials] = useState([0, 0, 0]);
-  const testimonialIntervals = useRef<(NodeJS.Timeout | null)[]>([null, null, null]);
+  const testimonialIntervals = useRef<(NodeJS.Timeout | null)[]>([
+    null,
+    null,
+    null,
+  ]);
 
   // Testimonial carousel auto-scroll for each section
   useEffect(() => {
     benefitsSections.forEach((_, sectionIndex) => {
-      testimonialIntervals.current[sectionIndex] = setInterval(() => {
-        setCurrentTestimonials(prev => {
-          const newTestimonials = [...prev];
-          newTestimonials[sectionIndex] = 
-            newTestimonials[sectionIndex] === benefitsSections[sectionIndex].testimonials.length - 1 
-              ? 0 
-              : newTestimonials[sectionIndex] + 1;
-          return newTestimonials;
-        });
-      }, 4000 + sectionIndex * 1000); // Stagger the intervals
+      testimonialIntervals.current[sectionIndex] = setInterval(
+        () => {
+          setCurrentTestimonials((prev) => {
+            const newTestimonials = [...prev];
+            newTestimonials[sectionIndex] =
+              newTestimonials[sectionIndex] ===
+              benefitsSections[sectionIndex].testimonials.length - 1
+                ? 0
+                : newTestimonials[sectionIndex] + 1;
+            return newTestimonials;
+          });
+        },
+        4000 + sectionIndex * 1000,
+      ); // Stagger the intervals
     });
 
     return () => {
-      testimonialIntervals.current.forEach(interval => {
+      testimonialIntervals.current.forEach((interval) => {
         if (interval) clearInterval(interval);
       });
     };
   }, []);
 
   // Handle testimonial dot click for specific section
-  const handleTestimonialClick = (sectionIndex: number, testimonialIndex: number) => {
-    setCurrentTestimonials(prev => {
+  const handleTestimonialClick = (
+    sectionIndex: number,
+    testimonialIndex: number,
+  ) => {
+    setCurrentTestimonials((prev) => {
       const newTestimonials = [...prev];
       newTestimonials[sectionIndex] = testimonialIndex;
       return newTestimonials;
@@ -243,7 +260,8 @@ const BenefitsSection = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
-            Benefits Achieved with <span className="text-yellow-400">Few Dollars</span>
+            Benefits Achieved with{" "}
+            <span className="text-yellow-400">Few Dollars</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             Real success stories from our members
@@ -255,14 +273,17 @@ const BenefitsSection = () => {
           {/* Three Cards with Visual Separators */}
           <div className="space-y-8 md:space-y-12">
             {benefitsSections.map((benefit, sectionIndex) => {
-              const currentTestimonial = benefit.testimonials[currentTestimonials[sectionIndex]];
-              
+              const currentTestimonial =
+                benefit.testimonials[currentTestimonials[sectionIndex]];
+
               return (
                 <div key={sectionIndex} className="relative">
                   {/* Visual Separator - Section Number */}
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                     <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center shadow-lg border-4 border-gray-900">
-                      <span className="text-white font-bold text-lg">{sectionIndex + 1}</span>
+                      <span className="text-white font-bold text-lg">
+                        {sectionIndex + 1}
+                      </span>
                     </div>
                   </div>
 
@@ -304,10 +325,16 @@ const BenefitsSection = () => {
                         <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border-2 border-pink-400/50 w-full max-w-lg mx-auto lg:max-w-none">
                           {/* User Details Section */}
                           <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
-                            <span className="text-2xl">{currentTestimonial.userImage}</span>
+                            <span className="text-2xl">
+                              {currentTestimonial.userImage}
+                            </span>
                             <div className="flex-1">
-                              <div className="text-gray-800 font-semibold text-lg">{currentTestimonial.userType}</div>
-                              <div className="text-gray-500 text-sm">{currentTestimonial.location}</div>
+                              <div className="text-gray-800 font-semibold text-lg">
+                                {currentTestimonial.userType}
+                              </div>
+                              <div className="text-gray-500 text-sm">
+                                {currentTestimonial.location}
+                              </div>
                             </div>
                             <div className="text-green-600 font-medium text-sm bg-green-100 px-3 py-1 rounded-full">
                               {currentTestimonial.achievement}
@@ -319,16 +346,18 @@ const BenefitsSection = () => {
                             <div className="text-base font-medium text-gray-800 leading-relaxed">
                               {currentTestimonial.text}
                             </div>
-                            
+
                             {/* Enhanced Dots Indicator */}
                             <div className="flex justify-center space-x-2 pt-2">
                               {benefit.testimonials.map((_, index) => (
                                 <button
                                   key={index}
-                                  onClick={() => handleTestimonialClick(sectionIndex, index)}
+                                  onClick={() =>
+                                    handleTestimonialClick(sectionIndex, index)
+                                  }
                                   className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-500/60 ${
-                                    currentTestimonials[sectionIndex] === index 
-                                      ? "bg-gray-800 w-4 h-4 shadow-sm" 
+                                    currentTestimonials[sectionIndex] === index
+                                      ? "bg-gray-800 w-4 h-4 shadow-sm"
                                       : "bg-gray-300 hover:bg-gray-400"
                                   }`}
                                   aria-label={`Show testimonial ${index + 1}`}
@@ -356,13 +385,15 @@ const BenefitsSection = () => {
           <div className="mt-16 md:mt-20 text-center bg-gray-800/80 backdrop-blur-sm rounded-xl p-8 md:p-10 border border-gray-700/50 shadow-xl">
             <div className="max-w-4xl mx-auto">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Join Thousands of Successful Connections
+                Thousands of Successful Collabs Every Week
               </h3>
               <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
-                Every week, MutualBook facilitates thousands of intent-driven real-life partnerships
+                Every week, MutualBook facilitates thousands of intent-driven
+                real-life partnerships
               </p>
               <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                Collaborations, deals, hirings—from startups and scholarships to weddings and manufacturing deals.
+                Collaborations, deals, hirings—from startups and scholarships to
+                weddings and manufacturing deals.
               </p>
             </div>
           </div>
@@ -373,5 +404,3 @@ const BenefitsSection = () => {
 };
 
 export default BenefitsSection;
-
-

@@ -21,11 +21,11 @@ const Footer = () => {
                 filter: 'drop-shadow(0 0 20px rgba(236,72,153,0.5)) drop-shadow(0 0 10px rgba(245,158,11,0.3))'
               }}
             />
-            {/* Blurred shadow logo for extra glow */}
+            {/* Subtle blurred shadow logo for extra glow */}
             <img 
               src="/Mutualbook complete logo.png" 
               alt="MutualBook" 
-              className="absolute inset-0 opacity-20 blur-[15px] select-none pointer-events-none z-10 h-16 md:h-20 lg:h-24 object-contain"
+              className="absolute inset-0 opacity-5 blur-[20px] select-none pointer-events-none z-10 h-16 md:h-20 lg:h-24 object-contain"
             />
           </div>
           <p className="text-xl text-muted-foreground mt-4 font-medium">
