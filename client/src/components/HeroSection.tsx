@@ -138,27 +138,56 @@ const HeroSection = () => {
           Where the world's most ambitious meet—and get things done.
         </p>
 
-        {/* CTA Area */}
-        <div className="max-w-md mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <Input 
-              type="email" 
-              placeholder="Organization Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
-            />
-            <Button 
-              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
-              disabled={!email}
-            >
-              Get Your Invitation
-            </Button>
+        {/* Hero Content Grid - Text + Feature Image */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center mb-12">
+          {/* Left Column - CTA */}
+          <div className="lg:text-left">
+            <div className="max-w-md mx-auto lg:mx-0">
+              <div className="flex flex-col md:flex-row gap-3 mb-4">
+                <Input 
+                  type="email" 
+                  placeholder="Organization Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
+                />
+                <Button 
+                  className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
+                  disabled={!email}
+                >
+                  Get Your Invitation
+                </Button>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground mb-6 px-2 lg:px-0">
+                ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
+                <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+              </p>
+            </div>
           </div>
-          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
-            ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-            <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
-          </p>
+
+          {/* Right Column - Feature Image */}
+          <div className="relative lg:order-last">
+            <div className="relative group">
+              {/* Glow effect behind image */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition duration-500"></div>
+              
+              {/* Main feature image */}
+              <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-2 border border-white/10">
+                <img 
+                  src="/MutualBook feature image .png" 
+                  alt="MutualBook Platform Preview" 
+                  className="w-full h-auto rounded-xl shadow-2xl"
+                  style={{
+                    filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))'
+                  }}
+                />
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-accent rounded-full animate-bounce"></div>
+            </div>
+          </div>
         </div>
 
         {/* University and Company Logos Scroll */}
