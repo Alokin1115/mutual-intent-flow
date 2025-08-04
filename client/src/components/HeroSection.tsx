@@ -126,41 +126,41 @@ const HeroSection = () => {
           {/* Left Side - Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
             {/* Top Banner */}
-            <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+            <Badge className="mb-4 md:mb-6 px-3 py-2 text-xs md:text-sm lg:text-base md:px-4 md:py-2 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
               From World's Top 100 Universities & Companies✨
             </Badge>
 
             {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-8 leading-tight">
-              <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+              <span className="block">Elites' Fast-Track to</span>
               <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
                 {rotatingWords[wordIndex]}
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl lg:max-w-none">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
               Where the world's most ambitious meet—and get things done.
             </p>
 
             {/* CTA Area */}
-            <div className="max-w-md lg:max-w-lg mx-auto lg:mx-0 mb-12">
-              <div className="flex flex-col md:flex-row gap-3 mb-4">
+            <div className="max-w-md lg:max-w-full mx-auto lg:mx-0 mb-8">
+              <div className="flex flex-col sm:flex-row gap-3 mb-3">
                 <Input 
                   type="email" 
                   placeholder="Organization Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
+                  className="glass-effect text-white placeholder:text-gray-400 min-h-[44px] text-sm lg:text-base flex-1"
                 />
                 <Button 
-                  className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
+                  className="gradient-gold text-black font-semibold px-4 sm:px-6 glow-gold min-h-[44px] whitespace-nowrap text-sm lg:text-base" 
                   disabled={!email}
                 >
                   Get Your Invitation
                 </Button>
               </div>
-              <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
+              <p className="text-xs md:text-sm text-muted-foreground mb-4 px-1">
                 ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
                 <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
               </p>
