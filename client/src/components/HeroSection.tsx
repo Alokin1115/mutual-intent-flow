@@ -119,55 +119,51 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      {/* Main Content Container */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="flex flex-col items-center text-center min-h-[calc(100vh-8rem)] justify-center">
-          
-          {/* Top Banner */}
-          <Badge className="mb-4 md:mb-6 px-3 py-2 text-xs md:text-sm lg:text-base md:px-4 md:py-2 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
-            From World's Top 100 Universities & Companies✨
-          </Badge>
+      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+        {/* Top Banner */}
+        <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+          From World's Top 100 Universities & Companies✨
+        </Badge>
 
-          {/* Main Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-            <span className="block">Elites' Fast-Track to</span>
-            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
-              {rotatingWords[wordIndex]}
-            </span>
-          </h1>
+        {/* Main Headline */}
+        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
+            {rotatingWords[wordIndex]}
+          </span>
+        </h1>
 
-          {/* Subheadline */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed max-w-2xl">
-            Where the world's most ambitious meet—and get things done.
-          </p>
+        {/* Subheadline */}
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
+          Where the world's most ambitious meet—and get things done.
+        </p>
 
-          {/* CTA Area */}
-          <div className="max-w-md mx-auto mb-8">
-            <div className="flex flex-col sm:flex-row gap-3 mb-3">
-              <Input 
-                type="email" 
-                placeholder="Organization Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="glass-effect text-white placeholder:text-gray-400 min-h-[44px] text-sm lg:text-base flex-1"
-              />
-              <Button 
-                className="gradient-gold text-black font-semibold px-4 sm:px-6 glow-gold min-h-[44px] whitespace-nowrap text-sm lg:text-base" 
-                disabled={!email}
-              >
-                Get Your Invitation
-              </Button>
-            </div>
-            <p className="text-xs md:text-sm text-muted-foreground mb-4 px-1">
-              ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-              <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
-            </p>
+        {/* CTA Area */}
+        <div className="max-w-md mx-auto mb-12">
+          <div className="flex flex-col md:flex-row gap-3 mb-4">
+            <Input 
+              type="email" 
+              placeholder="Organization Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
+            />
+            <Button 
+              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
+              disabled={!email}
+            >
+              Get Your Invitation
+            </Button>
           </div>
+          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
+            ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
+            <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+          </p>
         </div>
 
-        {/* University and Company Logos Scroll - Full Width Below Split */}
-        <div className="overflow-hidden w-full mt-12 lg:mt-16">
-          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium text-center">
+        {/* University and Company Logos Scroll */}
+        <div className="overflow-hidden w-full">
+          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium">
             Used by Professionals, Alumni & Students from
           </div>
           <div className="w-full">
@@ -176,10 +172,8 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Hero Highlights (ImpactStrip + Notice Banner) - Full Width Below */}
-        <div className="mt-12 lg:mt-16">
-          <HeroHighlights />
-        </div>
+        {/* Hero Highlights (ImpactStrip + Notice Banner) */}
+        <HeroHighlights />
       </div>
     </section>
   );
