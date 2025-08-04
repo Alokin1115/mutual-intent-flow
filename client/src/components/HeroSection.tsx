@@ -125,23 +125,24 @@ const HeroSection = () => {
           From World's Top 100 Universities & Companies✨
         </Badge>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
-          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
-            {rotatingWords[wordIndex]}
-          </span>
-        </h1>
-
-        {/* Subheadline */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
-          Where the world's most ambitious meet—and get things done.
-        </p>
-
-        {/* Hero Content Grid - Text + Feature Image */}
+        {/* Hero Content Grid - Headlines + Feature Image */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center mb-12">
-          {/* Left Column - CTA */}
-          <div className="flex flex-col items-center lg:items-start">
+          {/* Left Column - Headlines + CTA */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            {/* Main Headline */}
+            <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+              <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
+                {rotatingWords[wordIndex]}
+              </span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl lg:max-w-none">
+              Where the world's most ambitious meet—and get things done.
+            </p>
+
+            {/* CTA */}
             <div className="max-w-md w-full">
               <div className="flex flex-col md:flex-row gap-3 mb-4">
                 <Input 
