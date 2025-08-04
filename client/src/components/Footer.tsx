@@ -33,7 +33,7 @@ const Footer = () => {
               className="absolute inset-0 opacity-5 blur-[25px] select-none pointer-events-none z-10 h-32 sm:h-40 md:h-52 lg:h-64 xl:h-72 object-contain"
             />
           </div>
-          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-muted-foreground mt-2 sm:mt-3 md:mt-4 font-medium whitespace-nowrap">
+          <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-muted-foreground mt-1 sm:mt-1.5 md:mt-2 font-medium whitespace-nowrap">
             Do Incredible Things Together.
           </p>
         </div>
