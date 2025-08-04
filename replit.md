@@ -110,3 +110,10 @@ The architecture prioritizes developer experience with hot reload, type safety, 
 - **Content Updates**: Updated testimonials in BenefitsSection to highlight scholarships, team building, and vision alignment success stories
 - **Technical**: Fixed DOM nesting warnings by replacing inappropriate p > div structures with proper div containers
 - **Repository Sync**: Successfully pushed all UI improvements to GitHub repository (197 objects, 549.16 KiB)
+
+### Hero Section Layout Rollback (August 4, 2025)
+- **Layout Change**: Rolled back hero section from split two-column layout to simple single-column centered design
+- **Removed**: Grid-based split layout with content on left and iOS app image on right
+- **Restored**: Centered content layout with all elements vertically stacked and centered
+- **Improved**: Better content width constraints and centered alignment for mobile and desktop
+- **User Request**: User specifically requested rollback to remove split layout complexity

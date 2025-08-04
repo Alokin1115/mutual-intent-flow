@@ -119,70 +119,49 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      {/* Split Layout Container */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10 min-h-[calc(100vh-8rem)]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
+      {/* Main Content Container */}
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="flex flex-col items-center text-center min-h-[calc(100vh-8rem)] justify-center">
           
-          {/* Left Side - Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            {/* Top Banner */}
-            <Badge className="mb-4 md:mb-6 px-3 py-2 text-xs md:text-sm lg:text-base md:px-4 md:py-2 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
-              From World's Top 100 Universities & Companies✨
-            </Badge>
+          {/* Top Banner */}
+          <Badge className="mb-4 md:mb-6 px-3 py-2 text-xs md:text-sm lg:text-base md:px-4 md:py-2 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+            From World's Top 100 Universities & Companies✨
+          </Badge>
 
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight">
-              <span className="block">Elites' Fast-Track to</span>
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
-                {rotatingWords[wordIndex]}
-              </span>
-            </h1>
+          {/* Main Headline */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+            <span className="block">Elites' Fast-Track to</span>
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500">
+              {rotatingWords[wordIndex]}
+            </span>
+          </h1>
 
-            {/* Subheadline */}
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-              Where the world's most ambitious meet—and get things done.
-            </p>
+          {/* Subheadline */}
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed max-w-2xl">
+            Where the world's most ambitious meet—and get things done.
+          </p>
 
-            {/* CTA Area */}
-            <div className="max-w-md lg:max-w-full mx-auto lg:mx-0 mb-8">
-              <div className="flex flex-col sm:flex-row gap-3 mb-3">
-                <Input 
-                  type="email" 
-                  placeholder="Organization Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="glass-effect text-white placeholder:text-gray-400 min-h-[44px] text-sm lg:text-base flex-1"
-                />
-                <Button 
-                  className="gradient-gold text-black font-semibold px-4 sm:px-6 glow-gold min-h-[44px] whitespace-nowrap text-sm lg:text-base" 
-                  disabled={!email}
-                >
-                  Get Your Invitation
-                </Button>
-              </div>
-              <p className="text-xs md:text-sm text-muted-foreground mb-4 px-1">
-                ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-                <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Right Side - iOS Image */}
-          <div className="flex items-center justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
-              <img 
-                src="/1 ios.png" 
-                alt="MutualBook iOS App" 
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                onError={(e) => {
-                  // Fallback if image doesn't exist yet
-                  const img = e.target as HTMLImageElement;
-                  img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='600' viewBox='0 0 300 600'%3E%3Crect width='300' height='600' fill='%23334155' rx='30'/%3E%3Ctext x='150' y='300' text-anchor='middle' fill='%23E2E8F0' fontSize='18'%3EiOS App Image%3C/text%3E%3Ctext x='150' y='330' text-anchor='middle' fill='%2394A3B8' fontSize='14'%3EPlace your image at:%3C/text%3E%3Ctext x='150' y='350' text-anchor='middle' fill='%2394A3B8' fontSize='14'%3Eclient/public/1 ios.png%3C/text%3E%3C/svg%3E";
-                }}
+          {/* CTA Area */}
+          <div className="max-w-md mx-auto mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 mb-3">
+              <Input 
+                type="email" 
+                placeholder="Organization Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="glass-effect text-white placeholder:text-gray-400 min-h-[44px] text-sm lg:text-base flex-1"
               />
-              {/* Optional glow effect for the image */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 to-accent/20 blur-2xl rounded-3xl scale-110"></div>
+              <Button 
+                className="gradient-gold text-black font-semibold px-4 sm:px-6 glow-gold min-h-[44px] whitespace-nowrap text-sm lg:text-base" 
+                disabled={!email}
+              >
+                Get Your Invitation
+              </Button>
             </div>
+            <p className="text-xs md:text-sm text-muted-foreground mb-4 px-1">
+              ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
+              <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+            </p>
           </div>
         </div>
 
