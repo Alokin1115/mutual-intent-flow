@@ -110,7 +110,7 @@ const HeroSection = () => {
   }, [isMobile]);
 
   return (
-    <section className="min-h-screen gradient-hero relative overflow-hidden pt-20 lg:pt-24 pb-12 lg:pb-16">
+    <section className="min-h-screen gradient-hero relative overflow-hidden pt-24 pb-16">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/30 rounded-full blur-xl animate-float"></div>
@@ -119,78 +119,46 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 xl:px-12 text-center relative z-10">
+      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
         {/* Top Banner */}
         <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
           From World's Top 100 Universities & Companies✨
         </Badge>
 
-        {/* Hero Content Grid - Headlines + Feature Image */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 xl:gap-12 items-center mb-16 lg:mb-20">
-          {/* Left Column - Headlines + CTA (3/5 width) */}
-          <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-8">
-            {/* Main Headline - Optimized sizing */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-[1.1] lg:leading-[1.05]">
-              <span className="block lg:whitespace-nowrap">Elites' Fast-Track to</span>
-              <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block transition-all duration-500 mt-2 lg:mt-0">
-                {rotatingWords[wordIndex]}
-              </span>
-            </h1>
+        {/* Main Headline */}
+        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
+          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
+            {rotatingWords[wordIndex]}
+          </span>
+        </h1>
 
-            {/* Subheadline - Better spacing */}
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-xl xl:text-2xl text-muted-foreground max-w-2xl lg:max-w-none leading-relaxed">
-              Where the world's most ambitious meet—and get things done.
-            </p>
+        {/* Subheadline */}
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
+          Where the world's most ambitious meet—and get things done.
+        </p>
 
-            {/* CTA - Enhanced layout */}
-            <div className="w-full max-w-lg lg:max-w-md xl:max-w-lg">
-              <div className="flex flex-col sm:flex-row gap-3 mb-4">
-                <Input 
-                  type="email" 
-                  placeholder="Organization Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="glass-effect text-white placeholder:text-gray-400 min-h-[52px] text-base flex-1"
-                />
-                <Button 
-                  className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[52px] whitespace-nowrap" 
-                  disabled={!email}
-                >
-                  Get Your Invitation
-                </Button>
-              </div>
-              <p className="text-sm md:text-base text-muted-foreground text-center lg:text-left">
-                ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-                <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
-              </p>
-            </div>
+        {/* CTA Area */}
+        <div className="max-w-md mx-auto mb-12">
+          <div className="flex flex-col md:flex-row gap-3 mb-4">
+            <Input 
+              type="email" 
+              placeholder="Organization Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
+            />
+            <Button 
+              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
+              disabled={!email}
+            >
+              Get Your Invitation
+            </Button>
           </div>
-
-          {/* Right Column - Feature Image (2/5 width) */}
-          <div className="lg:col-span-2 relative mt-8 lg:mt-0">
-            <div className="relative group max-w-sm lg:max-w-none mx-auto">
-              {/* Optimized glow effect */}
-              <div className="absolute -inset-2 lg:-inset-3 bg-gradient-to-r from-primary/15 via-accent/15 to-primary/15 rounded-2xl blur-lg opacity-50 group-hover:opacity-70 transition duration-500"></div>
-              
-              {/* Main feature image with better sizing */}
-              <div className="relative bg-white/[0.02] backdrop-blur-sm rounded-xl lg:rounded-2xl p-1.5 lg:p-2 border border-white/5">
-                <img 
-                  src="/1 ios.png" 
-                  alt="MutualBook iOS App Preview" 
-                  className="w-full h-auto rounded-lg lg:rounded-xl shadow-2xl"
-                  style={{
-                    filter: 'drop-shadow(0 8px 25px rgba(0,0,0,0.25))',
-                    maxHeight: '500px',
-                    objectFit: 'contain'
-                  }}
-                />
-              </div>
-              
-              {/* Subtle floating indicators */}
-              <div className="absolute -top-1 -right-1 w-4 h-4 lg:w-5 lg:h-5 bg-green-400/80 rounded-full animate-ping"></div>
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 lg:w-4 lg:h-4 bg-accent/80 rounded-full animate-bounce"></div>
-            </div>
-          </div>
+          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
+            ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
+            <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+          </p>
         </div>
 
         {/* University and Company Logos Scroll */}
