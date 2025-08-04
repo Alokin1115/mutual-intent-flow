@@ -141,8 +141,8 @@ const HeroSection = () => {
         {/* Hero Content Grid - Text + Feature Image */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center mb-12">
           {/* Left Column - CTA */}
-          <div className="lg:text-left">
-            <div className="max-w-md mx-auto lg:mx-0">
+          <div className="flex flex-col items-center lg:items-start">
+            <div className="max-w-md w-full">
               <div className="flex flex-col md:flex-row gap-3 mb-4">
                 <Input 
                   type="email" 
@@ -158,7 +158,7 @@ const HeroSection = () => {
                   Get Your Invitation
                 </Button>
               </div>
-              <p className="text-sm md:text-base text-muted-foreground mb-6 px-2 lg:px-0">
+              <p className="text-sm md:text-base text-muted-foreground mb-6 text-center lg:text-left px-2 lg:px-0">
                 ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
                 <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
               </p>
