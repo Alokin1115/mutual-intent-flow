@@ -391,15 +391,15 @@ const BenefitsSection = () => {
               </h3>
               
               <div className="space-y-6">
-                <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-medium leading-relaxed max-w-4xl mx-auto">
-                  Every week, MutualBook facilitates thousands of intent-driven real-life partnerships
+                <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-medium leading-relaxed max-w-5xl mx-auto">
+                  Every week, MutualBook facilitates thousands of intent-driven real-life 
+                  <span className="text-white font-semibold"> Partnerships</span>,
+                  <span className="text-white font-semibold"> Collaborations</span>,
+                  <span className="text-white font-semibold"> Deals</span>, &
+                  <span className="text-white font-semibold"> Hirings</span>.
                 </p>
                 
-                <div className="w-24 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full"></div>
-                
-                <p className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto font-light">
-                  Collaborations, deals, hirings—from startups and scholarships to weddings and manufacturing deals.
-                </p>
+                <div className="w-32 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full mt-8"></div>
               </div>
             </div>
           </div>
