@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,15 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
   const [orgEmailValidationResult, setOrgEmailValidationResult] = useState<any>(null);
   const { toast } = useToast();
   const orgEmailValidationTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (orgEmailValidationTimeoutRef.current) {
+        clearTimeout(orgEmailValidationTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Email validation mutation for dialog
   const dialogEmailValidationMutation = useMutation({
@@ -79,7 +88,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
         dialogEmailValidationMutation.mutate(newEmail);
       }, 500); // Wait 500ms after user stops typing
     }
-  }, [dialogEmailValidationMutation]);
+  }, []); // Remove mutation dependency to prevent stale closure
 
   // Organization invite form
   const {
