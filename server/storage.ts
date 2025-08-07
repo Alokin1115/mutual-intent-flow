@@ -1,20 +1,43 @@
 import { users, type User, type InsertUser } from "@shared/schema";
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 
-// Database connection - conditional setup
+// Database connection - conditional setup with URL encoding
 let db: any;
+let pool: Pool | null = null;
 
 if (process.env.DATABASE_URL) {
-  const sql = neon(process.env.DATABASE_URL);
-  db = drizzle(sql);
+  try {
+    // Handle URL encoding for special characters in password
+    const connectionString = process.env.DATABASE_URL.replace(/(:)([^@:]+)(@)/, (match, colon, password, at) => {
+      return colon + encodeURIComponent(password) + at;
+    });
+    
+    pool = new Pool({
+      connectionString,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 2000,
+    });
+    
+    db = drizzle(pool);
+    console.log('✅ Database connection initialized with PostgreSQL driver');
+  } catch (error) {
+    console.error('❌ Failed to initialize database:', error);
+    db = createMockDb();
+  }
 } else {
   console.warn("DATABASE_URL not found - database operations will be disabled");
-  // Create a mock db object for development
-  db = {
+  db = createMockDb();
+}
+
+function createMockDb() {
+  return {
     select: () => ({ from: () => ({ where: () => ({ limit: () => ({ execute: () => Promise.resolve([]) }) }) }) }),
     insert: () => ({ values: () => ({ execute: () => Promise.resolve() }) }),
     update: () => ({ set: () => ({ where: () => ({ execute: () => Promise.resolve() }) }) }),
+    execute: () => Promise.resolve({ rows: [{ count: '0' }] }),
   };
 }
 

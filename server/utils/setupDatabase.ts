@@ -1,13 +1,31 @@
 import { db } from "../storage";
 
+// Test database connection first
+async function testDatabaseConnection(): Promise<boolean> {
+  try {
+    await db.execute('SELECT 1');
+    return true;
+  } catch (error) {
+    console.error('Database connection test failed:', error);
+    return false;
+  }
+}
+
 export async function setupDatabase(): Promise<void> {
   if (!process.env.DATABASE_URL) {
     console.log("No DATABASE_URL found - skipping database setup");
     return;
   }
 
+  // Test connection first
+  const isConnected = await testDatabaseConnection();
+  if (!isConnected) {
+    console.log("❌ Database connection failed - skipping setup");
+    return;
+  }
+
   try {
-    console.log("Setting up database tables...");
+    console.log("✅ Database connected - setting up tables...");
 
     // Create organization_domains table
     await db.execute(`
