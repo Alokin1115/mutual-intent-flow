@@ -1,35 +1,85 @@
 import { users, type User, type InsertUser } from "@shared/schema";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
+import postgres from "postgres";
+import { drizzle as drizzlePg } from "drizzle-orm/postgres-js";
 
-// Database connection - properly configured for Supabase
+// Database connection - multi-driver approach for Supabase
 let db: any;
 let isConnected = false;
+let connectionMethod = 'none';
 
 if (process.env.DATABASE_URL) {
+  // Always try postgres-js driver first as it's more reliable for Supabase
+  console.log('🔄 Attempting database connection with postgres-js driver...');
+  
   try {
-    // Check if using pooler URL (not supported with Neon driver)
-    if (process.env.DATABASE_URL.includes('pooler.supabase.com')) {
-      console.error('❌ INCOMPATIBLE DATABASE URL: Transaction pooler URLs are not supported with Neon driver');
-      console.log('📋 Please use the Direct Connection URL instead:');
-      console.log('   1. Go to Supabase Dashboard > Settings > Database');
-      console.log('   2. Copy URI connection string (NOT Transaction pooler)');
-      console.log('   3. Format: postgresql://postgres:[PASSWORD]@db.[PROJECT].supabase.co:5432/postgres');
-      db = createMockDb();
-    } else {
-      // Use direct connection URL
-      const sql = neon(process.env.DATABASE_URL);
-      db = drizzle(sql);
-      isConnected = true;
-      console.log('✅ Database connection initialized with Supabase direct connection');
+    // URL encode the connection string to handle special characters
+    let connectionUrl = process.env.DATABASE_URL;
+    console.log(`🔍 Connection URL format: ${connectionUrl.includes('pooler') ? 'Pooler' : 'Direct'}`);
+    
+    const urlMatch = connectionUrl.match(/postgresql:\/\/([^:]+):([^@]+)@(.+)/);
+    if (urlMatch) {
+      const [, username, password, hostAndDb] = urlMatch;
+      const encodedPassword = encodeURIComponent(password);
+      connectionUrl = `postgresql://${username}:${encodedPassword}@${hostAndDb}`;
+      console.log(`🔒 Password encoded for special characters`);
     }
-  } catch (error) {
-    console.error('❌ Failed to initialize database:', error);
-    db = createMockDb();
+    
+    const sql = postgres(connectionUrl, {
+      ssl: { rejectUnauthorized: false },
+      max: 1,
+      idle_timeout: 20,
+      connect_timeout: 10,
+      connection: {
+        application_name: 'mutualbook-replit'
+      }
+    });
+    
+    db = drizzlePg(sql);
+    isConnected = true;
+    connectionMethod = 'postgres-js';
+    console.log('✅ Database connection initialized with postgres-js driver');
+    
+  } catch (primaryError: any) {
+    console.error('❌ postgres-js connection failed:', primaryError?.message || primaryError);
+    console.log('🔄 Attempting Neon HTTP fallback...');
+    
+    try {
+      // Fallback to Neon HTTP driver (only for direct URLs)
+      if (!process.env.DATABASE_URL.includes('pooler.supabase.com')) {
+        let connectionUrl = process.env.DATABASE_URL;
+        const urlMatch = connectionUrl.match(/postgresql:\/\/([^:]+):([^@]+)@(.+)/);
+        if (urlMatch) {
+          const [, username, password, hostAndDb] = urlMatch;
+          const encodedPassword = encodeURIComponent(password);
+          connectionUrl = `postgresql://${username}:${encodedPassword}@${hostAndDb}`;
+        }
+        
+        const sql = neon(connectionUrl);
+        db = drizzle(sql);
+        isConnected = true;
+        connectionMethod = 'neon-http';
+        console.log('✅ Database connection established with Neon HTTP driver');
+      } else {
+        throw new Error('Pooler URLs not compatible with Neon driver');
+      }
+      
+    } catch (fallbackError: any) {
+      console.error('❌ All connection methods failed');
+      console.error('Primary error:', primaryError?.message || primaryError);
+      console.error('Fallback error:', fallbackError?.message || fallbackError);
+      console.log('📋 Using mock database mode - API will return fallback data');
+      db = createMockDb();
+      connectionMethod = 'mock';
+      isConnected = false;
+    }
   }
 } else {
-  console.warn("DATABASE_URL not found - using fallback mode");
+  console.warn("📋 No DATABASE_URL found - using mock database mode");
   db = createMockDb();
+  connectionMethod = 'mock';
+  isConnected = false;
 }
 
 function createMockDb() {
@@ -41,7 +91,7 @@ function createMockDb() {
   };
 }
 
-export { db, isConnected };
+export { db, isConnected, connectionMethod };
 
 // modify the interface with any CRUD methods
 // you might need
