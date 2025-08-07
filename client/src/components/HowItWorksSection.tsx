@@ -9,7 +9,7 @@ const steps = [
     number: "2",
     title: "Create your personal Mutual List",
     description:
-      "Matching your intent, urgency, expectation & 12+ tags. All in seconds.",
+      "Matching your intent, urgency & expectation. All in seconds.",
     icon: "🎯",
   },
   {
