@@ -79,24 +79,31 @@ export class OrganizationService {
     }
 
     try {
-      // Check if organizations are already seeded
-      const existingCount = await db.select().from(organizationDomains).execute();
+      // Test database connection with a simple query
+      console.log('Testing database connection...');
       
-      if (existingCount.length === 0) {
+      // Check if organizations are already seeded using raw SQL for better compatibility
+      const result = await db.execute(`SELECT COUNT(*) as count FROM organization_domains`);
+      const count = parseInt(result.rows[0].count);
+      
+      if (count === 0) {
         console.log('Seeding organization domains...');
         
         for (const org of this.VERIFIED_ORGANIZATIONS) {
-          await db.insert(organizationDomains).values({
-            domain: org.domain,
-            organizationName: org.name,
-            type: org.type,
-          }).execute();
+          await db.execute(`
+            INSERT INTO organization_domains (domain, organization_name, type) 
+            VALUES ('${org.domain}', '${org.name}', '${org.type}')
+            ON CONFLICT (domain) DO NOTHING
+          `);
         }
         
-        console.log(`Seeded ${this.VERIFIED_ORGANIZATIONS.length} organization domains`);
+        console.log(`✅ Seeded ${this.VERIFIED_ORGANIZATIONS.length} organization domains`);
+      } else {
+        console.log(`✅ Database connected - found ${count} organization domains`);
       }
     } catch (error) {
-      console.error('Error initializing organizations:', error);
+      console.error('❌ Error connecting to database:', error);
+      console.log('📋 Falling back to in-memory validation');
     }
   }
 

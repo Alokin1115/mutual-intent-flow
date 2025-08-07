@@ -10,6 +10,15 @@ import { eq } from "drizzle-orm";
 import crypto from "crypto";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Setup database tables first
+  try {
+    const { setupDatabase } = await import("./utils/setupDatabase");
+    await setupDatabase();
+  } catch (error) {
+    console.error('Database setup failed:', error);
+    console.log('Continuing with fallback mode...');
+  }
+
   // Initialize organization domains on startup
   await OrganizationService.initializeOrganizations();
 
