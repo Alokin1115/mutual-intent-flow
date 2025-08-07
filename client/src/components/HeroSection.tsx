@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useToast } from "@/hooks/use-toast";
 import { ImpactStrip } from "./ImpactStrip";
 import { NoticeBanner } from "./NoticeBanner";
 import HorizontalScroller from "./ui/horizontal-scroller";
 import HeroHighlights from "./HeroHighlights";
+import { InvitationDialog } from "./InvitationDialog";
+import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
 
 const topUniversities = [
   { name: "Harvard", logo: "/logos/universities/Harvard.png" },
@@ -79,11 +83,134 @@ const rotatingWords = ["Collaborations", "Deals", "Partnerships"];
 const HeroSection = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const [email, setEmail] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+  const [isValidating, setIsValidating] = useState(false);
   const isMobile = useIsMobile();
   const [unstacked, setUnstacked] = useState(false);
   const lastScrollY = useRef(0);
   const stackRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const { toast } = useToast();
+  const emailValidationTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Email validation mutation
+  const emailValidationMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const response = await fetch("/api/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Validation failed");
+      return result;
+    },
+    onSuccess: (data) => {
+      // If email needs correction, show suggestion
+      if (!data.isValid && data.suggestedFix) {
+        setEmailSuggestion(data.suggestedFix);
+      } else {
+        setEmailSuggestion(null);
+      }
+      setIsValidating(false);
+    },
+    onError: (error: Error) => {
+      console.warn('Email validation error:', error.message);
+      setEmailSuggestion(null);
+      setIsValidating(false);
+    },
+  });
+
+  // Organization invitation mutation for direct submission
+  const orgInviteMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const response = await fetch("/api/organization-invitation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      
+      const result = await response.json();
+      if (!response.ok) throw new Error(JSON.stringify(result));
+      return result;
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Success!",
+        description: data.message,
+        duration: 5000,
+      });
+      setEmail("");
+      setEmailSuggestion(null);
+    },
+    onError: (error: any) => {
+      // Try to parse error response for suggested corrections
+      try {
+        const errorData = JSON.parse(error.message);
+        if (errorData.suggestedEmail) {
+          setEmailSuggestion(errorData.suggestedEmail);
+          toast({
+            title: "Email Domain Issue",
+            description: `${errorData.error}. ${errorData.suggestion}`,
+            variant: "destructive",
+            duration: 8000,
+          });
+        } else {
+          toast({
+            title: "Not Recognized",
+            description: errorData.error || error.message,
+            variant: "destructive",
+            duration: 5000,
+          });
+        }
+      } catch {
+        toast({
+          title: "Error",
+          description: "Please check your email and try again",
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
+    },
+  });
+
+  // Handle email input changes with debounced validation
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    setEmailSuggestion(null);
+
+    // Clear existing timeout
+    if (emailValidationTimeoutRef.current) {
+      clearTimeout(emailValidationTimeoutRef.current);
+    }
+
+    // Only validate if email looks complete (has @ and domain)
+    if (newEmail.includes('@') && newEmail.split('@')[1]?.includes('.')) {
+      setIsValidating(true);
+      emailValidationTimeoutRef.current = setTimeout(() => {
+        emailValidationMutation.mutate(newEmail);
+      }, 500); // Wait 500ms after user stops typing
+    }
+  }, [emailValidationMutation]);
+
+  // Handle invitation button click
+  const handleGetInvitation = useCallback(() => {
+    if (!email.includes('@')) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+        duration: 3000,
+      });
+      return;
+    }
+
+    // If there's a suggestion, use it instead
+    const emailToSubmit = emailSuggestion || email;
+    orgInviteMutation.mutate(emailToSubmit);
+  }, [email, emailSuggestion, orgInviteMutation, toast]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -139,26 +266,70 @@ const HeroSection = () => {
           Where the world's most ambitious meet—and get things done.
         </p>
 
-        {/* CTA Area */}
+        {/* CTA Area with Email Validation */}
         <div className="max-w-md mx-auto mb-12">
           <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <Input 
-              type="email" 
-              placeholder="Organization Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base"
-            />
+            <div className="relative flex-1">
+              <div className="relative">
+                <Input 
+                  type="email" 
+                  placeholder="Organization Email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base pr-10"
+                />
+                {isValidating && (
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                  </div>
+                )}
+              </div>
+              {emailSuggestion && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-blue-900/90 backdrop-blur-sm border border-blue-400/30 rounded-md p-2 text-sm">
+                  <div className="flex items-center gap-2 text-blue-200">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>Did you mean: </span>
+                    <button
+                      onClick={() => {
+                        setEmail(emailSuggestion);
+                        setEmailSuggestion(null);
+                      }}
+                      className="text-accent hover:text-accent/80 underline font-medium"
+                    >
+                      {emailSuggestion}
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             <Button 
+              onClick={handleGetInvitation}
               className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
-              disabled={!email}
+              disabled={!email.includes('@') || orgInviteMutation.isPending}
             >
-              Get Your Invitation
+              {orgInviteMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Checking...
+                </>
+              ) : (
+                "Get Your Invitation"
+              )}
             </Button>
           </div>
           <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
-            ❓ <span className="underline cursor-pointer hover:text-primary">Not from Listed Org?</span>{" "}
-            <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
+            ❓ <span 
+              onClick={() => setIsDialogOpen(true)}
+              className="underline cursor-pointer hover:text-primary"
+            >
+              Not from Listed Org?
+            </span>{" "}
+            <span 
+              onClick={() => setIsDialogOpen(true)}
+              className="underline cursor-pointer hover:text-accent"
+            >
+              Join Weekly Waitlist
+            </span>
           </p>
         </div>
         </div>
@@ -179,6 +350,12 @@ const HeroSection = () => {
           <HeroHighlights />
         </div>
       </div>
+
+      {/* Invitation Dialog */}
+      <InvitationDialog 
+        open={isDialogOpen} 
+        onOpenChange={setIsDialogOpen}
+      />
     </section>
   );
 };
