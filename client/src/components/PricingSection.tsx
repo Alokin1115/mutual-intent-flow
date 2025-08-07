@@ -16,12 +16,12 @@ const pricingTiers = [
     name: "Free Fridays",
     price: "$0",
     tagline: "For students",
-    buttonText: "Join Free",
+    buttonText: "Secure Early",
     features: [
+      "Only 40 calls/month",
       "Limited Friday access",
       "Supports only Personal Usecases",
       "Limited to Unversity",
-      "Limited to 40 calls/month",
       "Student verification",
     ],
     highlight: false,
@@ -35,7 +35,7 @@ const pricingTiers = [
       "Unlimited access",
       "Advanced filters",
       "Priority matching",
-      "Video calls",
+      "Audio/Video calls",
       "Profile verification",
     ],
     highlight: false,
@@ -193,7 +193,7 @@ const PricingSection = () => {
                       : tier.highlight
                         ? "gradient-primary text-black glow-primary group-hover:shadow-xl group-hover:scale-105"
                         : tier.premium
-                          ? "bg-black text-accent group-hover:bg-black group-hover:text-accent group-hover:glow-accent group-hover:shadow-xl group-hover:scale-105"
+                          ? "bg-black text-accent group-hover:bg-accent group-hover:text-black group-hover:glow-accent group-hover:shadow-xl group-hover:scale-105"
                           : "glass-effect border-primary/20 group-hover:gradient-primary group-hover:text-black group-hover:glow-primary group-hover:shadow-xl group-hover:scale-105"
                   }`}
                 >
