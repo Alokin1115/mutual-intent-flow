@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,7 +33,61 @@ interface InvitationDialogProps {
 
 export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) {
   const [activeTab, setActiveTab] = useState("organization");
+  const [orgEmailSuggestion, setOrgEmailSuggestion] = useState<string | null>(null);
+  const [isOrgEmailValidating, setIsOrgEmailValidating] = useState(false);
+  const [orgEmailValidationResult, setOrgEmailValidationResult] = useState<any>(null);
   const { toast } = useToast();
+  const orgEmailValidationTimeoutRef = useRef<NodeJS.Timeout>();
+
+  // Email validation mutation for dialog
+  const dialogEmailValidationMutation = useMutation({
+    mutationFn: async (email: string) => {
+      const response = await fetch("/api/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Validation failed");
+      return result;
+    },
+    onSuccess: (data) => {
+      setOrgEmailValidationResult(data);
+      // If email needs correction, show suggestion
+      if (!data.isValid && data.suggestedFix) {
+        setOrgEmailSuggestion(data.suggestedFix);
+      } else {
+        setOrgEmailSuggestion(null);
+      }
+      setIsOrgEmailValidating(false);
+    },
+    onError: (error: Error) => {
+      console.warn('Email validation error:', error.message);
+      setOrgEmailSuggestion(null);
+      setOrgEmailValidationResult(null);
+      setIsOrgEmailValidating(false);
+    },
+  });
+
+  // Handle organization email input changes with debounced validation
+  const handleOrgEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value;
+    setOrgEmailSuggestion(null);
+    setOrgEmailValidationResult(null);
+
+    // Clear existing timeout
+    if (orgEmailValidationTimeoutRef.current) {
+      clearTimeout(orgEmailValidationTimeoutRef.current);
+    }
+
+    // Only validate if email looks complete (has @ and domain)
+    if (newEmail.includes('@') && newEmail.split('@')[1]?.includes('.')) {
+      setIsOrgEmailValidating(true);
+      orgEmailValidationTimeoutRef.current = setTimeout(() => {
+        dialogEmailValidationMutation.mutate(newEmail);
+      }, 500); // Wait 500ms after user stops typing
+    }
+  }, [dialogEmailValidationMutation]);
 
   // Organization invite form
   const {
@@ -41,9 +95,13 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
     handleSubmit: handleSubmitOrg,
     formState: { errors: errorsOrg },
     reset: resetOrg,
+    watch: watchOrg,
+    setValue: setValueOrg,
   } = useForm<OrganizationInviteForm>({
     resolver: zodResolver(organizationInviteSchema),
   });
+
+  const orgEmailValue = watchOrg("email");
 
   // Waitlist form
   const {
@@ -140,7 +198,9 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
   });
 
   const onSubmitOrganization = (data: OrganizationInviteForm) => {
-    orgInviteMutation.mutate(data);
+    // If there's a suggestion, use it instead
+    const emailToSubmit = orgEmailSuggestion || data.email;
+    orgInviteMutation.mutate({ email: emailToSubmit });
   };
 
   const onSubmitWaitlist = (data: WaitlistForm) => {
@@ -181,13 +241,51 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
             <form onSubmit={handleSubmitOrg(onSubmitOrganization)} className="space-y-4">
               <div>
                 <Label htmlFor="org-email" className="text-white">Organization Email</Label>
-                <Input
-                  id="org-email"
-                  type="email"
-                  placeholder="john@stanford.edu"
-                  className="bg-gray-900 border-gray-700 text-white"
-                  {...registerOrg("email")}
-                />
+                <div className="relative">
+                  <div className="relative">
+                    <Input
+                      id="org-email"
+                      type="email"
+                      placeholder="john@stanford.edu"
+                      className={`bg-gray-900 border-gray-700 text-white pr-10 ${
+                        orgEmailValidationResult?.isValid && !isOrgEmailValidating 
+                          ? 'border-green-400/50' 
+                          : ''
+                      }`}
+                      {...registerOrg("email", {
+                        onChange: (e) => {
+                          handleOrgEmailChange(e);
+                        }
+                      })}
+                    />
+                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                      {isOrgEmailValidating ? (
+                        <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                      ) : orgEmailValidationResult?.isValid && !orgEmailSuggestion ? (
+                        <CheckCircle className="h-4 w-4 text-green-400" />
+                      ) : null}
+                    </div>
+                  </div>
+                  {orgEmailSuggestion && (
+                    <div className="absolute top-full left-0 right-0 mt-1 bg-blue-900/90 backdrop-blur-sm border border-blue-400/30 rounded-md p-2 text-sm z-10">
+                      <div className="flex items-center gap-2 text-blue-200">
+                        <AlertCircle className="h-4 w-4" />
+                        <span>Did you mean: </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setValueOrg("email", orgEmailSuggestion);
+                            setOrgEmailSuggestion(null);
+                            setOrgEmailValidationResult(null);
+                          }}
+                          className="text-accent hover:text-accent/80 underline font-medium"
+                        >
+                          {orgEmailSuggestion}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 {errorsOrg.email && (
                   <p className="text-red-400 text-sm mt-1">{errorsOrg.email.message}</p>
                 )}
@@ -195,7 +293,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
 
               <Button
                 type="submit"
-                disabled={orgInviteMutation.isPending}
+                disabled={orgInviteMutation.isPending || !orgEmailValue?.includes('@')}
                 className="w-full gradient-gold text-black font-semibold hover:scale-105 transition-transform"
               >
                 {orgInviteMutation.isPending ? (

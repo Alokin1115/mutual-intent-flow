@@ -276,13 +276,19 @@ const HeroSection = () => {
                   placeholder="Organization Email"
                   value={email}
                   onChange={handleEmailChange}
-                  className="glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base pr-10"
+                  className={`glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base pr-10 ${
+                    emailValidationMutation.data?.isValid && !isValidating 
+                      ? 'border-green-400/50' 
+                      : ''
+                  }`}
                 />
-                {isValidating && (
-                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                  {isValidating ? (
                     <Loader2 className="h-4 w-4 animate-spin text-accent" />
-                  </div>
-                )}
+                  ) : emailValidationMutation.data?.isValid && !emailSuggestion ? (
+                    <CheckCircle className="h-4 w-4 text-green-400" />
+                  ) : null}
+                </div>
               </div>
               {emailSuggestion && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-blue-900/90 backdrop-blur-sm border border-blue-400/30 rounded-md p-2 text-sm">
