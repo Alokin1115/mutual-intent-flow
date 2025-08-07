@@ -2,21 +2,33 @@ import { users, type User, type InsertUser } from "@shared/schema";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 
-// Database connection - optimized for serverless/pooler
+// Database connection - properly configured for Supabase
 let db: any;
+let isConnected = false;
 
 if (process.env.DATABASE_URL) {
   try {
-    // Use the original DATABASE_URL (should be pooler format for serverless)
-    const sql = neon(process.env.DATABASE_URL);
-    db = drizzle(sql);
-    console.log('✅ Database connection initialized with Neon serverless driver');
+    // Check if using pooler URL (not supported with Neon driver)
+    if (process.env.DATABASE_URL.includes('pooler.supabase.com')) {
+      console.error('❌ INCOMPATIBLE DATABASE URL: Transaction pooler URLs are not supported with Neon driver');
+      console.log('📋 Please use the Direct Connection URL instead:');
+      console.log('   1. Go to Supabase Dashboard > Settings > Database');
+      console.log('   2. Copy URI connection string (NOT Transaction pooler)');
+      console.log('   3. Format: postgresql://postgres:[PASSWORD]@db.[PROJECT].supabase.co:5432/postgres');
+      db = createMockDb();
+    } else {
+      // Use direct connection URL
+      const sql = neon(process.env.DATABASE_URL);
+      db = drizzle(sql);
+      isConnected = true;
+      console.log('✅ Database connection initialized with Supabase direct connection');
+    }
   } catch (error) {
     console.error('❌ Failed to initialize database:', error);
     db = createMockDb();
   }
 } else {
-  console.warn("DATABASE_URL not found - database operations will be disabled");
+  console.warn("DATABASE_URL not found - using fallback mode");
   db = createMockDb();
 }
 
@@ -29,7 +41,7 @@ function createMockDb() {
   };
 }
 
-export { db };
+export { db, isConnected };
 
 // modify the interface with any CRUD methods
 // you might need

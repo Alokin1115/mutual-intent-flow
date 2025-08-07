@@ -1,12 +1,18 @@
-import { db } from "../storage";
+import { db, isConnected } from "../storage";
 
 // Test database connection first
 async function testDatabaseConnection(): Promise<boolean> {
+  if (!isConnected) {
+    console.log('❌ Database not connected - check DATABASE_URL format');
+    return false;
+  }
+  
   try {
-    await db.execute('SELECT 1');
+    const result = await db.execute('SELECT 1 as test');
+    console.log('✅ Database connection test successful');
     return true;
   } catch (error) {
-    console.error('Database connection test failed:', error);
+    console.error('❌ Database connection test failed:', error);
     return false;
   }
 }
