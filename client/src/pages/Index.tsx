@@ -6,7 +6,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
 import WhosHereSection from "@/components/WhosHereSection";
-import IndustryLeaderCarousel from "@/components/IndustryLeaderCarousel";
+
 import WaitlistSection from "@/components/WaitlistSection";
 import Footer from "@/components/Footer";
 
@@ -21,7 +21,6 @@ const Index = () => {
       <HowItWorksSection />
       <PricingSection />
       <WhosHereSection />
-      <IndustryLeaderCarousel />
       <WaitlistSection />
       <Footer />
       
