@@ -29,8 +29,8 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="py-16 md:py-20 px-4 md:px-6" id="how-it-works">
-      <div className="container mx-auto max-w-6xl">
+    <section className="py-16 md:py-20 px-2 md:px-4" id="how-it-works">
+      <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">
             How It Works
@@ -40,8 +40,8 @@ const HowItWorksSection = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {steps.map((step, index) => (
               <div key={index} className="text-center group relative">
                 {/* Step Number */}
