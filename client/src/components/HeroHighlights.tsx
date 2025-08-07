@@ -31,7 +31,7 @@ const HeroHighlights = () => {
           </div>
         </div>
       ) : (
-        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-2xl md:rounded-3xl p-4 md:p-8 lg:p-12 max-w-6xl mx-auto my-6 md:my-12 shadow-xl md:shadow-2xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 border border-primary/20 rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-5xl mx-auto my-6 md:my-12 shadow-xl md:shadow-2xl">
           {/* Floating background elements */}
           <div className="absolute top-4 right-6 w-20 h-20 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute bottom-4 left-6 w-16 h-16 bg-accent/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: "1s" }}></div>
@@ -79,6 +79,13 @@ const HeroHighlights = () => {
                     employer
                   </span>
                   <div className="absolute inset-0 bg-primary/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "1.5s" }}></div>
+                </span>
+                ,{" "}
+                <span className="relative inline-block">
+                  <span className="font-bold bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent px-2 py-1 rounded-lg">
+                    client
+                  </span>
+                  <div className="absolute inset-0 bg-accent/10 rounded-lg -z-10 animate-pulse" style={{ animationDelay: "1.7s" }}></div>
                 </span>
                 , or{" "}
                 <span className="relative inline-block">
