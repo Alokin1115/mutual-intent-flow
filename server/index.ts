@@ -61,8 +61,9 @@ app.use((req, res, next) => {
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    log(`Environment: ${process.env.NODE_ENV}`);
+    log(`Database URL configured: ${process.env.DATABASE_URL ? 'Yes' : 'No'}`);
   });
 })();
