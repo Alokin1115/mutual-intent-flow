@@ -18,9 +18,9 @@ const ImpactStrip = () => {
       label: 'Average From First Call to Collab',
     },
     {
-      value: '0',
+      value: '20+',
       color: 'text-accent',
-      label: 'Randomness | 20+ Use Cases',
+      label: 'personal to professional Usecase',
     },
   ];
 
