@@ -11,21 +11,24 @@ Railway deployment shows `ENETUNREACH` error when connecting to Supabase because
 - **Database**: Connection blocked by Railway network restrictions ❌
 - **Functionality**: App runs in mock mode (still fully functional for testing)
 
-## 🚀 Solutions Available
+## 🚀 Solution Found: Use Supabase Transaction Pooler
 
-### Option 1: Use Render Instead (Recommended)
-- Render has better external database connectivity
-- Your Render deployment should work with Supabase without issues
-- All functionality will work properly
+### The Fix: Switch to IPv4-Compatible Pooler
+Your Supabase dashboard shows:
+- **Direct Connection**: "Not IPv4 compatible" ❌  
+- **Transaction Pooler**: "IPv4 compatible" ✅
 
-### Option 2: Continue with Railway + Mock Mode
-- App remains fully functional for demonstration
-- All features work with realistic mock data
-- Users can still test organization validation and waitlist signup
+### Steps to Fix:
+1. In Supabase Dashboard → Settings → Database → Connection String
+2. Select "Transaction pooler" instead of "Direct connection"
+3. Copy the pooler URI (contains `pooler.supabase.com:6543`)
+4. Update Railway's `DATABASE_URL` environment variable
+5. Redeploy
 
-### Option 3: Railway Pro Plan
-- Railway Pro plans have better network connectivity
-- May resolve the external database connection issue
+### Expected Result:
+- Full database connectivity on Railway
+- All Supabase functionality restored
+- Real organization validation and waitlist signup
 
 ## 📋 Current App Status
 Your MutualBook platform is fully operational in mock mode:

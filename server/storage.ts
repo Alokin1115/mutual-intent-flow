@@ -16,7 +16,7 @@ if (process.env.DATABASE_URL) {
   try {
     // URL encode the connection string to handle special characters
     let connectionUrl = process.env.DATABASE_URL;
-    console.log(`🔍 Connection URL format: ${connectionUrl.includes('pooler') ? 'Pooler' : 'Direct'}`);
+    console.log(`🔍 Connection URL format: ${connectionUrl.includes('pooler') ? 'Transaction Pooler (IPv4 Compatible)' : 'Direct Connection'}`);
     
     const urlMatch = connectionUrl.match(/postgresql:\/\/([^:]+):([^@]+)@(.+)/);
     if (urlMatch) {
@@ -46,8 +46,8 @@ if (process.env.DATABASE_URL) {
     console.log('🔄 Attempting Neon HTTP fallback...');
     
     try {
-      // Fallback to Neon HTTP driver (only for direct URLs)
-      if (!process.env.DATABASE_URL.includes('pooler.supabase.com')) {
+      // Fallback to Neon HTTP driver (only for direct URLs, not pooler URLs)
+      if (!process.env.DATABASE_URL.includes('pooler')) {
         let connectionUrl = process.env.DATABASE_URL;
         const urlMatch = connectionUrl.match(/postgresql:\/\/([^:]+):([^@]+)@(.+)/);
         if (urlMatch) {
@@ -62,7 +62,7 @@ if (process.env.DATABASE_URL) {
         connectionMethod = 'neon-http';
         console.log('✅ Database connection established with Neon HTTP driver');
       } else {
-        throw new Error('Pooler URLs not compatible with Neon driver');
+        throw new Error('Transaction pooler URLs not compatible with Neon HTTP driver');
       }
       
     } catch (fallbackError: any) {
