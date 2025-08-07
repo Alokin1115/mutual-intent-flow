@@ -1,4 +1,10 @@
 import { users, type User, type InsertUser } from "@shared/schema";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+
+// Database connection
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle(sql);
 
 // modify the interface with any CRUD methods
 // you might need
