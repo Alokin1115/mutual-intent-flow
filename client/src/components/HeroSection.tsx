@@ -325,7 +325,7 @@ const HeroSection = () => {
           </div>
           <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
             ❓ <span 
-              onClick={() => setIsDialogOpen(true)}
+              onClick={() => window.open('/organizations', '_blank')}
               className="underline cursor-pointer hover:text-primary"
             >
               Not from Listed Org?
