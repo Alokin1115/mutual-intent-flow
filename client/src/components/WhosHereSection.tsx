@@ -135,40 +135,22 @@ const modernEconomySectors = [
 
 const testimonials = [
   {
-    name: "Sarah Chen",
-    role: "MIT Graduate • Engaged",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face",
-    quote: "💍 Engaged to a fellow MIT grad I met on MutualBook. We started talking over a shared interest in generational wealth and legacy. It clicked beyond words."
-  },
-  {
-    name: "Marcus Johnson", 
-    role: "Oxford PhD Student",
+    name: "Naval Ravikant",
+    role: "AngelList Founder • Tech Philosopher",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
-    quote: "🎓 Landed a fully-funded PhD at Oxford via a MutualBook intro with a former reviewer. The platform helped me skip months of cold outreach and confusion."
+    quote: "You have one life. The most important thing is to surround yourself with people who are playing the long game. MutualBook gets this—it's not about networking, it's about finding your tribe of builders, thinkers, and doers who understand that real wealth comes from deep relationships, not shallow connections."
   },
   {
-    name: "Alex Rivera",
-    role: "Startup Founder • San Francisco",
+    name: "Sam Altman",
+    role: "OpenAI CEO • Golden Member",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
-    quote: "🏠 Found my first SF roommate through MutualBook—same startup ambitions, same 5AM gym routine, same weird diet. We've now joined the same accelerator."
+    quote: "The future belongs to those who can build and execute at the intersection of technology and human connection. MutualBook is creating something special—a platform where the world's most ambitious minds can find their perfect collaborators. This is exactly what the next generation of founders and builders need."
   },
   {
-    name: "Emma Thompson",
-    role: "Product Lead • Sequoia-backed Startup",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
-    quote: "💼 Got hired as Product Lead at a climate startup backed by Sequoia — all from a single filtered intro through MutualBook. Felt like it understood exactly where I was headed."
-  },
-  {
-    name: "David Park",
-    role: "Professional Networker",
+    name: "Marc Andreessen",
+    role: "Andreessen Horowitz • Co-founder",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face",
-    quote: "🎯 Within 2 days of posting, I had 4 high-context intros. This is not networking—it's alignment over signal. Finally."
-  },
-  {
-    name: "Rachel Martinez",
-    role: "Entrepreneur • Co-founder",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&fit=crop&crop=face",
-    quote: "📬 I get zero spam and 100% useful intros. My post asked for a co-founder with design sense and urgency. The person I matched with had read my thesis."
+    quote: "The best companies are built by teams that share a deep understanding and mutual respect. MutualBook's approach to connecting like-minded professionals is exactly what the startup ecosystem needs."
   }
 ];
 
