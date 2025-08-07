@@ -382,19 +382,25 @@ const BenefitsSection = () => {
           </div>
 
           {/* Enhanced Weekly Stats */}
-          <div className="mt-16 md:mt-20 text-center bg-gray-800/80 backdrop-blur-sm rounded-xl p-8 md:p-10 border border-gray-700/50 shadow-xl">
-            <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Thousands of Successful Collabs Every Week
+          <div className="mt-16 md:mt-20 text-center bg-gray-800/90 backdrop-blur-md rounded-2xl p-10 md:p-16 border border-gray-700/60 shadow-2xl">
+            <div className="max-w-5xl mx-auto space-y-8">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight">
+                Thousands of Successful 
+                <br className="hidden sm:block" />
+                <span className="text-primary">Collabs</span> Every Week
               </h3>
-              <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
-                Every week, MutualBook facilitates thousands of intent-driven
-                real-life partnerships
-              </p>
-              <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                Collaborations, deals, hirings—from startups and scholarships to
-                weddings and manufacturing deals.
-              </p>
+              
+              <div className="space-y-6">
+                <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-medium leading-relaxed max-w-4xl mx-auto">
+                  Every week, MutualBook facilitates thousands of intent-driven real-life partnerships
+                </p>
+                
+                <div className="w-24 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full"></div>
+                
+                <p className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-4xl mx-auto font-light">
+                  Collaborations, deals, hirings—from startups and scholarships to weddings and manufacturing deals.
+                </p>
+              </div>
             </div>
           </div>
         </div>

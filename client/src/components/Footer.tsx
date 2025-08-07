@@ -26,12 +26,6 @@ const Footer = () => {
                   "drop-shadow(0 0 30px rgba(236,72,153,0.6)) drop-shadow(0 0 15px rgba(245,158,11,0.4))",
               }}
             />
-            {/* Subtle blurred shadow logo for extra glow - enlarged */}
-            <img
-              src="/Mutualbook complete logo.png"
-              alt="MutualBook"
-              className="absolute inset-0 opacity-5 blur-[25px] select-none pointer-events-none z-10 h-32 sm:h-40 md:h-52 lg:h-64 xl:h-72 object-contain"
-            />
           </div>
           <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-muted-foreground -mt-2 sm:-mt-3 md:-mt-4 font-medium whitespace-nowrap">
             Do Incredible Things Together.
