@@ -504,7 +504,7 @@ const TestimonialsCarousel = ({
                 <div className="h-full flex items-center justify-center">
                   <div className="relative w-full max-w-md mx-auto">
                     {/* Card with Tab */}
-                    <div className="bg-white rounded-2xl shadow-xl relative overflow-hidden h-[420px] flex flex-col">
+                    <div className="bg-white rounded-2xl shadow-xl relative overflow-hidden h-[320px] flex flex-col">
                       {/* Tab Handle */}
                       <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 z-10">
                         <div className="w-16 h-6 bg-gray-200 rounded-t-lg flex items-center justify-center">
