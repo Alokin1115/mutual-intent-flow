@@ -1,21 +1,71 @@
-import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
+
+// Form schema for waitlist wildcard
+const waitlistSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  linkedinX: z.string().url("Please enter a valid LinkedIn or X (Twitter) URL"),
+  reason: z.string().min(10, "Please provide at least 10 characters explaining why you belong here"),
+});
+
+type WaitlistForm = z.infer<typeof waitlistSchema>;
 
 const WaitlistSection = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    linkedinX: "",
-    reason: ""
+  const { toast } = useToast();
+
+  // Waitlist form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<WaitlistForm>({
+    resolver: zodResolver(waitlistSchema),
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    // console.log("Waitlist submission:", formData); // Removed for production
+  // Waitlist signup mutation
+  const waitlistMutation = useMutation({
+    mutationFn: async (data: WaitlistForm) => {
+      const response = await fetch("/api/waitlist-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Failed to join waitlist");
+      return result;
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Success!",
+        description: data.message || "You've been added to the waitlist successfully!",
+        duration: 5000,
+      });
+      reset();
+    },
+    onError: (error: Error) => {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+        duration: 5000,
+      });
+    },
+  });
+
+  const onSubmit = (data: WaitlistForm) => {
+    waitlistMutation.mutate(data);
   };
 
   return (
@@ -43,30 +93,32 @@ const WaitlistSection = () => {
           </CardHeader>
 
           <CardContent className="relative">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium mb-2 text-foreground">Name</label>
                   <Input
                     type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                     placeholder="Your full name"
-                    required
+                    {...register("name")}
                   />
+                  {errors.name && (
+                    <p className="text-red-400 text-sm mt-1">{errors.name.message}</p>
+                  )}
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium mb-2 text-foreground">Email</label>
                   <Input
                     type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                     placeholder="your@email.com"
-                    required
+                    {...register("email")}
                   />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -74,30 +126,40 @@ const WaitlistSection = () => {
                 <label className="block text-sm font-medium mb-2 text-foreground">LinkedIn/X Link</label>
                 <Input
                   type="url"
-                  value={formData.linkedinX}
-                  onChange={(e) => setFormData(prev => ({ ...prev, linkedinX: e.target.value }))}
                   className="glass-effect border-accent/30 focus:border-accent min-h-[48px] text-base"
                   placeholder="https://linkedin.com/in/yourprofile"
-                  required
+                  {...register("linkedinX")}
                 />
+                {errors.linkedinX && (
+                  <p className="text-red-400 text-sm mt-1">{errors.linkedinX.message}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-2 text-foreground">Why do you belong here?</label>
                 <Textarea
-                  value={formData.reason}
-                  onChange={(e) => setFormData(prev => ({ ...prev, reason: e.target.value }))}
                   className="glass-effect border-accent/30 focus:border-accent min-h-[120px] text-base"
                   placeholder="Tell us about your achievements, ambitions, and why you belong with the elite..."
-                  required
+                  {...register("reason")}
                 />
+                {errors.reason && (
+                  <p className="text-red-400 text-sm mt-1">{errors.reason.message}</p>
+                )}
               </div>
 
               <Button 
                 type="submit"
+                disabled={waitlistMutation.isPending}
                 className="w-full gradient-gold text-black font-bold py-4 text-base sm:text-lg glow-gold hover:scale-105 transition-all duration-300 min-h-[56px]"
               >
-                Join the Weekly Waitlist
+                {waitlistMutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  "Join the Weekly Waitlist"
+                )}
               </Button>
             </form>
 

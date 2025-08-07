@@ -16,15 +16,7 @@ const organizationInviteSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
 
-const waitlistSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  linkedinX: z.string().url("Please enter a valid LinkedIn or X (Twitter) URL"),
-  reason: z.string().min(10, "Please provide at least 10 characters explaining why you want to join"),
-});
-
 type OrganizationInviteForm = z.infer<typeof organizationInviteSchema>;
-type WaitlistForm = z.infer<typeof waitlistSchema>;
 
 interface InvitationDialogProps {
   open: boolean;
@@ -103,15 +95,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
 
   const orgEmailValue = watchOrg("email");
 
-  // Waitlist form
-  const {
-    register: registerWaitlist,
-    handleSubmit: handleSubmitWaitlist,
-    formState: { errors: errorsWaitlist },
-    reset: resetWaitlist,
-  } = useForm<WaitlistForm>({
-    resolver: zodResolver(waitlistSchema),
-  });
+
 
   // Organization invitation mutation
   const orgInviteMutation = useMutation({
@@ -165,37 +149,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
     },
   });
 
-  // Waitlist signup mutation
-  const waitlistMutation = useMutation({
-    mutationFn: async (data: WaitlistForm) => {
-      const response = await fetch("/api/waitlist-signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Failed to join waitlist");
-      return result;
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Success!",
-        description: data.message,
-        duration: 5000,
-      });
-      resetWaitlist();
-      onOpenChange(false);
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    },
-  });
+
 
   const onSubmitOrganization = (data: OrganizationInviteForm) => {
     // If there's a suggestion, use it instead
@@ -203,9 +157,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
     orgInviteMutation.mutate({ email: emailToSubmit });
   };
 
-  const onSubmitWaitlist = (data: WaitlistForm) => {
-    waitlistMutation.mutate(data);
-  };
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -222,10 +174,10 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
           <TabsList className="grid w-full grid-cols-2 bg-gray-900">
             <TabsTrigger value="organization" className="data-[state=active]:bg-pink-600">
-              Organization
+              Get Invitation
             </TabsTrigger>
-            <TabsTrigger value="waitlist" className="data-[state=active]:bg-amber-600">
-              Waitlist
+            <TabsTrigger value="waitlist" className="data-[state=active]:bg-blue-600">
+              Member Login
             </TabsTrigger>
           </TabsList>
 
@@ -309,86 +261,81 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
           </TabsContent>
 
           <TabsContent value="waitlist" className="space-y-4 mt-6">
-            <div className="text-center mb-4">
-              <AlertCircle className="h-8 w-8 text-amber-500 mx-auto mb-2" />
-              <h3 className="font-semibold text-white">Join Waitlist</h3>
+            <div className="text-center mb-6">
+              <div className="h-12 w-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-white text-lg">Member Login</h3>
               <p className="text-sm text-gray-400">
-                Currently accepting 28 of 2,847 applicants weekly
+                Access your MutualBook account
               </p>
             </div>
 
-            <form onSubmit={handleSubmitWaitlist(onSubmitWaitlist)} className="space-y-4">
+            <form className="space-y-4">
               <div>
-                <Label htmlFor="name" className="text-white">Full Name</Label>
+                <Label htmlFor="login-email" className="text-white">Email Address</Label>
                 <Input
-                  id="name"
-                  type="text"
-                  placeholder="John Doe"
-                  className="bg-gray-900 border-gray-700 text-white"
-                  {...registerWaitlist("name")}
-                />
-                {errorsWaitlist.name && (
-                  <p className="text-red-400 text-sm mt-1">{errorsWaitlist.name.message}</p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="waitlist-email" className="text-white">Email</Label>
-                <Input
-                  id="waitlist-email"
+                  id="login-email"
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="your-email@organization.com"
                   className="bg-gray-900 border-gray-700 text-white"
-                  {...registerWaitlist("email")}
                 />
-                {errorsWaitlist.email && (
-                  <p className="text-red-400 text-sm mt-1">{errorsWaitlist.email.message}</p>
-                )}
               </div>
 
               <div>
-                <Label htmlFor="linkedin" className="text-white">LinkedIn or X Profile</Label>
+                <Label htmlFor="login-password" className="text-white">Password</Label>
                 <Input
-                  id="linkedin"
-                  type="url"
-                  placeholder="https://linkedin.com/in/johndoe"
+                  id="login-password"
+                  type="password"
+                  placeholder="••••••••"
                   className="bg-gray-900 border-gray-700 text-white"
-                  {...registerWaitlist("linkedinX")}
                 />
-                {errorsWaitlist.linkedinX && (
-                  <p className="text-red-400 text-sm mt-1">{errorsWaitlist.linkedinX.message}</p>
-                )}
               </div>
 
-              <div>
-                <Label htmlFor="reason" className="text-white">Why do you want to join?</Label>
-                <Input
-                  id="reason"
-                  type="text"
-                  placeholder="I want to connect with..."
-                  className="bg-gray-900 border-gray-700 text-white"
-                  {...registerWaitlist("reason")}
-                />
-                {errorsWaitlist.reason && (
-                  <p className="text-red-400 text-sm mt-1">{errorsWaitlist.reason.message}</p>
-                )}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <input
+                    id="remember-me"
+                    name="remember-me"
+                    type="checkbox"
+                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded bg-gray-800"
+                  />
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-400">
+                    Remember me
+                  </label>
+                </div>
+                <div className="text-sm">
+                  <button
+                    type="button"
+                    className="font-medium text-blue-400 hover:text-blue-300"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
               </div>
 
               <Button
                 type="submit"
-                disabled={waitlistMutation.isPending}
-                className="w-full gradient-gold text-black font-semibold hover:scale-105 transition-transform"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold hover:scale-105 transition-transform"
               >
-                {waitlistMutation.isPending ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  "Join Waitlist"
-                )}
+                Sign In
               </Button>
             </form>
+
+            <div className="text-center mt-4">
+              <p className="text-sm text-gray-400">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("organization")}
+                  className="font-medium text-blue-400 hover:text-blue-300"
+                >
+                  Get an invitation
+                </button>
+              </p>
+            </div>
           </TabsContent>
         </Tabs>
 
