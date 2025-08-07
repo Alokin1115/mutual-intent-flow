@@ -381,48 +381,39 @@ const BenefitsSection = () => {
             })}
           </div>
 
-          {/* Impact Statement */}
-          <div className="mt-16 md:mt-20 text-center bg-gray-800/90 backdrop-blur-md rounded-2xl p-10 md:p-16 border border-gray-700/60 shadow-2xl">
-            <div className="max-w-6xl mx-auto space-y-10">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
-                Where Ambition Meets 
-                <br className="hidden sm:block" />
-                <span className="text-primary">Opportunity</span>
+          {/* Platform Summary */}
+          <div className="mt-16 md:mt-20 text-center">
+            <div className="max-w-4xl mx-auto space-y-8">
+              <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                Professional Networking,
+                <br />
+                <span className="text-primary">Reimagined</span>
               </h3>
               
-              <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                <div className="space-y-6">
-                  <p className="text-xl md:text-2xl text-gray-200 font-medium leading-relaxed text-left">
-                    MutualBook transforms professional networking into meaningful action
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-4 text-left">
-                    <div className="space-y-2">
-                      <div className="text-primary font-semibold text-lg">Partnerships</div>
-                      <div className="text-primary font-semibold text-lg">Collaborations</div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="text-primary font-semibold text-lg">Strategic Deals</div>
-                      <div className="text-primary font-semibold text-lg">Key Hirings</div>
-                    </div>
-                  </div>
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                MutualBook connects ambitious professionals through shared goals and mutual value creation. 
+                No more cold outreach. No more random networking events. Just meaningful connections with people 
+                who can help you achieve your objectives.
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">500+</div>
+                  <div className="text-sm text-gray-400">Active Members</div>
                 </div>
-                
-                <div className="space-y-6">
-                  <p className="text-lg md:text-xl text-gray-300 leading-relaxed text-left">
-                    From startup founders seeking co-founders to students landing scholarships, 
-                    from manufacturing deals to wedding planning partnerships—
-                  </p>
-                  
-                  <p className="text-2xl md:text-3xl font-bold text-white text-left">
-                    Every connection has <span className="text-accent">intent</span>.
-                    <br />
-                    Every match has <span className="text-primary">purpose</span>.
-                  </p>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">1,200+</div>
+                  <div className="text-sm text-gray-400">Connections Made</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">95%</div>
+                  <div className="text-sm text-gray-400">Match Quality</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-primary">24h</div>
+                  <div className="text-sm text-gray-400">Avg Response</div>
                 </div>
               </div>
-              
-              <div className="w-32 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full"></div>
             </div>
           </div>
         </div>
