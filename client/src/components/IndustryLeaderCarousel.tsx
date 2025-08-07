@@ -6,64 +6,58 @@ import { motion, AnimatePresence, easeOut, easeIn } from "framer-motion";
 
 const testimonials = [
   {
-    name: "Satya Nadella",
-    title: "CEO, Microsoft",
+    name: "Sarah Chen",
+    title: "MIT Graduate",
     quote:
-      "What impressed me about MutualBook wasn't the technology—it was the philosophy. Intent-first networking is where the future of collaboration lies.",
+      "💍 Engaged to a fellow MIT grad I met on MutualBook. We started talking over a shared interest in generational wealth and legacy. It clicked beyond words.",
   },
   {
-    name: "Aileen Lee",
-    title: "Founder, Cowboy Ventures",
+    name: "Marcus Johnson",
+    title: "PhD Student",
     quote:
-      "MutualBook is quietly doing what other platforms only promise—curating real founders, doers, and operators around aligned missions.",
+      "🎓 Landed a fully-funded PhD at Oxford via a MutualBook intro with a former reviewer. The platform helped me skip months of cold outreach and confusion.",
   },
   {
-    name: "Balaji Srinivasan",
-    title: "Author, The Network State",
+    name: "Alex Rivera",
+    title: "Startup Founder",
     quote:
-      "This feels like a social layer designed for sovereignty of purpose. A decentralized 'phonebook' that sorts by mission, not popularity.",
+      "🏠 Found my first SF roommate through MutualBook—same startup ambitions, same 5AM gym routine, same weird diet. We've now joined the same accelerator.",
   },
   {
-    name: "Whitney Wolfe Herd",
-    title: "Founder & CEO, Bumble",
+    name: "Emma Thompson",
+    title: "Product Lead",
     quote:
-      "We built Bumble to humanize dating. MutualBook is doing the same for work, collaboration, and creative ambition—with less noise and more respect.",
+      "💼 Got hired as Product Lead at a climate startup backed by Sequoia — all from a single filtered intro through MutualBook. Felt like it understood exactly where I was headed.",
   },
   {
-    name: "Naval Ravikant",
-    title: "Founder, AngelList",
+    name: "David Park",
+    title: "Networker",
     quote:
-      "The best way to build wealth and relationships is through alignment. MutualBook makes finding aligned minds effortless and scalable.",
+      "🎯 Within 2 days of posting, I had 4 high-context intros. This is not networking—it's alignment over signal. Finally.",
   },
   {
-    name: "Rohini Nilekani",
-    title: "Founder, Arghyam",
+    name: "Rachel Martinez",
+    title: "Entrepreneur",
     quote:
-      "Impact needs more than money—it needs matching minds. MutualBook connects purpose-led builders who would otherwise never find each other.",
+      "📬 I get zero spam and 100% useful intros. My post asked for a co-founder with design sense and urgency. The person I matched with had read my thesis.",
   },
   {
-    name: "Parag Agrawal",
-    title: "ex-CEO, Twitter",
+    name: "Jordan Kim",
+    title: "Tech Lead",
     quote:
-      "I wish we'd built something like MutualBook inside Twitter—something that filters not by followers but by intent.",
+      "🚀 Connected with my co-founder through MutualBook in under a week. We're now building an AI startup that just raised seed funding.",
   },
   {
-    name: "Dylan Field",
-    title: "Co-founder, Figma",
+    name: "Maya Patel",
+    title: "Design Director",
     quote:
-      "The best product teams form around clear intent. MutualBook is productizing that intent-matching—across industries, not just tech.",
+      "✨ Found three incredible mentors who completely changed my career trajectory. MutualBook filters by values, not just skills.",
   },
   {
-    name: "Reshma Saujani",
-    title: "Founder, Girls Who Code",
+    name: "Chris Anderson",
+    title: "Venture Partner",
     quote:
-      "I've seen communities, accelerators, mentorship programs—none match people like MutualBook does. This is what women and students need to grow together.",
-  },
-  {
-    name: "Ben Horowitz",
-    title: "Co-founder, Andreessen Horowitz",
-    quote:
-      "This isn't just another network. It's a blueprint for how the next generation of partnerships, teams, and companies will form.",
+      "💡 Every conversation I have through MutualBook feels like it matters. The platform curates for intent and urgency—exactly what I need.",
   },
 ];
 
