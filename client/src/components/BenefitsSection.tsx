@@ -381,26 +381,48 @@ const BenefitsSection = () => {
             })}
           </div>
 
-          {/* Enhanced Weekly Stats */}
+          {/* Impact Statement */}
           <div className="mt-16 md:mt-20 text-center bg-gray-800/90 backdrop-blur-md rounded-2xl p-10 md:p-16 border border-gray-700/60 shadow-2xl">
-            <div className="max-w-5xl mx-auto space-y-8">
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-8 leading-tight tracking-tight">
-                Thousands of Successful 
+            <div className="max-w-6xl mx-auto space-y-10">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
+                Where Ambition Meets 
                 <br className="hidden sm:block" />
-                <span className="text-primary">Collabs</span> Every Week
+                <span className="text-primary">Opportunity</span>
               </h3>
               
-              <div className="space-y-6">
-                <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 font-medium leading-relaxed max-w-5xl mx-auto">
-                  Every week, MutualBook facilitates thousands of intent-driven real-life 
-                  <span className="text-white font-semibold"> Partnerships</span>,
-                  <span className="text-white font-semibold"> Collaborations</span>,
-                  <span className="text-white font-semibold"> Deals</span>, &
-                  <span className="text-white font-semibold"> Hirings</span>.
-                </p>
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div className="space-y-6">
+                  <p className="text-xl md:text-2xl text-gray-200 font-medium leading-relaxed text-left">
+                    MutualBook transforms professional networking into meaningful action
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-left">
+                    <div className="space-y-2">
+                      <div className="text-primary font-semibold text-lg">Partnerships</div>
+                      <div className="text-primary font-semibold text-lg">Collaborations</div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-primary font-semibold text-lg">Strategic Deals</div>
+                      <div className="text-primary font-semibold text-lg">Key Hirings</div>
+                    </div>
+                  </div>
+                </div>
                 
-                <div className="w-32 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full mt-8"></div>
+                <div className="space-y-6">
+                  <p className="text-lg md:text-xl text-gray-300 leading-relaxed text-left">
+                    From startup founders seeking co-founders to students landing scholarships, 
+                    from manufacturing deals to wedding planning partnerships—
+                  </p>
+                  
+                  <p className="text-2xl md:text-3xl font-bold text-white text-left">
+                    Every connection has <span className="text-accent">intent</span>.
+                    <br />
+                    Every match has <span className="text-primary">purpose</span>.
+                  </p>
+                </div>
               </div>
+              
+              <div className="w-32 h-1 bg-gradient-to-r from-primary via-accent to-primary mx-auto rounded-full"></div>
             </div>
           </div>
         </div>
