@@ -1,9 +1,9 @@
-# 🚀 Railway Deployment Fix - 404 Error Resolution
+# 🚀 Railway Deployment Fix - Build Error Resolution
 
 ## Issue Identified
-Your Railway deployment is showing a 404 error because:
-1. Railway uses dynamic PORT assignment (not fixed port 5000)
-2. Build files might not be found in the expected location
+Your Railway deployment is failing during the build process because:
+1. Nixpacks configuration error: 'npm' is not a valid nixPkg (npm comes with nodejs)
+2. Railway uses dynamic PORT assignment (not fixed port 5000)
 
 ## ✅ Fixes Applied
 
@@ -11,9 +11,13 @@ Your Railway deployment is showing a 404 error because:
 - Updated server to use `process.env.PORT || 5000`
 - Railway automatically assigns a port via environment variable
 
-### 2. Railway Configuration Files Added
+### 2. Railway Configuration Files Fixed
 - `railway.json` - Railway-specific deployment configuration
-- `nixpacks.toml` - Build process optimization
+- `nixpacks.toml` - Fixed build process (removed invalid 'npm' package)
+
+### 3. Nixpacks Build Fix
+- Removed 'npm' from nixPkgs (npm comes bundled with nodejs)
+- Now only specifies 'nodejs' which includes npm automatically
 
 ### 3. Build Process Verification
 - Confirmed build outputs to `dist/public/` correctly
