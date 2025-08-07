@@ -389,20 +389,21 @@ const BenefitsSection = () => {
                 <br />
                 <span className="text-primary">Reimagined</span>
               </h3>
-              
+
               <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-                MutualBook connects ambitious professionals through shared goals and mutual value creation. 
-                No more cold outreach. No more random networking events. Just meaningful connections with people 
-                who can help you achieve your objectives.
+                MutualBook connects ambitious professionals through shared goals
+                and mutual value creation. No more cold outreach. No more random
+                networking events. Just meaningful connections with people who
+                can help you achieve your objectives.
               </p>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">500+</div>
+                  <div className="text-2xl font-bold text-primary">50,000+</div>
                   <div className="text-sm text-gray-400">Active Members</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">1,200+</div>
+                  <div className="text-2xl font-bold text-primary">16,200+</div>
                   <div className="text-sm text-gray-400">Connections Made</div>
                 </div>
                 <div className="text-center">
