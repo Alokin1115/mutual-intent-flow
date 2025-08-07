@@ -119,8 +119,9 @@ const HeroSection = () => {
         <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+      <div className="max-w-7xl mx-auto text-center relative z-10">
         {/* Top Banner */}
+        <div className="px-4 md:px-6">
         <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
           From World's Top 100 Universities & Companies✨
         </Badge>
@@ -160,10 +161,11 @@ const HeroSection = () => {
             <span className="underline cursor-pointer hover:text-accent">Join Weekly Waitlist</span>
           </p>
         </div>
+        </div>
 
         {/* University and Company Logos Scroll */}
-        <div className="overflow-hidden w-full">
-          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium">
+        <div className="overflow-hidden w-screen relative left-1/2 -translate-x-1/2">
+          <div className="text-xs md:text-sm text-muted-foreground mb-1 font-medium text-center px-4 md:px-6">
             Used by Professionals, Alumni & Students from
           </div>
           <div className="w-full">
@@ -173,7 +175,9 @@ const HeroSection = () => {
         </div>
 
         {/* Hero Highlights (ImpactStrip + Notice Banner) */}
-        <HeroHighlights />
+        <div className="px-4 md:px-6">
+          <HeroHighlights />
+        </div>
       </div>
     </section>
   );
