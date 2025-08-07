@@ -137,14 +137,14 @@ const PricingSection = () => {
                   aria-current={isMobile && scrollActiveIdx === index ? "true" : undefined}
                   tabIndex={isMobile && scrollActiveIdx === index ? 0 : -1}
                   variant={isMobile && scrollActiveIdx === index && !tier.premium ? "active" : undefined}
-                  className={`w-full font-semibold transition-all duration-300 ${
+                  className={`w-full font-semibold transition-all duration-300 hover:scale-105 ${
                     isMobile && scrollActiveIdx === index && !tier.premium
                       ? "gradient-primary text-black glow-primary shadow-lg border-2 border-primary"
                       : tier.highlight
-                        ? 'gradient-primary text-black glow-primary'
+                        ? 'gradient-primary text-black glow-primary hover:shadow-xl'
                         : tier.premium
-                          ? 'bg-black text-accent hover:bg-black/80 group-hover:glow-accent group-hover:shadow-lg'
-                          : 'glass-effect border-primary/20 hover:border-primary/50 hover:gradient-primary hover:text-black hover:glow-primary hover:shadow-lg'
+                          ? 'bg-black text-accent hover:bg-black/80 hover:glow-accent hover:shadow-xl hover:scale-105'
+                          : 'glass-effect border-primary/20 hover:border-primary/50 hover:gradient-primary hover:text-black hover:glow-primary hover:shadow-xl'
                   }`}
                 >
                   {tier.buttonText}
