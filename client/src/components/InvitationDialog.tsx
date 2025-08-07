@@ -24,7 +24,7 @@ interface InvitationDialogProps {
 }
 
 export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) {
-  const [activeTab, setActiveTab] = useState("organization");
+  const [activeTab, setActiveTab] = useState("waitlist");
   const [orgEmailSuggestion, setOrgEmailSuggestion] = useState<string | null>(null);
   const [isOrgEmailValidating, setIsOrgEmailValidating] = useState(false);
   const [orgEmailValidationResult, setOrgEmailValidationResult] = useState<any>(null);
@@ -164,10 +164,10 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
       <DialogContent className="max-w-md bg-gray-950 border-gray-800">
         <DialogHeader className="text-center">
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-amber-500 bg-clip-text text-transparent">
-            Join MutualBook
+            MutualBook Access
           </DialogTitle>
           <DialogDescription className="text-gray-400">
-            Choose your path to join our exclusive network
+            Sign in to your account or get an invitation
           </DialogDescription>
         </DialogHeader>
 

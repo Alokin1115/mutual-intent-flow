@@ -43,7 +43,7 @@ const Navbar = () => {
           className="hidden md:block gradient-gold text-black font-semibold px-6 py-2 rounded-full glow-gold hover:scale-105 transition-transform" 
           onClick={() => setInviteDialogOpen(true)}
         >
-          Get Invite
+          Log In
         </Button>
         
         {/* Mobile Get Invite Button */}
@@ -51,7 +51,7 @@ const Navbar = () => {
           className="md:hidden gradient-gold text-black font-semibold px-4 py-2 rounded-full glow-gold text-sm hover:scale-105 transition-transform" 
           onClick={() => setInviteDialogOpen(true)}
         >
-          Get Invite
+          Log In
         </Button>
       </div>
       
