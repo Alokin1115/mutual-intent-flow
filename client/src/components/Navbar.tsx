@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { InvitationDialog } from "@/components/InvitationDialog";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,17 +39,27 @@ const Navbar = () => {
         </div>
         
         {/* Desktop CTA Button */}
-        <Button className="hidden md:block gradient-gold text-black font-semibold px-6 py-2 rounded-full glow-gold" disabled>
+        <Button 
+          className="hidden md:block gradient-gold text-black font-semibold px-6 py-2 rounded-full glow-gold hover:scale-105 transition-transform" 
+          onClick={() => setInviteDialogOpen(true)}
+        >
           Get Invite
         </Button>
         
         {/* Mobile Get Invite Button */}
-        <Button className="md:hidden gradient-gold text-black font-semibold px-4 py-2 rounded-full glow-gold text-sm" disabled>
+        <Button 
+          className="md:hidden gradient-gold text-black font-semibold px-4 py-2 rounded-full glow-gold text-sm hover:scale-105 transition-transform" 
+          onClick={() => setInviteDialogOpen(true)}
+        >
           Get Invite
         </Button>
       </div>
       
-      
+      {/* Invitation Dialog */}
+      <InvitationDialog 
+        open={inviteDialogOpen} 
+        onOpenChange={setInviteDialogOpen} 
+      />
     </nav>
   );
 };

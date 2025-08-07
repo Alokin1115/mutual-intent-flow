@@ -72,6 +72,11 @@ export class OrganizationService {
   ];
 
   static async initializeOrganizations(): Promise<void> {
+    if (!process.env.DATABASE_URL) {
+      console.log('Database not configured - using in-memory organization validation');
+      return;
+    }
+
     try {
       // Check if organizations are already seeded
       const existingCount = await db.select().from(organizationDomains).execute();
@@ -101,6 +106,15 @@ export class OrganizationService {
       return { isValid: false };
     }
 
+    // If no database, use in-memory validation
+    if (!process.env.DATABASE_URL) {
+      const org = this.VERIFIED_ORGANIZATIONS.find(o => o.domain === domain);
+      return {
+        isValid: Boolean(org),
+        organization: org?.name
+      };
+    }
+
     try {
       const organization = await db
         .select()
@@ -119,7 +133,12 @@ export class OrganizationService {
       return { isValid: false };
     } catch (error) {
       console.error('Error validating organization email:', error);
-      return { isValid: false };
+      // Fallback to in-memory validation
+      const org = this.VERIFIED_ORGANIZATIONS.find(o => o.domain === domain);
+      return {
+        isValid: Boolean(org),
+        organization: org?.name
+      };
     }
   }
 

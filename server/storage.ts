@@ -2,9 +2,23 @@ import { users, type User, type InsertUser } from "@shared/schema";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 
-// Database connection
-const sql = neon(process.env.DATABASE_URL!);
-export const db = drizzle(sql);
+// Database connection - conditional setup
+let db: any;
+
+if (process.env.DATABASE_URL) {
+  const sql = neon(process.env.DATABASE_URL);
+  db = drizzle(sql);
+} else {
+  console.warn("DATABASE_URL not found - database operations will be disabled");
+  // Create a mock db object for development
+  db = {
+    select: () => ({ from: () => ({ where: () => ({ limit: () => ({ execute: () => Promise.resolve([]) }) }) }) }),
+    insert: () => ({ values: () => ({ execute: () => Promise.resolve() }) }),
+    update: () => ({ set: () => ({ where: () => ({ execute: () => Promise.resolve() }) }) }),
+  };
+}
+
+export { db };
 
 // modify the interface with any CRUD methods
 // you might need

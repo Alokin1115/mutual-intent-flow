@@ -12,6 +12,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize organization domains on startup
   await OrganizationService.initializeOrganizations();
 
+  // Handle missing database gracefully
+  const isDatabaseConnected = Boolean(process.env.DATABASE_URL);
+  
+  if (!isDatabaseConnected) {
+    console.log("⚠️  Database not configured - API endpoints will return mock responses");
+    console.log("📋 To connect your database, set the DATABASE_URL environment variable");
+    console.log("🔗 For Supabase: Get connection string from Settings > Database > Connection string > URI");
+  }
+
   // Organization email invitation endpoint
   app.post("/api/organization-invitation", async (req, res) => {
     try {
@@ -23,6 +32,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({
           error: "Email domain not recognized as a verified organization",
           suggestion: "Try using your official organization email or join our waitlist instead"
+        });
+      }
+
+      // If no database, return mock success
+      if (!isDatabaseConnected) {
+        return res.json({
+          success: true,
+          message: "Organization email validated successfully (Demo Mode)",
+          organization: validation.organization,
+          note: "Database not connected - this is a demo response"
         });
       }
 
@@ -88,6 +107,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { name, email, linkedinX, reason } = insertWaitlistSignupSchema.parse(req.body);
 
+      // Validate LinkedIn/X URL format
+      const urlPattern = /^https?:\/\/(www\.)?(linkedin\.com\/in\/|x\.com\/|twitter\.com\/)/i;
+      if (!urlPattern.test(linkedinX)) {
+        return res.status(400).json({
+          error: "Invalid LinkedIn/X URL",
+          message: "Please provide a valid LinkedIn or X (Twitter) profile URL"
+        });
+      }
+
+      // If no database, return mock success
+      if (!isDatabaseConnected) {
+        return res.json({
+          success: true,
+          message: "Waitlist registration received successfully (Demo Mode)",
+          note: "Database not connected - this is a demo response"
+        });
+      }
+
       // Check if email already exists
       const existing = await db
         .select()
@@ -108,15 +145,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             message: "Please check your email for the verification link"
           });
         }
-      }
-
-      // Validate LinkedIn/X URL format
-      const urlPattern = /^https?:\/\/(www\.)?(linkedin\.com\/in\/|x\.com\/|twitter\.com\/)/i;
-      if (!urlPattern.test(linkedinX)) {
-        return res.status(400).json({
-          error: "Invalid LinkedIn/X URL",
-          message: "Please provide a valid LinkedIn or X (Twitter) profile URL"
-        });
       }
 
       // Generate verification token
