@@ -173,11 +173,11 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
           <TabsList className="grid w-full grid-cols-2 bg-gray-900">
-            <TabsTrigger value="organization" className="data-[state=active]:bg-pink-600">
-              Get Invitation
-            </TabsTrigger>
             <TabsTrigger value="waitlist" className="data-[state=active]:bg-blue-600">
               Member Login
+            </TabsTrigger>
+            <TabsTrigger value="organization" className="data-[state=active]:bg-pink-600">
+              Get Invitation
             </TabsTrigger>
           </TabsList>
 
@@ -245,7 +245,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
 
               <Button
                 type="submit"
-                disabled={orgInviteMutation.isPending || !orgEmailValue?.includes('@')}
+                disabled={orgInviteMutation.isPending || !orgEmailValue?.includes('@') || (!orgEmailValidationResult?.isValid && !orgEmailSuggestion)}
                 className="w-full gradient-gold text-black font-semibold hover:scale-105 transition-transform"
               >
                 {orgInviteMutation.isPending ? (

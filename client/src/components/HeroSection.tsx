@@ -311,7 +311,7 @@ const HeroSection = () => {
             <Button 
               onClick={handleGetInvitation}
               className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
-              disabled={!email.includes('@') || orgInviteMutation.isPending}
+              disabled={!email.includes('@') || orgInviteMutation.isPending || (!emailValidationMutation.data?.isValid && !emailSuggestion)}
             >
               {orgInviteMutation.isPending ? (
                 <>
@@ -331,7 +331,12 @@ const HeroSection = () => {
               Not from Listed Org?
             </span>{" "}
             <span 
-              onClick={() => setIsDialogOpen(true)}
+              onClick={() => {
+                const waitlistSection = document.getElementById('waitlist');
+                if (waitlistSection) {
+                  waitlistSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               className="underline cursor-pointer hover:text-accent"
             >
               Join Weekly Waitlist
