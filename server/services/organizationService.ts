@@ -1,6 +1,7 @@
 import { db } from "../storage";
 import { organizationDomains } from "../../shared/schema";
 import { eq } from "drizzle-orm";
+import { EmailValidationService } from "./emailValidationService";
 
 export class OrganizationService {
   // Top universities and companies from your website
@@ -99,47 +100,74 @@ export class OrganizationService {
     }
   }
 
-  static async validateOrganizationEmail(email: string): Promise<{ isValid: boolean; organization?: string }> {
+  static async validateOrganizationEmail(email: string): Promise<{ 
+    isValid: boolean; 
+    organization?: string;
+    suggestedFix?: string;
+    correctionType?: 'typo' | 'fuzzy' | null;
+  }> {
     const domain = email.split('@')[1]?.toLowerCase();
     
     if (!domain) {
       return { isValid: false };
     }
 
-    // If no database, use in-memory validation
-    if (!process.env.DATABASE_URL) {
-      const org = this.VERIFIED_ORGANIZATIONS.find(o => o.domain === domain);
+    // Get list of valid domains
+    const validDomains = this.VERIFIED_ORGANIZATIONS.map(org => org.domain);
+    
+    // Use enhanced validation service
+    const validation = EmailValidationService.validateEmailDomain(email, validDomains);
+    
+    // Find organization name
+    const findOrgName = (dom: string) => {
+      const org = this.VERIFIED_ORGANIZATIONS.find(o => o.domain === dom);
+      return org?.name;
+    };
+
+    // If valid or has a correction suggestion
+    if (validation.isValid) {
       return {
-        isValid: Boolean(org),
-        organization: org?.name
+        isValid: true,
+        organization: findOrgName(validation.originalDomain),
       };
     }
 
-    try {
-      const organization = await db
-        .select()
-        .from(organizationDomains)
-        .where(eq(organizationDomains.domain, domain))
-        .limit(1)
-        .execute();
-
-      if (organization.length > 0) {
+    // If there's a suggested correction
+    if (validation.suggestedFix && validation.correctedDomain) {
+      const correctedOrg = findOrgName(validation.correctedDomain);
+      
+      if (correctedOrg) {
         return {
-          isValid: true,
-          organization: organization[0].organizationName,
+          isValid: false,
+          organization: correctedOrg,
+          suggestedFix: validation.suggestedFix,
+          correctionType: validation.orgStatus === 'typo_corrected' ? 'typo' : 'fuzzy',
         };
       }
-
-      return { isValid: false };
-    } catch (error) {
-      console.error('Error validating organization email:', error);
-      // Fallback to in-memory validation
-      const org = this.VERIFIED_ORGANIZATIONS.find(o => o.domain === domain);
-      return {
-        isValid: Boolean(org),
-        organization: org?.name
-      };
     }
+
+    // If using database, try database validation as fallback
+    if (process.env.DATABASE_URL) {
+      try {
+        const organization = await db
+          .select()
+          .from(organizationDomains)
+          .where(eq(organizationDomains.domain, domain))
+          .limit(1)
+          .execute();
+
+        if (organization.length > 0) {
+          return {
+            isValid: true,
+            organization: organization[0].organizationName,
+          };
+        }
+      } catch (error) {
+        console.error('Error validating organization email:', error);
+      }
+    }
+
+    return { isValid: false };
   }
 
   static extractDomain(email: string): string | null {

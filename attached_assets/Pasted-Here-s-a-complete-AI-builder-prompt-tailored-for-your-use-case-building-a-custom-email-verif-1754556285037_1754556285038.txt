@@ -1,0 +1,114 @@
+Here’s a **complete AI builder prompt** tailored for your use case — building a **custom email verification system** with **organization whitelist**, **typo correction**, and **Supabase integration**. You can use this prompt in tools like Vercel AI SDK, Replit Ghostwriter, GitHub Copilot Chat, or any AI pair programmer.
+
+---
+
+## 🧠 Prompt for AI Builder
+
+> 💡 **Tip**: Replace `"your-supabase-url"` and `"your-supabase-key"` with your actual Supabase credentials.
+
+---
+
+### 📋 AI Builder Prompt (Full Text)
+
+---
+
+**Prompt:**
+
+> Build a backend service in **Node.js + Express** that does custom email verification for a website.
+>
+> ## Core Features:
+>
+> 1. Accepts POST requests at `/verify-email` with a JSON body:
+>    `{ "email": "user@example.com" }`
+>
+> 2. Splits the email into `local` and `domain` parts.
+>
+> 3. Checks the domain against a **custom list of approved domains**, stored in **Supabase** under the table `approved_domains`, with schema:
+>
+> ```sql
+> CREATE TABLE approved_domains (
+>   id SERIAL PRIMARY KEY,
+>   domain TEXT UNIQUE NOT NULL
+> );
+> ```
+>
+> 4. If the domain **matches**, return:
+>
+> ```json
+> {
+>   "isValid": true,
+>   "suggestedFix": null,
+>   "orgStatus": "approved"
+> }
+> ```
+>
+> 5. If the domain is **a known typo**, suggest a correction using a **hardcoded dictionary** like:
+>
+> ```json
+> {
+>   "gamil.com": "gmail.com",
+>   "yaho.com": "yahoo.com",
+>   "mit.ed": "mit.edu",
+>   "stamford.edu": "stanford.edu"
+> }
+> ```
+>
+> 6. If the domain is **not in the approved list**, return:
+>
+> ```json
+> {
+>   "isValid": false,
+>   "suggestedFix": "corrected-domain.com",
+>   "orgStatus": "unapproved"
+> }
+> ```
+>
+> 7. Add fuzzy matching via Levenshtein distance to catch near-matches (e.g. one-letter typo).
+>
+> 8. Connect to **Supabase** using the official Node SDK:
+>
+> ```bash
+> npm install @supabase/supabase-js
+> ```
+>
+> 9. Add a `/admin/add-domain` endpoint to add new domains to Supabase manually.
+>
+> 10. Include CORS and JSON parsing middleware for cross-origin requests from our frontend.
+>
+> 11. Optional: log each request (IP, email, timestamp) to a `verification_logs` table in Supabase with schema:
+>
+> ```sql
+> CREATE TABLE verification_logs (
+>   id SERIAL PRIMARY KEY,
+>   email TEXT NOT NULL,
+>   domain TEXT NOT NULL,
+>   ip_address TEXT,
+>   created_at TIMESTAMP DEFAULT now()
+> );
+> ```
+
+---
+
+### 🧑‍💻 Bonus (if AI supports frontend integration):
+
+> Also generate a **React hook** to call this `/verify-email` API endpoint and return:
+>
+> * `isApproved: boolean`
+> * `suggestedFix: string | null`
+> * `loading: boolean`
+> * `error: string | null`
+
+---
+
+## ✅ Outcome
+
+This prompt will give you:
+
+* A working backend service
+* Integration with Supabase for dynamic org list
+* Auto-correction for typos
+* Extensible API that’s easy to plug into your MutualBook-style frontend
+
+---
+
+Let me know if you want a version of this for **Next.js API routes**, **Python FastAPI**, or **Go** instead.

@@ -65,7 +65,7 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
       });
       
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Failed to send invitation");
+      if (!response.ok) throw new Error(JSON.stringify(result));
       return result;
     },
     onSuccess: (data) => {
@@ -77,13 +77,33 @@ export function InvitationDialog({ open, onOpenChange }: InvitationDialogProps) 
       resetOrg();
       onOpenChange(false);
     },
-    onError: (error: Error) => {
-      toast({
-        title: "Error",
-        description: error.message,
-        variant: "destructive",
-        duration: 5000,
-      });
+    onError: (error: any) => {
+      // Try to parse error response for suggested corrections
+      try {
+        const errorData = JSON.parse(error.message);
+        if (errorData.suggestedEmail) {
+          toast({
+            title: "Email Domain Issue",
+            description: `${errorData.error}. ${errorData.suggestion}`,
+            variant: "destructive",
+            duration: 8000,
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: errorData.error || error.message,
+            variant: "destructive",
+            duration: 5000,
+          });
+        }
+      } catch {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
     },
   });
 

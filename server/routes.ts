@@ -5,12 +5,16 @@ import { db } from "./storage";
 import { organizationInvitations, waitlistSignups, insertOrganizationInvitationSchema, insertWaitlistSignupSchema } from "../shared/schema";
 import { EmailService } from "./services/emailService";
 import { OrganizationService } from "./services/organizationService";
+import { registerVerificationRoutes } from "./routes/verification";
 import { eq } from "drizzle-orm";
 import crypto from "crypto";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize organization domains on startup
   await OrganizationService.initializeOrganizations();
+
+  // Register enhanced verification routes
+  registerVerificationRoutes(app);
 
   // Handle missing database gracefully
   const isDatabaseConnected = Boolean(process.env.DATABASE_URL);
@@ -26,9 +30,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { email } = insertOrganizationInvitationSchema.parse(req.body);
 
-      // Validate organization email
+      // Validate organization email with enhanced validation
       const validation = await OrganizationService.validateOrganizationEmail(email);
+      
       if (!validation.isValid) {
+        // If there's a suggested correction, offer it
+        if (validation.suggestedFix) {
+          return res.status(400).json({
+            error: "Email domain not recognized, but we found a possible correction",
+            suggestion: `Did you mean: ${validation.suggestedFix}?`,
+            correctionType: validation.correctionType,
+            suggestedEmail: validation.suggestedFix,
+            organization: validation.organization
+          });
+        }
+
         return res.status(400).json({
           error: "Email domain not recognized as a verified organization",
           suggestion: "Try using your official organization email or join our waitlist instead"
