@@ -156,9 +156,9 @@ const testimonials = [
 
 const WhosHereSection = () => {
   return (
-    <section className="py-16 md:py-20 px-4 md:px-6" id="whos-here">
-      <div className="container mx-auto max-w-7xl">
-        <div className="text-center mb-12 md:mb-16">
+    <section className="py-16 md:py-20" id="whos-here">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 md:mb-16 px-4 md:px-6">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8">Who's Here</h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto">
             "Neurosurgeons to quantum physicists, Travelers to Fashion Designers, 
@@ -168,8 +168,8 @@ const WhosHereSection = () => {
 
         {/* Additional Professionals Auto-Scroller */}
         <div className="mb-12 md:mb-16">
-          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">More Elite Professionals</h3>
-          <div className="flex flex-col gap-[2px] -mx-4 md:-mx-6">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary px-4 md:px-6">More Elite Professionals</h3>
+          <div className="flex flex-col gap-[2px] w-screen relative left-1/2 -translate-x-1/2">
             <ProfessionsScroller professions={professions.slice(8, 24)} />
             <ProfessionsScroller professions={professions.slice(24, 40)} reverse />
             <ProfessionsScroller professions={professions.slice(40, 56)} />
@@ -178,8 +178,8 @@ const WhosHereSection = () => {
 
         {/* Modern Economy and Startup Sectors */}
         <div className="mb-12 md:mb-16">
-          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">Modern Economy and Startup Sectors</h3>
-          <div className="flex flex-col gap-[2px] -mx-4 md:-mx-6">
+          <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary px-4 md:px-6">Modern Economy and Startup Sectors</h3>
+          <div className="flex flex-col gap-[2px] w-screen relative left-1/2 -translate-x-1/2">
             <SectorsScroller sectors={startupSectors} />
             <SectorsScroller sectors={industries} reverse />
             <SectorsScroller sectors={modernEconomySectors} />
@@ -189,7 +189,7 @@ const WhosHereSection = () => {
         
 
         {/* Avatars/Portraits Section */}
-        <div className="max-w-6xl mx-auto mb-16">
+        <div className="max-w-6xl mx-auto mb-16 px-4 md:px-6">
           <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8 text-primary">Real Members</h3>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
             {[...Array(12)].map((_, index) => (
@@ -203,7 +203,9 @@ const WhosHereSection = () => {
         </div>
 
         {/* Testimonials Section */}
-        <TestimonialsCarousel testimonials={testimonials} />
+        <div className="px-4 md:px-6">
+          <TestimonialsCarousel testimonials={testimonials} />
+        </div>
       </div>
     </section>
   );
