@@ -32,7 +32,7 @@ if (process.env.DATABASE_URL) {
       idle_timeout: 20,
       connect_timeout: 10,
       connection: {
-        application_name: 'mutualbook-replit'
+        application_name: 'mutualbook-railway'
       }
     });
     

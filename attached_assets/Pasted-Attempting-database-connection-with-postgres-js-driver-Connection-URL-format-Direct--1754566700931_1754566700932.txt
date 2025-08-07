@@ -1,0 +1,89 @@
+Attempting database connection with postgres-js driver...
+
+🔍 Connection URL format: Direct
+
+🔒 Password encoded for special characters
+
+✅ Database connection initialized with postgres-js driver
+
+API key does not start with "SG.".
+
+❌ Supabase connection test failed: Error: connect ENETUNREACH 2600:1f1c:f9:4d0b:9bb:d025:c9e8:2a0:5432 - Local (:::0)
+
+    at internalConnect (node:net:1097:16)
+
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1496:9)
+
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:132:8) {
+
+  errno: -101,
+
+  code: 'ENETUNREACH',
+
+  syscall: 'connect',
+
+  address: '2600:1f1c:f9:4d0b:9bb:d025:c9e8:2a0',
+
+  port: 5432
+
+}
+
+🔗 Connection method attempted: postgres-js
+
+❌ Database connection failed - skipping setup
+
+❌ Database setup failed: Error: Database connection test failed
+
+    at setupDatabase (file:///app/dist/index.js:332:13)
+
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+    at async registerRoutes (file:///app/dist/index.js:863:5)
+
+    at async file:///app/dist/index.js:1138:18
+
+❌ Database setup failed: Error: Database connection test failed
+
+    at setupDatabase (file:///app/dist/index.js:332:13)
+
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+    at async registerRoutes (file:///app/dist/index.js:863:5)
+
+    at async file:///app/dist/index.js:1138:18
+
+📋 Continuing with fallback mode - API responses will be mock data
+
+Testing database connection...
+
+❌ Error connecting to database: Error: connect ENETUNREACH 2600:1f1c:f9:4d0b:9bb:d025:c9e8:2a0:5432 - Local (:::0)
+
+    at internalConnect (node:net:1097:16)
+
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)
+
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1496:9)
+
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:132:8) {
+
+  errno: -101,
+
+  code: 'ENETUNREACH',
+
+  syscall: 'connect',
+
+  address: '2600:1f1c:f9:4d0b:9bb:d025:c9e8:2a0',
+
+  port: 5432
+
+}
+
+📋 Falling back to in-memory validation
+
+⚠️  Database not connected - API endpoints will return mock responses
+
+📋 To connect your database, set the DATABASE_URL environment variable
+
+🔗 For Supabase: Get connection string from Settings > Database > Connection string > URI
