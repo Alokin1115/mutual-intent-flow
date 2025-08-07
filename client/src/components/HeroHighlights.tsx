@@ -22,7 +22,7 @@ const HeroHighlights = () => {
                 Matching your <span className="font-bold text-primary">intent</span>, <span className="font-bold text-primary">urgency</span> & <span className="font-bold text-primary">expectation</span>
               </p>
               <p className="text-sm text-muted-foreground">
-                Real-time calls with your future co-founder, investor, mentor, employer or life partner
+                Real-time calls with your future co-founder, investor, mentor, employer, client or life partner
               </p>
               <p className="text-xs text-muted-foreground">
                 Like thousands already have.

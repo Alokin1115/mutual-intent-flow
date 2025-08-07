@@ -10,7 +10,7 @@ const NoticeBanner = () => (
       Real-time calls with your future
     </div>
     <div className="text-sm text-center">
-      <span className="font-bold text-primary">co-founder</span>, <span className="font-bold text-primary">investor</span>, <span className="font-bold text-primary">mentor</span>, <span className="font-bold text-primary">employer</span> or <span className="font-bold text-primary">life partner</span>
+      <span className="font-bold text-primary">co-founder</span>, <span className="font-bold text-primary">investor</span>, <span className="font-bold text-primary">mentor</span>, <span className="font-bold text-primary">employer</span>, <span className="font-bold text-primary">client</span> or <span className="font-bold text-primary">life partner</span>
     </div>
     <div className="text-xs text-muted-foreground text-center mt-2">
       Like thousands already have.
