@@ -1,28 +1,16 @@
 import { users, type User, type InsertUser } from "@shared/schema";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 
-// Database connection - conditional setup with URL encoding
+// Database connection - optimized for serverless/pooler
 let db: any;
-let pool: Pool | null = null;
 
 if (process.env.DATABASE_URL) {
   try {
-    // Handle URL encoding for special characters in password
-    const connectionString = process.env.DATABASE_URL.replace(/(:)([^@:]+)(@)/, (match, colon, password, at) => {
-      return colon + encodeURIComponent(password) + at;
-    });
-    
-    pool = new Pool({
-      connectionString,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-      max: 10,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000,
-    });
-    
-    db = drizzle(pool);
-    console.log('✅ Database connection initialized with PostgreSQL driver');
+    // Use the original DATABASE_URL (should be pooler format for serverless)
+    const sql = neon(process.env.DATABASE_URL);
+    db = drizzle(sql);
+    console.log('✅ Database connection initialized with Neon serverless driver');
   } catch (error) {
     console.error('❌ Failed to initialize database:', error);
     db = createMockDb();
