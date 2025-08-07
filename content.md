@@ -2,7 +2,40 @@
 
 This document contains all textual content across the MutualBook website, organized by component for AI content analysis and editing suggestions.
 
-## 1. NoticeBanner Component
+## 1. HeroSection Component
+**Location:** `client/src/components/HeroSection.tsx`
+
+### Top Badge
+- **Badge Text:** "From World's Top 100 Universities & Companies✨"
+
+### Main Headline
+- **Primary Text:** "Elites' Fast-Track to"
+- **Rotating Words:** "Collaborations", "Deals", "Partnerships" (rotates every 2 seconds)
+
+### Subheadline
+- **Supporting Text:** "Where the world's most ambitious meet—and get things done."
+
+### Call to Action
+- **Email Field:** "Organization Email" (placeholder)
+- **Button Text:** "Get Your Invitation"
+- **Alternative Options:** 
+  - "❓ Not from Listed Org? Join Weekly Waitlist"
+  - Links to alternative signup flow
+
+### Social Proof
+- **University/Company Context:** "Used by Professionals, Alumni & Students from"
+- **Logo Scrollers:** Top universities (Harvard, Stanford, MIT, etc.) and companies (Google, Meta, Microsoft, etc.)
+
+## 2. ImpactStrip Component
+**Location:** `client/src/components/ImpactStrip.tsx`
+
+### Impact Statistics (Rotating Cards)
+1. **5,000+** - "Verified Professionals Joined This Week"
+2. **4,847** - "Confirmed Collaborations Last Week"  
+3. **9.5 hrs** - "Average From First Call to Collab"
+4. **20+** - "Personal to Professional Usecase"
+
+## 3. NoticeBanner Component
 **Location:** `client/src/components/NoticeBanner.tsx`
 
 ### Main Message
@@ -173,9 +206,47 @@ Over 20 professional categories including:
 ## 8. WaitlistSection Component
 **Location:** `client/src/components/WaitlistSection.tsx`
 
-### Call to Action
-- Primary action for email collection and waitlist signup
-- *[Note: Specific content to be documented based on component structure]*
+### Section Header
+- **Title:** "Waitlist Wild Card"
+- **Subtitle:** "For Non-Org Members Who Belong With The Elite"
+
+### Call to Action Card
+- **Card Title:** "Think You Belong Here?"
+- **Description:** "If you are not from the listed org and think you belong here with elites & high achievers, then pre-register to get your invitation link this week."
+
+### Form Fields
+- **Name Field:** "Your full name" (placeholder)
+- **Email Field:** "your@email.com" (placeholder)
+- **LinkedIn/X Field:** "https://linkedin.com/in/yourprofile" (placeholder)
+- **Reason Field:** "Tell us about your achievements, ambitions, and why you belong with the elite..." (placeholder)
+- **Submit Button:** "Join the Weekly Waitlist"
+
+### Exclusivity Warning
+- **Alert:** "⚠️ Only >1% get invited each Friday"
+
+### Waitlist Statistics
+- **Applications This Week:** 2,847
+- **Approved Last Friday:** 28
+- **Current Success Rate:** 0.98%
+
+## 9. Footer Component
+**Location:** `client/src/components/Footer.tsx`
+
+### Brand Message
+- **Logo:** MutualBook complete logo with glow effects
+- **Tagline:** "Do Incredible Things Together."
+
+### Navigation Links
+- About, Careers, Privacy, Terms, Contact
+
+### Social Media
+- **X (Twitter):** 𝕏
+- **LinkedIn:** 💼  
+- **Email:** 📧
+
+### Copyright
+- **Copyright:** "© 2025 My MutualBook. All rights reserved."
+- **Location:** "Built with ❤️ in San Francisco"
 
 ## Content Themes & Messaging Strategy
 
@@ -187,11 +258,12 @@ Over 20 professional categories including:
 5. **Mutual Benefit:** "2-way rating system", "mutual value creation"
 
 ### Target Audiences
-1. **Students:** Free Fridays tier, scholarship success stories
-2. **Professionals:** Career advancement, networking, hiring
-3. **Entrepreneurs:** Co-founder matching, investor connections
-4. **High-Net-Worth:** Golden Class exclusive access
-5. **General Ambitious:** Relationship building, mentorship
+1. **Students:** Free Fridays tier, scholarship success stories, university verification
+2. **Professionals:** Career advancement, networking, hiring, employer connections
+3. **Entrepreneurs:** Co-founder matching, investor connections, startup funding
+4. **High-Net-Worth:** Golden Class exclusive access, millionaire network
+5. **General Ambitious:** Relationship building, mentorship, life partnerships
+6. **Elite Organizations:** Top 100 universities and companies, verified professionals
 
 ### Tone & Voice
 - **Professional but accessible**
@@ -203,10 +275,36 @@ Over 20 professional categories including:
 ### Key Differentiators
 - No AI algorithms (human choice)
 - Real-time calls vs endless messaging  
-- Curated community verification
+- Curated community verification (top universities/companies)
 - Multi-use case platform (professional + personal)
 - Accountability through mutual ratings
+- Elite exclusivity (only >1% waitlist approval)
+- Speed to collaboration (9.5 hours average)
+- Organization-based credibility verification
+
+## Additional Content Elements
+
+### University Partners (HeroSection)
+**Top Universities Featured:**
+Harvard, Stanford, MIT, UC Berkeley, Oxford, Cambridge, Caltech, Princeton, Yale, Columbia, UChicago, UPenn, Cornell, UCLA, Johns Hopkins, Duke, Northwestern, NYU, Michigan, Toronto, Imperial College London, ETH Zurich, Tsinghua, Peking University, National University of Singapore, LSE, Carnegie Mellon, Brown, Dartmouth, IIT Bombay, IIT Delhi
+
+### Company Partners (HeroSection) 
+**Top Companies Featured:**
+Google, Meta, Microsoft, Apple, Amazon, Nvidia, Tesla, OpenAI, Y Combinator, Goldman Sachs, McKinsey, Bain, BCG, JP Morgan, Morgan Stanley, Stripe, Airbnb, Netflix, Uber, Salesforce, Adobe, Intel, SpaceX, Palantir, LinkedIn, Dropbox, Atlassian, Shopify, ByteDance, Tencent
+
+### Conversion Funnel Elements
+1. **Organization Email Entry** → Get Your Invitation
+2. **Non-Org Alternative** → Join Weekly Waitlist
+3. **Waitlist Wild Card** → Elite verification process
+4. **Pricing Tiers** → Subscription conversion
+5. **Success Stories** → Social proof & validation
+
+### Content Hierarchy & User Journey
+1. **Attention:** Elite badge, university/company logos
+2. **Interest:** Impact statistics, rotating value propositions
+3. **Desire:** Success testimonials, exclusive access messaging
+4. **Action:** Multiple conversion paths based on eligibility
 
 ---
 
-*This content catalog serves as a reference for maintaining consistency across the MutualBook platform and enables AI-assisted content optimization while preserving the brand voice and core messaging.*
+*This comprehensive content catalog serves as the definitive reference for maintaining consistency across the MutualBook platform and enables AI-assisted content optimization while preserving the brand voice, exclusivity positioning, and core messaging strategy.*
