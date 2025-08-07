@@ -33,17 +33,26 @@ const topUniversities = [
   { name: "NYU", logo: "/logos/universities/NYU.png" },
   { name: "Michigan", logo: "/logos/universities/Michigan.png" },
   { name: "Toronto", logo: "/logos/universities/Toronto.png" },
-  { name: "Imperial College London", logo: "/logos/universities/Imperial_College_London.png" },
+  {
+    name: "Imperial College London",
+    logo: "/logos/universities/Imperial_College_London.png",
+  },
   { name: "ETH Zurich", logo: "/logos/universities/ETH_Zurich.png" },
   { name: "Tsinghua", logo: "/logos/universities/Tsinghua.png" },
-  { name: "Peking University", logo: "/logos/universities/Peking_University.png" },
-  { name: "National University of Singapore", logo: "/logos/universities/National_University_of_Singapore.png" },
+  {
+    name: "Peking University",
+    logo: "/logos/universities/Peking_University.png",
+  },
+  {
+    name: "National University of Singapore",
+    logo: "/logos/universities/National_University_of_Singapore.png",
+  },
   { name: "LSE", logo: "/logos/universities/LSE.png" },
   { name: "Carnegie Mellon", logo: "/logos/universities/Carnegie_Mellon.png" },
   { name: "Brown", logo: "/logos/universities/Brown.png" },
   { name: "Dartmouth", logo: "/logos/universities/Dartmouth.png" },
   { name: "IIT Bombay", logo: "/logos/universities/IIT_Bombay.png" },
-  { name: "IIT Delhi", logo: "/logos/universities/IIT_Delhi.png" }
+  { name: "IIT Delhi", logo: "/logos/universities/IIT_Delhi.png" },
 ];
 const topCompanies = [
   { name: "Google", logo: "https://logo.clearbit.com/google.com" },
@@ -60,7 +69,10 @@ const topCompanies = [
   { name: "Bain", logo: "https://logo.clearbit.com/bain.com" },
   { name: "BCG", logo: "https://logo.clearbit.com/bcg.com" },
   { name: "JP Morgan", logo: "https://logo.clearbit.com/jpmorganchase.com" },
-  { name: "Morgan Stanley", logo: "https://logo.clearbit.com/morganstanley.com" },
+  {
+    name: "Morgan Stanley",
+    logo: "https://logo.clearbit.com/morganstanley.com",
+  },
   { name: "Stripe", logo: "https://logo.clearbit.com/stripe.com" },
   { name: "Airbnb", logo: "https://logo.clearbit.com/airbnb.com" },
   { name: "Netflix", logo: "https://logo.clearbit.com/netflix.com" },
@@ -75,7 +87,7 @@ const topCompanies = [
   { name: "Atlassian", logo: "https://logo.clearbit.com/atlassian.com" },
   { name: "Shopify", logo: "https://logo.clearbit.com/shopify.com" },
   { name: "ByteDance", logo: "https://logo.clearbit.com/bytedance.com" },
-  { name: "Tencent", logo: "https://logo.clearbit.com/tencent.com" }
+  { name: "Tencent", logo: "https://logo.clearbit.com/tencent.com" },
 ];
 
 const rotatingWords = ["Collaborations", "Deals", "Partnerships"];
@@ -116,7 +128,7 @@ const HeroSection = () => {
       setIsValidating(false);
     },
     onError: (error: Error) => {
-      console.warn('Email validation error:', error.message);
+      console.warn("Email validation error:", error.message);
       setEmailSuggestion(null);
       setIsValidating(false);
     },
@@ -130,7 +142,7 @@ const HeroSection = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      
+
       const result = await response.json();
       if (!response.ok) throw new Error(JSON.stringify(result));
       return result;
@@ -176,28 +188,31 @@ const HeroSection = () => {
   });
 
   // Handle email input changes with debounced validation
-  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    setEmailSuggestion(null);
+  const handleEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newEmail = e.target.value;
+      setEmail(newEmail);
+      setEmailSuggestion(null);
 
-    // Clear existing timeout
-    if (emailValidationTimeoutRef.current) {
-      clearTimeout(emailValidationTimeoutRef.current);
-    }
+      // Clear existing timeout
+      if (emailValidationTimeoutRef.current) {
+        clearTimeout(emailValidationTimeoutRef.current);
+      }
 
-    // Only validate if email looks complete (has @ and domain)
-    if (newEmail.includes('@') && newEmail.split('@')[1]?.includes('.')) {
-      setIsValidating(true);
-      emailValidationTimeoutRef.current = setTimeout(() => {
-        emailValidationMutation.mutate(newEmail);
-      }, 500); // Wait 500ms after user stops typing
-    }
-  }, [emailValidationMutation]);
+      // Only validate if email looks complete (has @ and domain)
+      if (newEmail.includes("@") && newEmail.split("@")[1]?.includes(".")) {
+        setIsValidating(true);
+        emailValidationTimeoutRef.current = setTimeout(() => {
+          emailValidationMutation.mutate(newEmail);
+        }, 500); // Wait 500ms after user stops typing
+      }
+    },
+    [emailValidationMutation],
+  );
 
   // Handle invitation button click
   const handleGetInvitation = useCallback(() => {
-    if (!email.includes('@')) {
+    if (!email.includes("@")) {
       toast({
         title: "Invalid Email",
         description: "Please enter a valid email address",
@@ -243,106 +258,116 @@ const HeroSection = () => {
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/30 rounded-full blur-xl animate-float"></div>
         <div className="absolute top-40 right-20 w-24 h-24 bg-accent/40 rounded-full blur-lg animate-bounce-slow"></div>
         <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-primary/20 rounded-full blur-2xl animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float" style={{animationDelay: "2s"}}></div>
+        <div
+          className="absolute bottom-20 right-1/3 w-28 h-28 bg-accent/30 rounded-full blur-xl animate-float"
+          style={{ animationDelay: "2s" }}
+        ></div>
       </div>
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
         {/* Top Banner */}
         <div className="px-4 md:px-6">
-        <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
-          From World's Top 100 Universities & Companies✨
-        </Badge>
+          <Badge className="mb-6 md:mb-8 px-3 py-2 text-xs md:text-base lg:text-lg md:px-6 md:py-3 font-medium bg-blue-600/20 text-blue-300 border-blue-400/30 glow-primary">
+            From World's Top 100 Universities & Companies✨
+          </Badge>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
-          <span className="whitespace-nowrap">Elites' Fast-Track to</span><br />
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
-            {rotatingWords[wordIndex]}
-          </span>
-        </h1>
+          {/* Main Headline */}
+          <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
+            <span className="whitespace-nowrap">Elites' Fast-Track to</span>
+            <br />
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent block mx-auto transition-all duration-500">
+              {rotatingWords[wordIndex]}
+            </span>
+          </h1>
 
-        {/* Subheadline */}
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
-          Where the world's most ambitious meet—and get things done.
-        </p>
+          {/* Subheadline */}
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-12 max-w-3xl mx-auto">
+            Where the world's most ambitious meet—and get things done.
+          </p>
 
-        {/* CTA Area with Email Validation */}
-        <div className="max-w-md mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-3 mb-4">
-            <div className="relative flex-1">
-              <div className="relative">
-                <Input 
-                  type="email" 
-                  placeholder="Organization Email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  className={`glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base pr-10 ${
-                    emailValidationMutation.data?.isValid && !isValidating 
-                      ? 'border-green-400/50' 
-                      : ''
-                  }`}
-                />
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  {isValidating ? (
-                    <Loader2 className="h-4 w-4 animate-spin text-accent" />
-                  ) : emailValidationMutation.data?.isValid && !emailSuggestion ? (
-                    <CheckCircle className="h-4 w-4 text-green-400" />
-                  ) : null}
-                </div>
-              </div>
-              {emailSuggestion && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-blue-900/90 backdrop-blur-sm border border-blue-400/30 rounded-md p-2 text-sm">
-                  <div className="flex items-center gap-2 text-blue-200">
-                    <AlertCircle className="h-4 w-4" />
-                    <span>Did you mean: </span>
-                    <button
-                      onClick={() => {
-                        setEmail(emailSuggestion);
-                        setEmailSuggestion(null);
-                      }}
-                      className="text-accent hover:text-accent/80 underline font-medium"
-                    >
-                      {emailSuggestion}
-                    </button>
+          {/* CTA Area with Email Validation */}
+          <div className="max-w-md mx-auto mb-12">
+            <div className="flex flex-col md:flex-row gap-3 mb-4">
+              <div className="relative flex-1">
+                <div className="relative">
+                  <Input
+                    type="email"
+                    placeholder="Organization Email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className={`glass-effect text-white placeholder:text-gray-400 min-h-[48px] text-base pr-10 ${
+                      emailValidationMutation.data?.isValid && !isValidating
+                        ? "border-green-400/50"
+                        : ""
+                    }`}
+                  />
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    {isValidating ? (
+                      <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                    ) : emailValidationMutation.data?.isValid &&
+                      !emailSuggestion ? (
+                      <CheckCircle className="h-4 w-4 text-green-400" />
+                    ) : null}
                   </div>
                 </div>
-              )}
-            </div>
-            <Button 
-              onClick={handleGetInvitation}
-              className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap" 
-              disabled={!email.includes('@') || orgInviteMutation.isPending || (!emailValidationMutation.data?.isValid && !emailSuggestion)}
-            >
-              {orgInviteMutation.isPending ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Checking...
-                </>
-              ) : (
-                "Get Your Invitation"
-              )}
-            </Button>
-          </div>
-          <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
-            ❓ <span 
-              onClick={() => window.open('/organizations', '_blank')}
-              className="underline cursor-pointer hover:text-primary"
-            >
-              Not from Listed Org?
-            </span>{" "}
-            <span 
-              onClick={() => {
-                const waitlistSection = document.getElementById('waitlist');
-                if (waitlistSection) {
-                  waitlistSection.scrollIntoView({ behavior: 'smooth' });
+                {emailSuggestion && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-blue-900/90 backdrop-blur-sm border border-blue-400/30 rounded-md p-2 text-sm">
+                    <div className="flex items-center gap-2 text-blue-200">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>Did you mean: </span>
+                      <button
+                        onClick={() => {
+                          setEmail(emailSuggestion);
+                          setEmailSuggestion(null);
+                        }}
+                        className="text-accent hover:text-accent/80 underline font-medium"
+                      >
+                        {emailSuggestion}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <Button
+                onClick={handleGetInvitation}
+                className="gradient-gold text-black font-semibold px-6 sm:px-8 glow-gold min-h-[48px] whitespace-nowrap"
+                disabled={
+                  !email.includes("@") ||
+                  orgInviteMutation.isPending ||
+                  (!emailValidationMutation.data?.isValid && !emailSuggestion)
                 }
-              }}
-              className="underline cursor-pointer hover:text-accent"
-            >
-              Join Weekly Waitlist
-            </span>
-          </p>
-        </div>
+              >
+                {orgInviteMutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Checking...
+                  </>
+                ) : (
+                  "Get Your Invitation"
+                )}
+              </Button>
+            </div>
+            <p className="text-sm md:text-base text-muted-foreground mb-6 px-2">
+              ❓{" "}
+              <span
+                onClick={() => window.open("/organizations", "_blank")}
+                className="underline cursor-pointer hover:text-primary"
+              >
+                Check the Listed Org!
+              </span>{" "}
+              <span
+                onClick={() => {
+                  const waitlistSection = document.getElementById("waitlist");
+                  if (waitlistSection) {
+                    waitlistSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="underline cursor-pointer hover:text-accent"
+              >
+                Join Weekly Waitlist
+              </span>
+            </p>
+          </div>
         </div>
 
         {/* University and Company Logos Scroll */}
@@ -363,10 +388,7 @@ const HeroSection = () => {
       </div>
 
       {/* Invitation Dialog */}
-      <InvitationDialog 
-        open={isDialogOpen} 
-        onOpenChange={setIsDialogOpen}
-      />
+      <InvitationDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
     </section>
   );
 };
