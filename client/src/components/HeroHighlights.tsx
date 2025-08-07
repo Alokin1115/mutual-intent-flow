@@ -8,7 +8,7 @@ const HeroHighlights = () => {
     <>
       <ImpactStrip />
       {isMobile ? (
-        <div className="px-4 py-6 mx-4 my-6 bg-gradient-to-br from-primary/10 via-background to-accent/10 border border-primary/20 rounded-xl">
+        <div className="px-3 py-6 mx-2 my-6 bg-gradient-to-br from-primary/10 via-background to-accent/10 border border-primary/20 rounded-xl">
           <div className="text-center space-y-4">
             <div className="flex items-center justify-center mb-4">
               <div className="flex items-center bg-primary/10 rounded-full px-3 py-2">
