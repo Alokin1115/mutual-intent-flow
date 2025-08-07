@@ -471,7 +471,7 @@ const TestimonialsCarousel = ({
 
   return (
     <div className="mt-16 md:mt-20">
-      <div className="text-center mb-12 md:mb-16">
+      <div className="text-center mb-6 md:mb-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
           TRUSTED BY
         </h2>
