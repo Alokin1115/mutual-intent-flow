@@ -21,7 +21,7 @@ export async function setupDatabase(): Promise<void> {
   const isConnected = await testDatabaseConnection();
   if (!isConnected) {
     console.log("❌ Database connection failed - skipping setup");
-    return;
+    throw new Error('Database connection test failed');
   }
 
   try {
